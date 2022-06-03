@@ -1,0 +1,29 @@
+
+
+.v2-badge-aceptado {
+    color: #1ea672;
+    background-color: #CAF4C9;
+  }
+  
+  .v2-badge-pendiente {
+    color: #ffbc04;
+    background-color: #e8d3a5;
+  }
+
+  .v2-badge-fondoimagen {
+    color: #ffffff;
+    background-color: #ffbc0414;
+  }
+
+  .v2-badge-imagen {
+    color: #ffffff;
+    background-color: #784d94;
+  }
+  
+  .v2-badge {
+    padding: 3px 8px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }

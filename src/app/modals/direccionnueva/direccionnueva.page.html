@@ -1,0 +1,38 @@
+
+<ion-content color="light">
+
+<!-- <ion-button color="danger" click="dismissystep2()"><ion-icon cname="close"></ion-icon></ion-button> -->
+<ion-fab-button (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Tipo:</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-select [(ngModel)]="tipo_direccion" placeholder="Seleccione Tipo">
+      <ion-select-option value="BTC">BTC</ion-select-option>
+      <ion-select-option value="TRX">TRX</ion-select-option>
+      <ion-select-option value="DOT">DOT</ion-select-option>
+      <ion-select-option value="ADA">ADA</ion-select-option>
+      <ion-select-option value="ETH">ETH</ion-select-option>
+    </ion-select>
+  </ion-card-content>
+</ion-card>
+
+<br>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Dirección:</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-label position="floating">Direccion:</ion-label>
+      <ion-input [(ngModel)]="direccion"></ion-input>
+    </ion-item>
+  </ion-card-content>
+</ion-card>
+
+<ion-button (click)="agregardireccion()"><ion-icon name="checkmark"></ion-icon>Agregar</ion-button>
+
+</ion-content>

@@ -1,0 +1,178 @@
+
+
+
+<ion-content padding class="signup-style">
+
+    <ion-buttons>
+      <ion-button (click)="goBack()">
+        <ion-icon style="font-size: 30px; " name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+<br>
+
+<section *ngIf="this.step=='login'">
+
+  <ion-grid>
+		<ion-row>
+      <ion-col id="somelement" align-self-center size-md="6" size-lg="5" size-xs="12">
+
+
+        <ion-card style=" padding:10%;" > 
+              <ion-row class="row" class="ion-no-padding" no-padding >
+                <ion-col size="4.5">
+                </ion-col>
+                <ion-col size="3">
+                    <a (click)="gotohome()"><ion-text>Ir Al inicio</ion-text></a>
+                </ion-col>
+                <ion-col size="4.5">
+                </ion-col>
+            </ion-row>
+            <ion-row class="row" class="ion-no-padding" no-padding >
+                <ion-col size="3">
+                </ion-col>
+                <ion-col size="6">
+                    <img src="../assets/tonyslogo.png" class="img-logo">
+                </ion-col>
+                <ion-col size="3">
+                </ion-col>
+            </ion-row>
+          
+            <ion-item>
+            <ion-input (ionChange)="CHANGEusuarioocorreo()"  (input)="CHANGEusuarioocorreo()" [(ngModel)]="loginuser" placeholder="Ingrese su Email"></ion-input>
+            <ion-text *ngIf="loginuser&&!usuariologin_tienearrobas||colocouncorreoperonoelpunto" style="position:absolute; bottom:-1px; font-size:9px; color:red;">Ingrese un correo valido.</ion-text>
+           </ion-item>
+
+            <ion-item>
+              <ion-input type="password" [(ngModel)]="loginpassword" placeholder="Contraseña"></ion-input>
+            </ion-item>
+          
+            <ion-button [disabled]="!usuariologin_tienearrobas||colocouncorreoperonoelpunto||!loginuser||loginuser==''||!loginpassword||loginpassword==''" (click)="logear()" expand='block'>Ingresar</ion-button>
+            <ion-button (click)="iraregistrarse()" fill='clear'>¿Eres nuevo? Registrate</ion-button>
+
+        </ion-card>
+
+
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+    
+</section>
+
+<section  *ngIf="step=='registro'">
+  <ion-grid>
+		<ion-row>
+      <ion-col id="somelement" align-self-center size-md="6" size-lg="5" size-xs="12">
+        <ion-card  style=" padding:10%;" > 
+        <ion-row class="row" class="ion-no-padding" no-padding >
+            <ion-col size="3">
+            </ion-col>
+            <ion-col size="6">
+                <img src="../assets/tonyslogo.png" class="img-logo">
+            </ion-col>
+            <ion-col size="3">
+            </ion-col>
+        </ion-row>
+
+            <section>
+                <ion-item>
+                   <ion-input [(ngModel)]="registercorreo" placeholder="E-mail"></ion-input>
+                </ion-item>
+                <ion-row>
+                  <ion-col size="5.7">
+                    <ion-item>
+                      <ion-input type="password" [(ngModel)]="registropassword" placeholder="Contraseña"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="5.7">
+                    <ion-item>
+                      <ion-input type="password" [(ngModel)]="registropasswordrepetida" placeholder="Repetir Contraseña"></ion-input>
+                      <ion-text *ngIf="registropassword!=registropasswordrepetida" style="position:absolute; bottom:-1px; font-size:8px; color:red;">Contraseñas no coinciden.</ion-text>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <ion-item>
+                  <ion-label>Pais</ion-label>
+                  <ion-select interface="popover" (ionChange)="ONCHANGEPAIS($event)" >
+                    <ion-select-option value="{{i}}" *ngFor="let c of countryData; let i = index;">{{c.name}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-row>
+                  <ion-col size="5.7">
+                    <ion-item>
+                      <ion-input [(ngModel)]="nombre" placeholder="Nombre"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="5.7">
+                    <ion-item>
+                      <ion-input [(ngModel)]="apellido" placeholder="Apellido"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+
+                <ion-row class="ion-no-padding ion-justify-content-center ion-align-items-center" no-padding >
+                  <ion-col  class="" size="1.7">
+                    <ion-text *ngIf="!paisdataseleccionado" style="font-size: 10; margin-top: 5px; margin-bottom: 5px;"><strong>+</strong></ion-text>
+                    <ion-text *ngIf="paisdataseleccionado" style="font-size: 10; margin-top: 5px; margin-bottom: 5px;">+{{paisdataseleccionado.code}}</ion-text>
+                  </ion-col>
+                  <ion-col size="10.3" class="ion-no-padding" no-padding >
+                    <ion-card class="ion-no-padding" no-padding >
+                      <ion-item class="ion-no-padding" no-padding >
+                        <ion-input [disabled]="!paisdataseleccionado" [(ngModel)]="celular" [placeholder]="paisdataseleccionado ? 'Nro Celular' : 'Seleccione pais'"></ion-input>
+                        <ion-text style="position:absolute; bottom:0px; right:1px; font-size:9px; color:rgba(0, 128, 0, 0.583);">Numero Celular Obligatorio.</ion-text>
+                      </ion-item>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+
+
+                <ion-row>
+                  <ion-list>
+                    <ion-item>
+                      <ion-label style="padding: 0px;">Términos y condiciones.</ion-label>
+                      <ion-checkbox (ionChange)="cambioterminos()" slot="start" [(ngModel)]="aceptaterminos"></ion-checkbox>
+                    </ion-item>
+                  </ion-list>
+                </ion-row>
+
+                <ion-button [disabled]="
+                registrandoseconarrobaenelusuario==true||
+                registropassword!=registropasswordrepetida||
+                aceptaterminos!=true||
+                registercorreo==undefined||
+                registercorreo==null||
+                registercorreo==''||
+                registropassword==undefined||
+                registropassword==null||
+                registropassword==''||
+                registropasswordrepetida==undefined||
+                registropasswordrepetida==null||
+                registropasswordrepetida==''||
+                paisdataseleccionado==undefined||
+                paisdataseleccionado==null||
+                paisdataseleccionado==''||
+                nombre==''||
+                nombre==undefined||
+                nombre==null||
+                apellido==''||
+                apellido==undefined||
+                apellido==null
+
+
+                " (click)="registrarsecorreo()" expand='block'>Registrarse</ion-button>
+
+                <h6>Al registrarse, usted podra iniciar sección con su correo electronico o su nombre de usuario.</h6>
+
+                <ion-button (click)="iralogin()" fill='clear'>¿Tienes Cuenta? Ingresa Aqui!</ion-button>
+            </section>
+
+    </ion-card>
+
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+
+</section>

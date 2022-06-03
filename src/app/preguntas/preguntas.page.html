@@ -1,0 +1,378 @@
+<ion-segment (ionChange)="segmentChanged($event)"  
+value="ordenesdefraccionamiento"
+scrollable="true"
+mode="ios"
+[(ngModel)]="segmentModel" 
+(ionChange)="segmentChanged($event)"
+>
+
+<ion-row>
+  <ion-col size="12">
+    <ion-segment-button [disabled]="segmentModel=='puedocambiardepatrocinador'" value="puedocambiardepatrocinador">
+      <ion-button [disabled]="segmentModel=='puedocambiardepatrocinador'" > 
+         <ion-label>1 ¿Cuál es la dirección que<br>debo utilizar en mis compras?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="segmentModel=='elsaldodisponiblesepuedepasaraotracuenta'" value="elsaldodisponiblesepuedepasaraotracuenta">
+      <ion-button [disabled]="segmentModel=='elsaldodisponiblesepuedepasaraotracuenta'"> 
+      <ion-label>2 ¿En cuántos días <br>recibiré mis paquetes?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12">
+    <ion-segment-button [disabled]="segmentModel=='cuandoseprocesanlospagos'" value="cuandoseprocesanlospagos">
+     <ion-button [disabled]="segmentModel=='cuandoseprocesanlospagos'"> 
+        <ion-label>3 ¿Debo pagar algún costo <br>de suscripción o mensualidad?</ion-label> 
+     </ion-button>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="segmentModel=='quehacersinecesitosoporte'" value="quehacersinecesitosoporte">
+      <ion-button [disabled]="segmentModel=='quehacersinecesitosoporte'"> 
+      <ion-label>4 ¿Cómo me suscribo?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size="12">
+    <ion-segment-button [disabled]="segmentModel=='dondeencuentrolascuentasoficialespararealizartransferencias'" value="dondeencuentrolascuentasoficialespararealizartransferencias">
+      <ion-button [disabled]="segmentModel=='dondeencuentrolascuentasoficialespararealizartransferencias'"> 
+      <ion-label>5 ¿Qué es el<br>Número de guía?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="segmentModel=='mienlacedeafiliado'" value="mienlacedeafiliado">
+      <ion-button [disabled]="segmentModel=='mienlacedeafiliado'"> 
+      <ion-label>6 ¿Que son los anuncios<br> de administración?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+  </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+    <ion-segment-button [disabled]="segmentModel=='quedebohacercuandomipaqueteestaconfirmadoenoficina'" value="quedebohacercuandomipaqueteestaconfirmadoenoficina">
+      <ion-button [disabled]="segmentModel=='quedebohacercuandomipaqueteestaconfirmadoenoficina'"> 
+      <ion-label>7 ¿Qué debo hacer cuando mi <br>paquete esté confirmado en oficina?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="segmentModel=='comomecontactoconsoporte'" value="comomecontactoconsoporte">
+      <ion-button [disabled]="segmentModel=='comomecontactoconsoporte'"> 
+      <ion-label>8 ¿Como me contacto<br> con soporte?</ion-label>
+      </ion-button>
+    </ion-segment-button>
+  </ion-col>
+</ion-row>
+
+
+
+
+
+</ion-segment>
+
+<ion-content>
+
+  <br *ngIf="segmentModel!=undefined">
+  <br *ngIf="segmentModel!=undefined">
+  <br *ngIf="segmentModel!=undefined">
+
+  <section *ngIf="segmentModel=='puedocambiardepatrocinador'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¿Cuál es la dirección que debo utilizar en mis compras?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>Es de suma importancia que las compras que realices a través de cualquier proveedor o tienda online sean enviadas a nuestras direcciones, no olvides colocar tu Código BEO al momento de comprar para poder identificar tu compra de forma apropiada.
+
+            Igualmente, te invitamos a ingresar en las tiendas online en las que acostumbras comprar para realizar el cambio de dirección de destino o shipping address. Es de vital importancia que en la dirección coloques el campo del ZIP o ZIP-CODE correctamente, de esta forma garantizas una entrega eficiente por parte de tu proveedor.
+            
+            </ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='elsaldodisponiblesepuedepasaraotracuenta'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title>¿En cuántos días recibiré mis paquetes?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>En temporada alta (de diciembre a febrero) nuestros tiempos varían de acuerdo a la cantidad de carga recibida en nuestros almacenes, en muchos casos el tiempo en tránsito es superior a los 20 días.</ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='cuandoseprocesanlospagos'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title> ¿Debo pagar algún costo de suscripción o mensualidad?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>No, la suscripción es gratuita, solo cobramos el servicio de traslado.
+         </ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='quehacersinecesitosoporte'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title> ¿Cómo me suscribo?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>Entra a la sección de 
+            <a style="cursor: pointer;" (click)="iraregistro()">Registro gratuito</a>
+            
+            y sigue las indicaciones.</ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='dondeencuentrolascuentasoficialespararealizartransferencias'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+        <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title>¿Qué es el Número de guía?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>Es el número con el que identificamos cada paquete en nuestro sistema. Este número se genera automáticamente cuando tus paquetes son procesados en nuestros Almacenes y te indica en qué estatus se encuentra tu envío y cuál es el monto que vas a pagar por el servicio.</ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='mienlacedeafiliado'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title>¿Que son los anuncios de administración?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>Son mensajes globales dirigidos a todos nuestros clientes con información importante como por ejemplo, la situación que ha afetado internacionalmente a la ciudadania la <strong>Pandemia del Covid-19</strong> o para anunciar 
+            si actualmente Tonys necesita que recibas una información global por parte de la administración.
+            .</ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='quedebohacercuandomipaqueteestaconfirmadoenoficina'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title>¿Que debo hacer cuando mi paquete esta confirmado en oficina?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>
+            * debes diriguirte a la agencia principal, el el monto de la guía y retirar el paquete antes de que pasen 90 días continuos. ( 3 meses)
+             De lo contrario tu paquete será declarado en abandono.
+            </ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section *ngIf="segmentModel=='comomecontactoconsoporte'">
+    <ion-fab style="position:absolute; right:10%;top:1%;">
+      <ion-fab-button (click)="segmentModel=undefined">  <ion-icon name="arrow-back-outline"></ion-icon> </ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <br>
+      <ion-card-header>
+        <ion-card-title>¿Como me contacto con soporte?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-text>Puede abrir un ticket desde la sección soporte del menu principal y luego de 2 horas su ticket sera respondido.
+            .</ion-text>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+
+  <section *ngIf="segmentModel==undefined||segmentModel==null||segmentModel==''">
+
+    <section>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>¿Cuál es la dirección que debo utilizar en mis compras?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>Es de suma importancia que las compras que realices a través de cualquier proveedor o tienda online sean enviadas a nuestras direcciones, no olvides colocar tu Código BEO al momento de comprar para poder identificar tu compra de forma apropiada.
+  
+              Igualmente, te invitamos a ingresar en las tiendas online en las que acostumbras comprar para realizar el cambio de dirección de destino o shipping address. Es de vital importancia que en la dirección coloques el campo del ZIP o ZIP-CODE correctamente, de esta forma garantizas una entrega eficiente por parte de tu proveedor.
+              
+              </ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section>
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title>¿En cuántos días recibiré mis paquetes?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>En temporada alta (de diciembre a febrero) nuestros tiempos varían de acuerdo a la cantidad de carga recibida en nuestros almacenes, en muchos casos el tiempo en tránsito es superior a los 20 días.</ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section>
+      
+        
+      
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title> ¿Debo pagar algún costo de suscripción o mensualidad?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>No, la suscripción es gratuita, solo cobramos el servicio de traslado.
+           </ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section>
+      
+        
+      
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title> ¿Cómo me suscribo?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>Entra a la sección de <a style="cursor: pointer;" (click)="iraregistro()">Registro gratuito</a> y sigue las indicaciones.</ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section >
+      
+          
+      
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title>¿Qué es el Número de guía?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>Es el número con el que identificamos cada paquete en nuestro sistema. Este número se genera automáticamente cuando tus paquetes son procesados en nuestros Almacenes y te indica en qué estatus se encuentra tu envío y cuál es el monto que vas a pagar por el servicio.</ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section >
+      
+        
+      
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title>¿Que son los anuncios de administración?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>Son mensajes globales dirigidos a todos nuestros clientes con información importante como por ejemplo, la situación que ha afetado internacionalmente a la ciudadania la <strong>Pandemia del Covid-19</strong> o para anunciar 
+              si actualmente Tonys necesita que recibas una información global por parte de la administración.
+              .</ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section>
+      
+        
+      
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title>¿Que debo hacer cuando mi paquete esta confirmado en oficina?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>
+              * debes diriguirte a la agencia principal, el el monto de la guía y retirar el paquete antes de que pasen 90 días continuos. ( 3 meses)
+               De lo contrario tu paquete será declarado en abandono.
+              </ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+    <section>
+      
+        
+      
+      <ion-card>
+        <br>
+        <ion-card-header>
+          <ion-card-title>¿Como me contacto con soporte?</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-accordion-group>
+            <ion-text>Puede abrir un ticket desde la sección soporte del menu principal y luego de 2 horas su ticket sera respondido.
+              .</ion-text>
+          </ion-accordion-group>
+        </ion-card-content>
+      </ion-card>
+    </section>
+  
+
+
+  </section>
+
+</ion-content>
+
+
+

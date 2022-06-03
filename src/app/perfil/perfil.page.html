@@ -1,0 +1,140 @@
+<!-- empieza el menu superior izquierdo -->
+<ion-header color="light" class="ion-no-border" [translucent]="true">
+    <ion-toolbar color="light">
+      
+      <ion-buttons *ngIf="informacion_perfil!=null&&informacion_perfil!=undefined" slot="end">
+        <ion-button (click)="ONCHANGEmenuderechosuperior()" >
+          <ion-avatar style="width:90%; height:90%;">
+            <!-- <img src="assets/avatarassetsimage.png"> -->
+            <img [src]="informacion_perfil.profile_url_img==undefined || informacion_perfil.profile_url_img==null || informacion_perfil.profile_url_img=='' ? 'assets/avatarassetsimage.png' : informacion_perfil.profile_url_img"/>
+          </ion-avatar>
+        </ion-button>
+        <ion-button style="text-transform:none" (click)="ONCHANGEmenuderechosuperior()"><ion-text  style="margin-left: -8px;">{{this.informacion_perfil.email}}</ion-text><ion-icon name="ellipsis-vertical"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+  
+    <ion-card *ngIf="menuderechosuperior==true" style="position:sticky; float: right; width: fit-content; top:0%; z-index: 9999;">
+      <ion-card-header>
+        <ion-card-title>Mi Cuenta</ion-card-title>
+        <ion-card-subtitle>Menu de Usuario</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+            <ion-list>
+            <ion-item>
+            <ion-label (click)="iramiperfilDelMenuDerechoSuperior()" style="cursor: pointer;">Mi perfil</ion-label>
+            </ion-item>
+            <ion-item>
+            <ion-label style="cursor: pointer;">Mi Cuenta</ion-label>
+            </ion-item>
+            <ion-item (click)="logout()" style="cursor: pointer;">
+            <ion-label>Salir</ion-label>
+            </ion-item>
+            </ion-list>
+      </ion-card-content>
+    </ion-card>
+<!-- termina el menu superior izquierdo -->
+
+<!-- empieza la pagina de perfil (con editor) -->
+<ion-text style="text-align: center;color:#2DC123;margin-top: 10px;"><h4 style="font-size: 14px;">Verifique y edite su Perfil</h4></ion-text>
+
+<div class="content-img">
+    <label for="input">
+    <img *ngIf="!ahora_selecciono_otra_foto" style="border-radius: 50em; display: block; object-fit: cover;" [src]="informacion_perfil.profile_url_img==undefined || informacion_perfil.profile_url_img==null || informacion_perfil.profile_url_img=='' ? 'assets/avatarassetsimage.png' : informacion_perfil.profile_url_img"/>
+    <img *ngIf="ahora_selecciono_otra_foto" style="border-radius: 50em; display: block; object-fit: cover;" [src]="imageProfile"/>
+    <ion-icon name="camera"></ion-icon>
+    </label>
+    <input (change)=takePicture($event) class="input" type="file" id="input">
+</div>
+
+        <form [formGroup]="registerUserForm">
+
+        <ion-list style="background: transparent;" lines="full" class="ion-no-margin">
+
+<ion-card>
+    <h2 class="title-info1" style="margin-top: 0px;"><ion-icon style="font-size: 20px; margin-right: 10px;" name="id-card-outline"></ion-icon> Información Básica</h2>
+    <ion-item lines="none">
+        <ion-label color="primary" style="font-weight: 500;text-transform: capitalize;" [ngClass]="{'danger': formErrors.name}">Nombre:</ion-label>
+        <ion-input [(ngModel)]="informacion_perfil.name" formControlName="name" type="text" style="text-transform: capitalize;" placeholder="Ingrese Nombre"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+        <ion-label color="primary" style="font-weight: 500;text-transform: capitalize;" [ngClass]="{'danger': formErrors.lastName}">Apellido:</ion-label>
+        <ion-input [(ngModel)]="informacion_perfil.lastname" formControlName="lastName" style="text-transform: capitalize;" type="text" placeholder="Ingrese Apellido"></ion-input>
+    </ion-item>         
+    <ion-item>
+        <ion-label color="primary" style="max-width: 20%;font-weight: 500;" [ngClass]="{'danger': formErrors.genderId}">Genero:</ion-label>
+        <ion-select formControlName="genderId" interface="popover" [placeholder]="informacion_perfil.genero" style="max-width: 80%;padding-left: 0px;width: 100%;">
+            <ion-select-option value="1">Masculino</ion-select-option>
+            <ion-select-option value="2">Femenino</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+</ion-card>
+
+<ion-card>
+    <h2 class="title-info1" style="margin-top: 0px;"><ion-icon style="font-size: 20px; margin-right: 10px;" name="location-outline"></ion-icon> Pais</h2>
+
+    <ion-item>
+        <ion-label color="primary" style="max-width: 23%;font-weight: 500;">Pais: </ion-label>
+        <ion-select [placeholder]="informacion_perfil.paisnombre" style="max-width: 77%;padding-left: 0px;width: 100%;" interface="popover" okText="Ok" cancelText="Cancelar" formControlName="countryId" >
+            <ion-select-option *ngFor="let cadapais of countryData" value="{{cadapais.id}}">{{cadapais.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+</ion-card>
+        
+
+<ion-card>
+    <h2 class="title-info1" style="margin-top: 0px;"><ion-icon style="font-size: 20px; margin-right: 10px;" name="person-outline"></ion-icon> Acerca de tí</h2>
+    <ion-item lines="none">
+        <ion-label color="primary" style="font-weight: 500;" [ngClass]="{'danger': formErrors.description}">Descripción:</ion-label>
+        <ion-textarea formControlName="description" type="text" rows="6" cols="20" [placeholder]="informacion_perfil.descripcion"></ion-textarea>
+    </ion-item>
+
+    <ion-text color="primary" size="small" style="font-size: small; margin-left: 15px;"
+     *ngIf="informacion_perfil.referidor!=null&&informacion_perfil.referidor!=undefined">
+     Numero: <strong>{{informacion_perfil.referidor}}</strong> </ion-text>
+     <br *ngIf="informacion_perfil.referidor!=null&&informacion_perfil.referidor!=undefined">
+     <br *ngIf="informacion_perfil.referidor!=null&&informacion_perfil.referidor!=undefined">
+</ion-card>
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label position="floating">Contraseña anterior</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item>
+        <ion-label position="floating">Nueva Contraseña</ion-label>
+        <ion-input type="password" formControlName="nuevopassword" ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+        </ion-list>
+
+        <ion-row class="row" class="ion-no-padding" no-padding >
+            <ion-col size="1">
+            </ion-col>
+            <ion-col size="10">
+                <ion-text style="font-size: small;font-weight: 500;">Complete los datos y presione para continuar:</ion-text>
+                <ion-button [disabled]="!registerUserForm.valid"
+                 (click)="actualziarperfil()" style="margin-top: 10px;
+                margin-bottom: 20px;" expand='block'>Actualizar</ion-button>
+            </ion-col>
+            <ion-col size="1">
+            </ion-col>
+        </ion-row>
+
+        </form>
+
+
+
+</ion-content>

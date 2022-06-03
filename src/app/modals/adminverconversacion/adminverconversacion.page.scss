@@ -1,0 +1,115 @@
+// .mismensajes{
+//     color:green
+// }
+// .susmensajes{
+//     color:red;
+// }
+
+
+
+@mixin triangle($color, $size, $direction) {
+    width: 0;
+    height: 0;
+    @if $direction=="up" {
+        border-right: ($size + px) solid transparent;
+        border-left: ($size + px) solid transparent;
+        border-bottom: ($size + px) solid $color;
+    }
+    @if $direction=="down" {
+        border-right: ($size + px) solid transparent;
+        border-left: ($size + px) solid transparent;
+        border-top: ($size + px) solid $color;
+    }
+    @if $direction=="right" {
+        border-top: ($size + px) solid transparent;
+        border-bottom: ($size + px) solid transparent;
+        border-left: ($size + px) solid $color;
+    }
+    @if $direction=="left" {
+        border-top: ($size + px) solid transparent;
+        border-bottom: ($size + px) solid transparent;
+        border-right: ($size + px) solid $color;
+    }
+}
+
+
+
+ion-content{
+    --background: #EDEDED;
+}
+
+.message-input {
+    color:#202020;
+    width: 100%;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 6px;
+    background: #fff;
+    resize: none;
+    margin-top: 0px;
+    --padding-start: 8px;
+}
+ 
+.message {
+    padding: 10px !important;
+    border-radius: 10px !important;
+    margin-bottom: 4px !important;
+    white-space: pre-wrap;
+}
+ 
+.my-message {
+    background: var(--ion-color-success);
+    color: #fff;
+    position: relative;
+    border-radius: 5px;
+    padding: 13px;
+    max-width: calc(100vw - 124px);
+}
+
+.my-message:after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 11px;
+    @include triangle(rgba(45, 211, 111, 1), 9, left);
+}
+ 
+.other-message {
+    background: #ffffff;
+    color: #202020;
+}
+ 
+.time {
+    color: #dfdfdf;
+    float: right;
+    font-size: small;
+}
+
+
+.chat-left {
+    position: relative;
+    border-radius: 5px;
+    background: white;
+    padding: 13px;
+    max-width: calc(100vw - 124px);
+}
+
+.chat-left:after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 11px;
+    @include triangle(rgba(255, 255, 255, 1), 9, left);
+}
+
+.v2-badge-cerrado {
+    color: #ffbc04;
+    background-color: #e8d3a5;
+  }
+
+  .v2-badge {
+    padding: 3px 8px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }

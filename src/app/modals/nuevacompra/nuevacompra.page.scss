@@ -1,0 +1,44 @@
+.content-img{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 0px 15px;
+    position: relative;
+    img{
+    	height: 100px;
+    	width: 100px;
+    }
+    ion-icon{
+    	position: absolute;
+	    bottom: 0px;
+	    margin-left: 65px;
+	    background-color: #F7293A;
+	    color: #fff;
+	    padding: 5px;
+	    border-radius: 50em;
+	    height: 16px;
+	    width: 16px;
+    }
+    label{
+    	width: 100%;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+    }
+    .input{
+	    visibility: hidden;
+	    position: absolute;
+	}
+
+}
+
+.cartaconscrolly300dealto {
+	// width: 300px;
+	height: auto;
+	overflow-y: scroll;
+	scrollbar-color: rebeccapurple green;
+	scrollbar-width: thin;
+  }
+
+  .ningunaclase {
+  }

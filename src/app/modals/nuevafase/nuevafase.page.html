@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar style="text-align:center">
+    <ion-title>Agregar Nuevo anuncio</ion-title>
+    <ion-button (click)="dismiss()"><ion-icon color="danger" name="close-outline"></ion-icon>Cerrar</ion-button>
+    <ion-button [disabled]="!titulo||!mensaje" (click)="agregaranuncio()"><ion-icon color="success" name="checkmark-done-outline"></ion-icon>Agregar</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Titulo:</ion-label>
+      <ion-input [(ngModel)]="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Mensaje:</ion-label>
+      <ion-input [(ngModel)]="mensaje"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prioridad</ion-label>
+      <ion-select [(ngModel)]="prioridad" value="normal" interface="popover">
+        <ion-select-option value="normal" selected>Normal</ion-select-option>
+        <ion-select-option value="importante">Importante</ion-select-option>
+      </ion-select>
+    </ion-item>
+   </ion-list>
+
+</ion-content>
+

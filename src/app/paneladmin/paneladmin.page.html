@@ -1,0 +1,377 @@
+<!-- empieza el menu superior izquierdo -->
+<ion-header color="light" class="ion-no-border" [translucent]="true">
+  <ion-toolbar color="light">
+    
+    <ion-buttons *ngIf="informacion_perfil!=null&&informacion_perfil!=undefined" slot="end">
+      <ion-button (click)="ONCHANGEmenuderechosuperior()" >
+        <ion-avatar style="width:90%; height:90%;">
+          <!-- <img src="assets/avatarassetsimage.png"> -->
+          <img [src]="informacion_perfil.profile_url_img==undefined || informacion_perfil.profile_url_img==null || informacion_perfil.profile_url_img=='' ? 'assets/avatarassetsimage.png' : informacion_perfil.profile_url_img"/>
+        </ion-avatar>
+      </ion-button>
+      <ion-button style="text-transform:none" (click)="ONCHANGEmenuderechosuperior()"><ion-text  style="margin-left: -8px;">{{this.informacion_perfil.email}}</ion-text><ion-icon name="ellipsis-vertical"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenido si no se tiene informacion del tipo de cuenta -->
+<ion-content *ngIf="!this.varios.tipo_cuenta">
+  <ion-item routerLink="/login"><ion-button>Reingresar</ion-button>
+  </ion-item>
+</ion-content>
+
+
+<ion-content *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+<!-- <ion-content  color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true"> -->
+
+  <ion-card *ngIf="menuderechosuperior==true" style="position:sticky; float: right; width: fit-content; top:0%; z-index: 9999;">
+    <ion-card-header>
+      <ion-card-title>Mi Cuenta</ion-card-title>
+      <ion-card-subtitle>Menu de Usuario</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+          <ion-list>
+          <ion-item>
+          <ion-label (click)="iramiperfilDelMenuDerechoSuperior()" style="cursor: pointer;">Mi perfil</ion-label>
+          </ion-item>
+          <ion-item>
+          <ion-label style="cursor: pointer;">Mi Cuenta</ion-label>
+          </ion-item>
+          <ion-item (click)="logout()" style="cursor: pointer;">
+          <ion-label>Salir</ion-label>
+          </ion-item>
+          </ion-list>
+    </ion-card-content>
+  </ion-card>
+<!-- termina el menu superior izquierdo -->
+
+<ion-segment (ionChange)="segmentChanged()"  
+value="ordenesdefraccionamiento"
+scrollable="true"
+mode="ios"
+[(ngModel)]="segmentModel" 
+(ionChange)="segmentChanged()"
+>
+
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='solicitudesdecompras'" value="solicitudesdecompras">
+      <ion-button [disabled]="segmentModel=='solicitudesdecompras'" > 
+         <ion-label>Paquetes</ion-label>
+      </ion-button>
+    </ion-segment-button>
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='activardesacusuario'" value="activardesacusuario">
+      <ion-button [disabled]="segmentModel=='activardesacusuario'"> 
+      <ion-label>Activar/ <br>Desac. usuario</ion-label>
+      </ion-button>
+    </ion-segment-button>
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='chatdesoporte'" value="chatdesoporte">
+      <ion-button [disabled]="segmentModel=='chatdesoporte'"> 
+      <ion-label>tickets Soporte</ion-label>
+      </ion-button>
+    </ion-segment-button>
+
+</ion-segment>
+
+<span class="brxsmall"></span>
+
+<ion-segment (ionChange)="segmentChanged()"  
+value="ordenesdefraccionamiento"
+scrollable="true"
+mode="ios"
+[(ngModel)]="segmentModel" 
+(ionChange)="segmentChanged()"
+>
+
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='direcciones'" value="direcciones">
+      <ion-button [disabled]="segmentModel=='direcciones'" > 
+         <ion-label>Direcciones (TODAS)</ion-label>
+      </ion-button>
+    </ion-segment-button>
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='veraumentarfase'" value="veraumentarfase">
+     <ion-button [disabled]="segmentModel=='veraumentarfase'"> 
+        <ion-label>Ver o editar<br>anuncios</ion-label> 
+     </ion-button>
+    </ion-segment-button>
+    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='reportes'" value="reportes">
+      <ion-button [disabled]="segmentModel=='reportes'"> 
+      <ion-label>Reportes</ion-label>
+      </ion-button>
+    </ion-segment-button>
+
+</ion-segment>
+
+<section style="text-align:center;">
+<ion-text color="primary" *ngIf="segmentModel=='activardesacusuario'"><h3>Activar desactivar usuarios</h3></ion-text>
+<ion-text color="primary" *ngIf="segmentModel=='chatdesoporte'"><h3>Chat de Soporte</h3></ion-text>
+<ion-text color="primary" *ngIf="!segmentModel"><h2>Bienvenido Admin</h2></ion-text>
+</section>
+
+<section *ngIf="segmentModel=='solicitudesdecompras'">
+  <ion-text style="text-align:center;" color="success"><ion-button color="success" (click)="agregarcompra()">
+    <ion-icon name="add-circle-outline"></ion-icon>
+    Agregar</ion-button><br></ion-text>
+    
+<ion-text style="font-size: small;">Usr=Usuario | BC=BeoCode | PTS=Puntos | Nom=Nombre | Tr=Traking | PE=Peso | Or=Origen | Est=Estado | Obs=Observación</ion-text>
+<ion-grid class="ion-no-padding" no-padding>
+  <ion-card *ngFor="let movimiento of respuestadetonysadminobtenermovimientos">
+  <ion-row class="ion-no-padding" no-padding>
+    <ion-col size="3.5"  class="ion-no-padding" no-padding>
+
+      <a color="primary">Usr</a>:{{movimiento.userdetalles.username}}
+      
+      <br>
+        <a color="primary">BC</a>:{{movimiento.userdetalles.id_publico}}
+      <br>
+
+        <a color="primary">PTS</a>:{{movimiento.monto}}
+      <br>
+        <a color="primary">Nom</a>:{{movimiento.userdetalles.name}}&nbsp;{{movimiento.userdetalles.lastname}}
+
+    </ion-col>
+    <ion-col  size="4.5"   class="ion-no-padding" no-padding>
+
+        <a color="primary">tr</a>:{{movimiento.traking}}
+
+      <br>
+
+      <a color="primary">Pe</a>:{{movimiento.peso}} <strong>gr</strong>
+      <br>
+        <a color="primary">Or</a>:{{movimiento.origen}}
+        <br>
+        <a color="primary">Est</a>:<strong>{{movimiento.status}}</strong>
+        <br>
+        <a color="primary">Obs</a>:<strong>{{movimiento.observacion}}</strong>
+
+    </ion-col>
+    <ion-col  size="4"   class="ion-no-padding" no-padding>
+      <ion-button size="small" color="primary" text-capitalize >
+        Detalles
+      </ion-button>
+      <ion-button (click)="presentAlertRadio(movimiento)" text-capitalize >
+        <strong>Estado</strong>
+      </ion-button>
+      
+      <ion-button size="small" (click)="VerImagen(movimiento.reciboImgUrl)">
+        Ver Imagen
+      </ion-button>
+      
+    </ion-col>
+  </ion-row>
+</ion-card>
+</ion-grid>
+
+</section>
+
+<section *ngIf="segmentModel=='activardesacusuario'&&this.varios.tipo_cuenta=='999'">
+
+<ion-grid>
+  <ion-card *ngFor="let cadausuario of respuestadetonysadminobtenerlistadeuduarios">
+    <ion-row>
+      <ion-col >
+          <span style="margin-left: 5px;" class="v2-badge v2-badge-movimientos">
+            <a style="vertical-align: inherit; color:#ffffff;">mail:</a></span>
+            {{cadausuario.email}}
+          <br>
+          <span style="margin-left: 5px;" class="v2-badge v2-badge-movimientos">
+            <a style="vertical-align: inherit; color:#ffffff;">Pass:</a></span>
+            {{cadausuario.password }}
+          <br>
+          <span style="margin-left: 5px;" class="v2-badge v2-badge-movimientos">
+            <a style="vertical-align: inherit; color:#ffffff;">Fecha:</a></span>
+            {{cadausuario.create_date| date:'shortDate':'GMT-3'}}&nbsp;{{cadausuario.create_date | date:'shortTime':'GMT-3'}}
+      </ion-col>
+  
+      <ion-col>
+        <ion-button color="danger" (click)="suspenderusuario(cadausuario)" *ngIf="cadausuario.status=='activo'">Desactivar</ion-button>
+        <ion-button color="success" (click)="activarusuario(cadausuario)" *ngIf="cadausuario.status=='desactivado'">Activar</ion-button>
+
+        <!-- <ion-button>Desactivar</ion-button> -->
+               
+      </ion-col>
+  
+    </ion-row>
+  </ion-card>
+</ion-grid>
+
+</section>
+
+
+<section *ngIf="segmentModel=='veraumentarfase'&&this.varios.tipo_cuenta=='999'">
+
+  <ion-grid class="ion-no-padding" no-padding>
+    <ion-row style="margin-bottom:15px">
+      <ion-col>
+        <section style="text-align: center;">
+          <ion-text style="text-align: center;">Ver o administrar anuncios para usuarios.</ion-text>
+          <ion-button (click)="AdminagregarFase()"><ion-icon style="color:white;" name="add-circle"></ion-icon>&nbsp;Agrear Anuncio</ion-button>
+        </section>
+        <br>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-no-padding ion-justify-content-center ion-align-items-center"
+     *ngFor="let cadaanuncio of respuestatonysanuncios; let i=index"
+     style="border: thick double #32a1ce; margin-bottom:5px"
+     >
+
+      <ion-col size="4">
+        <ion-text color="primary">{{cadaanuncio.titulo}}</ion-text>
+        <br>
+        <ion-text>{{cadaanuncio.prioridad}}</ion-text>
+        <br>
+        <ion-button (click)="borraranuncios(cadaanuncio)">Borrar</ion-button>
+        <br><br>
+      </ion-col>
+      <ion-col size="8">
+        <ion-text>{{cadaanuncio.descripcion}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <br>
+
+</ion-grid>
+</section>
+
+<section *ngIf="segmentModel=='chatdesoporte'">
+
+  <ion-card>
+    <ion-grid *ngIf="!listasdechat">
+      <ion-row>
+        <ion-col>
+          <ion-text><h4>Porfavor espere, cargando lista de tickets...</h4></ion-text>
+          <img width="50%" src="assets/chat/one-chat/loading_chat.gif">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-card (click)="leermensajes(ticket)" *ngFor="let ticket of listasdechat">
+    <ion-grid *ngIf="listasdechat">
+      <ion-row>
+        <ion-col size="4">
+          <ion-text *ngIf="ticket.asunto" style="font-size: small;">Asunto: {{ticket.asunto}}</ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text *ngIf="ticket.status" style="font-size: small;">Estado:<br> <a style="text-transform:capitalize;" [class]="ticket.status=='abierto' ? 'v2-badge-abierto v2-badge' : 'v2-badge-cerrado v2-badge'">{{ticket.status}}</a></ion-text>
+        </ion-col>
+        <ion-col style="font-size: small;" size="4">
+          {{ticket.fecha}}<br>
+          <ion-button style="font-size: small;" size="small"><ion-icon name="chatbubbles"></ion-icon>Ver</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  
+  <br>
+  
+</section>
+
+    <section *ngIf="segmentModel=='direcciones'&&this.varios.tipo_cuenta=='999'">
+      <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="abrireditardireccionderetiro()">Editar Direccion de retiro<a style="color:green; font-size: 8px;">Nuevo</a></ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-card *ngFor="let cadadireccion of respuestatonysobteneradmindirecciones">
+        <ion-row>
+          <ion-col>
+            <ion-fab-button (click)="actualizarAdminDireccion(cadadireccion)" style="position:absolute; right:1%; bottom:5%;" color="primary">
+              <ion-icon style="color:white;" name="create"></ion-icon>
+            </ion-fab-button>
+            <ion-text><strong>Pais:</strong> {{cadadireccion.pais}}</ion-text>
+            <br>
+            <ion-text><strong>Nombre:</strong> {{cadadireccion.nombre}}</ion-text>
+            <br>
+            <ion-text><strong>Dirección 1:</strong> {{cadadireccion.direccion_1}}</ion-text>
+            <br>
+            <ion-text><strong>Ciudad:</strong> {{cadadireccion.ciudad}}</ion-text>
+            <br>
+            <ion-text><strong>State:</strong> {{cadadireccion.estado}}</ion-text>
+            <br>
+            <ion-text><strong>Cod. Postal:</strong> {{cadadireccion.codigo_postal}}</ion-text>
+            <br>
+            <ion-text><strong>Numero Tlf:</strong> {{cadadireccion.telefono}}</ion-text>
+  
+            <ion-text></ion-text>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+      </ion-grid>
+    </section>
+
+    <section *ngIf="segmentModel=='reportes'&&this.varios.tipo_cuenta=='999'">
+      <ion-grid>
+      <ion-card>
+        <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-select (ionChange)="IONCHANGEselector()" [(ngModel)]="estado" placeholder="Estado" interface="popover">
+                    <ion-select-option value="recibido">recibido</ion-select-option>
+                    <ion-select-option value="en camino">en camino</ion-select-option>
+                    <ion-select-option value="listo">listo</ion-select-option>
+                    <ion-select-option value="entregado">entregado</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Inicio:</ion-label>
+                 <ion-input (ionChange)="IONCHANGEselector()" format="yyyy:mm:dd" [(ngModel)]="fecha_inicio" type="date"></ion-input>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Fin:</ion-label>
+                 <ion-input (ionChange)="IONCHANGEselector()" [(ngModel)]="fecha_fin" type="date"></ion-input>
+             </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-button [disabled]="
+        !fecha_inicio||!fecha_fin||!estado
+        " (click)="consultarReporte()">Consultar</ion-button>
+      </ion-card>
+
+      <section *ngIf="cambioelselector==false&&reportederegistros&&reportederegistros.length>0">
+        <ion-card  *ngFor="let reporte of reportederegistros">
+          <ion-row>
+            <ion-col>
+              <ion-text><strong>Traking:</strong>{{reporte.traking}}</ion-text>
+              <br>
+              <ion-text><strong>Peso:</strong>{{reporte.peso}}</ion-text>
+              <br>
+              <ion-text><strong>Origen:</strong>{{reporte.origen}}</ion-text>
+            </ion-col>
+            <ion-col>
+              <ion-text><strong>BeoPoint:</strong>{{reporte.monto}}</ion-text>
+              <br>
+              <ion-text><strong>Fecha:</strong>{{reporte.fecha}}</ion-text>
+              <br>
+              <ion-text><strong>Estado:</strong>{{reporte.status}}</ion-text>
+            </ion-col>
+            <ion-col>
+              <ion-text><strong>BeoCode:</strong>{{reporte.userdetalles.id_publico}}</ion-text>
+              <br>
+              <ion-text><strong>Usuario:</strong>{{reporte.userdetalles.username}}</ion-text>
+              <br>
+              <ion-text><strong>nombre:</strong>{{reporte.userdetalles.name}} {{reporte.userdetalles.lastname}}</ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </section>
+      </ion-grid>
+    </section>
+
+    <section *ngIf="cambioelselector==false&&reportederegistros&&reportederegistros.length<1">
+      <ion-text>No hay registros en estado 
+        <strong color="primary">{{estado}}</strong> 
+        para las fechas seleccionadas, Intente seleccionar otro rango de fechas.</ion-text>
+    </section>
+
+
+
+
+
+
+</ion-content>

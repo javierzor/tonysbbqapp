@@ -1,0 +1,18 @@
+
+  // ion-content.signup-style {
+  //   background-size: cover;
+  //       --background: url(../../assets/login-fondo.jpg) 0 0/100% 100% no-repeat;
+  // }
+
+ion-item {
+    --border-color: white; // default underline color
+    --highlight-color-invalid: red; // invalid underline color
+    --highlight-color-valid: #ffbc0488; // valid underline color
+}
+
+#somelement {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
+    }

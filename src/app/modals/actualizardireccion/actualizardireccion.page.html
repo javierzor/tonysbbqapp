@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-fab-button (click)="dismiss()"  style="position:absolute; left:1%; " color="primary">
+    <ion-icon color="danger" name="close-outline"></ion-icon>
+  </ion-fab-button>
+    <ion-fab-button (click)="actualizardireccion()" style="position:absolute; right:1%; " color="primary">
+      <ion-icon color="success" name="checkmark-done-outline"></ion-icon>
+    </ion-fab-button>
+
+</ion-header>
+
+
+<ion-content>
+  
+
+  <ion-list (ionChange)="ONCHANGElista()">
+
+    <ion-item>
+      <ion-label>   &nbsp; </ion-label>
+      <ion-input readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Pais:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.pais"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dirección 1:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.direccion_1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ciudad:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.ciudad"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Estado:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.estado"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cod. Postal:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.codigo_postal"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Telefono:</ion-label>
+      <ion-input [(ngModel)]="cadadireccion.telefono"></ion-input>
+    </ion-item>
+
+ </ion-list>
+
+<ion-text *ngIf="cambiosenlalista"><a color="primary">Cambios detectados!,</a> porfavor confirme clickeando el Check verde superior proceder a guardar estos cambios.</ion-text>
+
+</ion-content>

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-fab-button (click)="dismiss()"  style="position:absolute; left:1%; " color="primary">
+    <ion-icon color="danger" name="close-outline"></ion-icon>
+  </ion-fab-button>
+    <ion-fab-button (click)="actualizardireccion()" style="position:absolute; right:1%; " color="primary">
+      <ion-icon color="success" name="checkmark-done-outline"></ion-icon>
+    </ion-fab-button>
+
+</ion-header>
+
+
+<ion-content>
+  
+
+  <ion-list *ngIf="direccionderetiro">
+
+    <ion-item>
+      <ion-label>   &nbsp; </ion-label>
+      <ion-input readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Oficina:</ion-label>
+      <ion-input placeholder="Alfanumerico puede usar (numeros, letras y simbolos)" [(ngModel)]="direccionderetiro.oficina"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dirección:</ion-label>
+      <ion-input placeholder="Alfanumerico puede usar (numeros, letras y simbolos)" [(ngModel)]="direccionderetiro.direccion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefono:</ion-label>
+      <ion-input placeholder="+000 00000000" [(ngModel)]="direccionderetiro.telefono"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dias:</ion-label>
+      <ion-input placeholder="DD-DD" [(ngModel)]="direccionderetiro.dias"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Horarios:</ion-label>
+      <ion-input placeholder="(0:00am/0:00pm)" [(ngModel)]="direccionderetiro.horarios"></ion-input>
+    </ion-item>
+
+ </ion-list>
+
+<!-- <ion-text *ngIf="cambiosenlalista"><a color="primary">Cambios detectados!,</a> porfavor confirme clickeando el Check verde superior proceder a guardar estos cambios.</ion-text> -->
+
+</ion-content>

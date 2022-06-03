@@ -1,0 +1,50 @@
+<ion-content>
+    
+<img *ngIf="mostrardedos==true" style="position:absolute; top:1px; right:1px; width:35%; height:22%; opacity: 0.5;" src="assets/deslizar.gif">
+
+    <ion-slides (ionSlideDidChange)="activardedos()" (ionSlideDrag)="desactivardedos()"  paginationType="bullets"   scrollbar="true"  autoplay="3500" loop="true" speed="3000" pager="true" [options]="slideOpts">
+      <ion-slide style="background-image: url(assets/tuto-1.png); background-repeat:no-repeat;">
+        <ion-card color="primary">
+            <ion-card-header>
+                <h1>Bienvenido a Tonys App</h1><br>
+            </ion-card-header>
+            <ion-card-content>
+                <h2>Recorrido Guia tutorial de Tonys App</h2><br />
+                <h3>Registrate & Inicia sección</h3><br>
+                <ion-text>Video <strong>Estamos trabajando en ello.</strong></ion-text>
+
+                                <br><br><br><br><br>
+
+            </ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide  style=" background-image: url(assets/tuto-2.png);background-repeat:no-repeat;">
+        <ion-card  color="primary">
+            <ion-card-header>
+                <h1>Recorrido Tutorial Page Nro. 2</h1><br>
+            </ion-card-header>
+            <ion-card-content>
+
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </ion-card-content>
+        </ion-card>
+        
+      </ion-slide>
+      <ion-slide  style=" background-image: url(assets/tuto-3.png);background-repeat:no-repeat;">
+        <ion-card  color="primary">
+            <ion-card-header>
+                <h1>Recorrido Tutorial Page Nro. 3</h1><br>
+            </ion-card-header>
+            <ion-card-content>
+               
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+            </ion-card-content>
+        </ion-card>
+        
+
+    </ion-slide>
+    </ion-slides>
+
+
+  </ion-content>

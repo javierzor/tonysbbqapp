@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      {{dataparaelmodal.asunto}}
+    </ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content (ionScroll)="hizoscroll()" [scrollEvents]="true" color="fondochat" class="ion-padding">
+
+
+  <ion-fab style="position:absolute; top:-30px; right:0%;" slot="fixed">
+    <ion-fab-button color="danger" (click)="dismissyactualiza()"><ion-icon name="close-circle-outline"></ion-icon></ion-fab-button>
+  </ion-fab>
+
+
+
+    <ion-grid *ngIf="respuestamismensajesdechatabierto">
+      <ion-row *ngFor="let message of respuestamismensajesdechatabierto">
+        <ion-col size="1.5">
+          <ion-avatar>
+            <img *ngIf="message.es_admin_mensaje=='0'" style="width:50% !important; position:unset; right:0px; top:0px;
+            height : 50% !important; max-width: 50px !important; max-height: 50px !important;" src="assets/avatarassetsimage.png">
+          </ion-avatar>        
+        </ion-col>
+  
+        <ion-col size="9" [class]="message.es_admin_mensaje=='0' ? 'message my-message' : 'other-message'"
+        >
+        <b *ngIf="message.es_admin_mensaje=='0'" style="color: rgb(205, 44, 127);">Yo</b>
+        <b *ngIf="message.es_admin_mensaje=='1'" style="color: #86689F;">Soporte:</b>
+        <br>
+        <span>{{ message.mensaje }}
+        </span>
+        <div class="time ion-text-right"><br>{{ message.fecha | date:'short' }}</div>
+      </ion-col>
+  
+      <ion-col size="1.5">
+        <ion-avatar>
+          <img *ngIf="message.es_admin_mensaje=='1'" style="width:50% !important; position:unset; right:0px; top:0px;
+          height : 50% !important; max-width: 50px !important; max-height: 50px !important;" src="assets/chat/one-chat/soporte.svg">
+        </ion-avatar>        
+      </ion-col>
+  
+      </ion-row>
+    </ion-grid>
+  
+    <span class="v2-badge-cerrado v2-badge" color="primary" *ngIf="dataparaelmodal.status=='cerrado'">Ticket Cerrado
+    </span>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="9">
+        <ion-textarea [disabled]="dataparaelmodal.status=='cerrado'"  class="message-input" rows="1" maxLength="500" [(ngModel)]="mensaje" >
+        </ion-textarea>
+      </ion-col>
+      <ion-col size="2"  style="display: flex;align-items: center;font-size: 25px;justify-content: center;">
+        <ion-button expand="block" fill="clear" color="primary" [disabled]="mensaje === ''||mensaje==undefined||mensaje==null"
+          class="msg-btn" (click)="EnviarMensajeDeChat()">
+          <ion-icon name="send" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="1"  style="display: flex;align-items: center;font-size: 30px;justify-content: center;">
+        <ion-icon color="success" *ngIf="!mostrarr" (click)="mostrarr = !mostrarr" style="display: block" name="ellipsis-vertical"></ion-icon>
+        <ion-icon color="danger" *ngIf="mostrarr" (click)="mostrarr = !mostrarr" style="display: block" name="remove-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+    
+  </ion-toolbar>
+
+<ion-slides pager="false" *ngIf="mostrarr">
+  <ion-slide>
+      <ion-grid style="margin-top: 3px">
+          <ion-row style="text-align:center; font-size:12px">
+              <ion-col (click)="marcarresuelto()" size="3" style="cursor:pointer; padding: 20px 20px 0px;">
+                  <img style="margin-bottom: 3px; width: 50px;" src="assets/chat/one-chat/4.png" />
+                  <ion-text style="font-size: 11px; margin-left:0%">Cerrar</ion-text>
+              </ion-col>
+              <!-- <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px; width: 50px;" src="assets/chat/one-chat/2.png" /> Contacto
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/8.png" /> Transferir
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/4.png" /> Archivos
+              </ion-col>
+          </ion-row>
+          <ion-row style="text-align:center; font-size:12px">
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/5.png" /> Locación
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/6.png" /> Fotos
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/7.png" /> Audio
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                  <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/9.png" /> Regalo
+              </ion-col> -->
+          </ion-row>
+           
+
+      </ion-grid>
+  </ion-slide>
+  <ion-slide>
+      <ion-grid style="margin-top: 3px">
+          <ion-row style="text-align:center; font-size:12px">
+              <!-- <ion-col size="3" style="padding: 20px 20px 0px">
+                 <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/1x/ofertar.png" />ofertar
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                 <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/12.png" />Comprar
+              </ion-col>
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/14.png" />Solicitar
+             </ion-col>
+             <ion-col size="3" style="padding: 20px 20px 0px">
+              <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/15.png" />Bloquear
+           </ion-col>
+           </ion-row>
+           <ion-row style="text-align:center; font-size:12px">
+              <ion-col size="3" style="padding: 20px 20px 0px">
+                <img style="margin-bottom: 3px;width: 50px;" src="assets/chat/one-chat/13.png" />A Favorito
+            </ion-col> -->
+          </ion-row>
+      </ion-grid>
+  </ion-slide>
+
+</ion-slides>
+
+</ion-footer>
+
