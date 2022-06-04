@@ -149,8 +149,17 @@ export class LoginPage implements OnInit {
                       this.variosservicios.tipo_cuenta=res.tipo_cuenta;
                       localStorage.setItem('email', this.encrypt(res.email));
                       localStorage.setItem('username', this.encrypt(res.username));
-                      this.router.navigate(['home']);
                       localStorage.setItem('profileInfo', this.encrypt(JSON.stringify(res)));
+
+
+                      //inician los nuevos cache
+                      localStorage.setItem('email', this.encrypt(res.email));
+                      localStorage.setItem('tipo_cuenta', res.tipo_cuenta);
+                      localStorage.setItem('isloggedin', 'si');
+                      localStorage.setItem('perfil', this.encrypt(JSON.stringify(res)));
+                      //terminan los nuevos cache
+
+                      this.router.navigate(['home']);
                       // this.menu.enable(true);
                     }
                     else{
@@ -216,9 +225,20 @@ export class LoginPage implements OnInit {
         this.variosservicios.tipo_cuenta=res.tipo_cuenta;
         localStorage.setItem('email', this.encrypt(res.email));
         localStorage.setItem('username', this.encrypt(res.username));
-        this.router.navigate(['home']);
         localStorage.setItem('profileInfo', this.encrypt(JSON.stringify(res)));
+        // this.router.navigate(['home']);
+        
+        //inician los nuevos cache
+        localStorage.setItem('email', this.encrypt(res.email));
+        localStorage.setItem('tipo_cuenta', res.tipo_cuenta);
+        localStorage.setItem('isloggedin', 'si');
+        localStorage.setItem('perfil', this.encrypt(JSON.stringify(res)));
+        
+        //terminan los nuevos cache
+        
+        
         this.router.navigate(['home']);
+
       }
      },
      error=>{
