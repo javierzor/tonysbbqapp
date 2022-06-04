@@ -67,7 +67,7 @@
           <!-- direciones -->
           <ion-card>
             <ion-card-header color="primary">
-              <ion-card-title>Buzones</ion-card-title>
+              <ion-card-title>Favoritos</ion-card-title>
             </ion-card-header>
             <ion-card-content  *ngIf="respuestatonysobteneradmindirecciones" class="ion-no-padding" no-padding>
 
@@ -80,7 +80,7 @@
                       <ion-col size="6">
                         <ion-buttons >
                           <ion-button  style="border-radius:15px; background:#f1f1f1;color:black;" (click)="variabledelsegmentmodel=='0'">
-                            <ion-segment-button  value="0">{{respuestatonysobteneradmindirecciones[0].pais}}
+                            <ion-segment-button  value="0">Archivos
                             </ion-segment-button>
                           </ion-button>
                         </ion-buttons>
@@ -89,14 +89,14 @@
                       <ion-col size="6">
                         <ion-buttons>
                           <ion-button  style="border-radius:15px; background:#f1f1f1;color:black;" (click)="variabledelsegmentmodel=='1'">
-                            <ion-segment-button value="1">{{respuestatonysobteneradmindirecciones[1].pais}}
+                            <ion-segment-button value="1">Formularios
                             </ion-segment-button>
                        </ion-button>
                      </ion-buttons>
 
                       </ion-col>
                   </ion-row>
-
+<!-- 
                   <ion-row>
                     <ion-col size="6">
                       <ion-buttons>
@@ -114,7 +114,7 @@
                         </ion-button>
                        </ion-buttons>
                     </ion-col>
-                   </ion-row>
+                   </ion-row> -->
 
               </ion-grid>
               </ion-segment>
@@ -125,21 +125,8 @@
                <section>
                  <ion-row>
                    <ion-col>
-                     <ion-text><strong>Nombre:</strong>: {{respuestatonysobteneradmindirecciones[variabledelsegmentmodel].nombre}}</ion-text>
-                     <br>
-                     <ion-text><strong>Dirección 1:</strong> {{respuestatonysobteneradmindirecciones[variabledelsegmentmodel].direccion_1}}</ion-text>
-                     <br>
-                     <ion-text><strong>Dirección 2 o Nro: </strong><a color="primary">{{informacion_perfil.id_publico}}</a></ion-text>
-                     <br>
-                     <ion-text><strong>Ciudad:</strong>: {{respuestatonysobteneradmindirecciones[variabledelsegmentmodel].ciudad}}</ion-text>
-                     <br>
-                     <ion-text><strong>State:</strong> {{respuestatonysobteneradmindirecciones[variabledelsegmentmodel].estado}}</ion-text>
-                     <br>
-                     <ion-text><strong>Cod. Postal:</strong> {{respuestatonysobteneradmindirecciones[variabledelsegmentmodel].codigo_postal}}</ion-text>
-                     <br>
-                     <ion-text><strong>Numero Tlf:</strong> {{respuestatonysobteneradmindirecciones[variabledelsegmentmodel].telefono}}</ion-text>
-
-                     <ion-text></ion-text>
+                     <ion-text *ngIf="variabledelsegmentmodel=='0'"><strong>Actualmente usted no cuenta con contenido asignado como favorito.</strong></ion-text>
+                     <ion-text *ngIf="variabledelsegmentmodel=='1'"><strong>Actualmente usted no cuenta con formularios favoritos.</strong></ion-text>
                    </ion-col>
                  </ion-row>
                </section>
@@ -165,16 +152,13 @@
                 <ion-card-content>
                   <ion-list class="ion-no-padding" no-padding>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[0]" color="Primary">{{resumen[0].length}}</a> pedidos Recibidos</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> archivos asignados.</ion-text><br>
                     </ion-item>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[1]" color="Primary">{{resumen[1].length}}</a> pedidos En transito</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> formularios asignados.</ion-text><br>
                     </ion-item>
                     <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[2]" color="Primary">{{resumen[2].length}}</a> pedidos Listo para entrega</ion-text><br>
-                    </ion-item>
-                    <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a *ngIf="resumen&&resumen[3]" color="Primary">{{resumen[3].length}}</a> Entregados</ion-text><br>
+                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> formularios enviados.</ion-text><br>
                     </ion-item>
                   </ion-list>
                 </ion-card-content>
@@ -191,7 +175,7 @@
             <ion-col>
               <ion-card>
                 <ion-card-header color="primary">
-                  <ion-card-title>Tickets Abiertos</ion-card-title>
+                  <ion-card-title>Lista de contenido asignado.</ion-card-title>
                 </ion-card-header>
                 <br><br><br><br><br><br><br>
               </ion-card>
