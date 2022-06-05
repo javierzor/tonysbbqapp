@@ -86,8 +86,7 @@
       <img style="border-radius: 50em; display: block; object-fit: cover;" [src]="!new_url_image ? 'assets/adjuntar.gif' : 'assets/adjuntar.gif'"/>
       <ion-icon name="folder-outline"></ion-icon>
       </label>
-      <input accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-      text/plain, application/pdf" (change)=takePicture($event) class="input" type="file" id="input">
+      <input (change)=takePicture($event) class="input" type="file" id="input">
   </div>
   <ion-icon *ngIf="new_url_image" color="success" style="font-size:xx-large;" name="checkmark-circle"></ion-icon>
   </ion-card>
@@ -100,7 +99,7 @@
 
   
   
-  <ion-button [disabled]="!archivoaceptado&&!archivosubido" style="position:fixed; right:0; bottom:0;" (click)="agregarcompra()">
+  <ion-button [disabled]="!archivoaceptado||!archivosubido" style="position:fixed; right:0; bottom:0;" (click)="agregarcompra()">
     <ion-icon name="checkmark"></ion-icon>Agregar</ion-button>
   
 </ion-content>
