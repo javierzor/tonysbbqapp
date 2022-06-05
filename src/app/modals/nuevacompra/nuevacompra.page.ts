@@ -36,6 +36,7 @@ export class NuevacompraPage implements OnInit {
   mostrarcampopuntos:  boolean = false;
   puntos:any;
   observacion:any;
+  seleccion = [];
 
   constructor(
     private imageService: ImageService,
@@ -45,28 +46,28 @@ export class NuevacompraPage implements OnInit {
 
   ) 
   {
-    this.obtenerprecio_wera_usdsegunfase(); 
+    // this.obtenerprecio_wera_usdsegunfase(); 
    }
 
   ngOnInit() {
     this.obtenerAdminDirecciones();
-    this.obtenerprecio_wera_usdsegunfase();
+    // this.obtenerprecio_wera_usdsegunfase();
     this.ObtenerUsariosNormales();
   }
 
-  obtenerprecio_wera_usdsegunfase(){
-    var datatonysobtenerprecio_wera_usd = {
-      nombre_solicitud: 'tonysobtenerprecio_wera_usd'
-    }
-    this.variosservicios.variasfunciones(datatonysobtenerprecio_wera_usd).subscribe(async( res: any ) =>{
-      console.log('respuesta de tonysobtenerprecio_wera_usd', res);
-      this.precio_wera_usd=res;
-  });
-  }
+  // obtenerprecio_wera_usdsegunfase(){
+  //   var datatonysobtenerprecio_wera_usd = {
+  //     nombre_solicitud: 'tonysobtenerprecio_wera_usd'
+  //   }
+  //   this.variosservicios.variasfunciones(datatonysobtenerprecio_wera_usd).subscribe(async( res: any ) =>{
+  //     console.log('respuesta de tonysobtenerprecio_wera_usd', res);
+  //     this.precio_wera_usd=res;
+  // });
+  // }
 
   ObtenerUsariosNormales(){
     var dataobtenerusuariosbusqueda = {
-      nombre_solicitud: 'obtenerusuariosbusqueda'
+      nombre_solicitud: 'tonysobtenerusuariosbusqueda'
     }
     this.variosservicios.variasfunciones(dataobtenerusuariosbusqueda).subscribe(async( res: any ) =>{
       console.log('respuesta de obtenerusuariosbusqueda', res);
@@ -200,14 +201,20 @@ export class NuevacompraPage implements OnInit {
 }
   
 
-  esteusuario(usuario, i){
+  esteusuario(usuario, index){
     console.log('Usuario',usuario);
     // this.indexdeusuario= i;
     this.selected_user=usuario;
+
+    this.respuestaobtenerusuariosbusqueda.splice(index, 1);
+    this.seleccion[this.seleccion.length]=usuario;
+    console.log('seleccion',this.seleccion);
   }
 
-  borrarSelectedUser(){
-    this.selected_user=undefined;
+  borrarSelectedUserDeSeleccion(usuario, index){
+    this.seleccion.splice(index, 1);
+    this.respuestaobtenerusuariosbusqueda[this.respuestaobtenerusuariosbusqueda.length]=usuario;
+
   }
 
   

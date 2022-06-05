@@ -10,9 +10,9 @@
   <ion-card color="primary" [class]="mostrarleusuarios==false ? 'ningunaclase' : 'cartaconscrolly300dealto'" class="ion-no-padding" no-padding>
     <ion-card-content class="ion-no-padding" no-padding>
 
-      <ion-searchbar [(ngModel)]="filterTerm" (ionFocus)="mostrarleusuariosverdadero()" (ionBlur)="mostrarleusuariosfalso()" *ngIf="!selected_user" placeholder="Buscar Usuario..."></ion-searchbar>
+      <ion-searchbar [(ngModel)]="filterTerm" (ionFocus)="mostrarleusuariosverdadero()" (ionBlur)="mostrarleusuariosfalso()" placeholder="Buscar Usuario..."></ion-searchbar>
 
-      <ion-row *ngIf="selected_user" class="ion-no-padding" no-padding>
+      <!-- <ion-row *ngIf="selected_user" class="ion-no-padding" no-padding>
         <ion-col size="10" class="ion-no-padding" no-padding>
           <a style="color:white; margin-left: 15px;">{{selected_user.id_publico}}</a>
             <a style="color:white;">&nbsp;|</a>
@@ -28,7 +28,7 @@
             <ion-icon color="light" name="close-circle"></ion-icon>
           </ion-button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
       
       <ion-list *ngIf="mostrarleusuarios==true">
         <ion-item (click)="esteusuario(usuario, i)" *ngFor="let usuario of respuestaobtenerusuariosbusqueda | filter:filterTerm ; let i = index;">
@@ -61,28 +61,13 @@
       <ion-card class="ion-no-padding" no-padding>
         <ion-card-content class="ion-no-padding" no-padding>
           <ion-list  class="ion-no-padding" no-padding>
-            Agregar puntos<ion-toggle  [(ngModel)]="mostrarcampopuntos" color="primary">
-              
-            </ion-toggle >
 
-            <ion-item *ngIf="mostrarcampopuntos" class="ion-no-padding" no-padding>
-              <ion-label position="floating"><ion-icon name="add-circle-outline"></ion-icon>Puntos:</ion-label>
-              <ion-input [(ngModel)]="puntos"></ion-input>
-            </ion-item>
             <ion-item class="ion-no-padding" no-padding>
-              <ion-label position="floating">Traking:</ion-label>
-              <ion-input [(ngModel)]="traking"></ion-input>
-            </ion-item>
-            <ion-item class="ion-no-padding" no-padding>
-              <ion-label position="floating">Peso: <a style="font-size: 10px;color:rgb(114, 114, 114);">  Gramos</a></ion-label>
-              <ion-input type="number" [(ngModel)]="peso"></ion-input>
-            </ion-item>
-            <ion-item class="ion-no-padding" no-padding>
-              <ion-label position="floating">Origen:</ion-label>
+              <ion-label position="floating">Recomendación:</ion-label>
               <ion-input [(ngModel)]="origen"></ion-input>
             </ion-item>
             <ion-item class="ion-no-padding" no-padding>
-              <ion-label position="floating">Observación: <a style="font-size: 11px;color:green;">  (Nuevo)</a></ion-label>
+              <ion-label position="floating">Observación:</ion-label>
               <ion-input [(ngModel)]="observacion"></ion-input>
             </ion-item>
 
@@ -97,14 +82,21 @@
 
   <ion-card class="ion-no-padding" no-padding>
     <div class="content-img">
-      <label  style="cursor:pointer;"  for="input">Adjunta Imagen.
-      <img style="border-radius: 50em; display: block; object-fit: cover;" [src]="!new_url_image ? 'assets/caja_animada.gif' : new_url_image"/>
-      <ion-icon name="camera"></ion-icon>
+      <label  style="cursor:pointer;"  for="input">Adjunta Archivo.
+      <img style="border-radius: 50em; display: block; object-fit: cover;" [src]="!new_url_image ? 'assets/adjuntar.gif' : new_url_image"/>
+      <ion-icon name="folder-outline"></ion-icon>
       </label>
       <input (change)=takePicture($event) class="input" type="file" id="input">
   </div>
   <ion-icon *ngIf="new_url_image" color="success" style="font-size:xx-large;" name="checkmark-circle"></ion-icon>
   </ion-card>
+
+  <ion-text *ngIf="seleccion.length<1||!seleccion">aún no ha seleccionado usuarios para este archivo.</ion-text>
+
+    <ion-text *ngIf="seleccion.length>0">
+      <a style="color:black;" *ngFor=" let seleccionados of seleccion; let i = index;">{{seleccionados.name}} {{seleccionados.last_name}}, {{seleccionados.id_publico}}, {{seleccionados.email}}
+        <span style="color:#c81f26;"> <ion-button (click)="borrarSelectedUserDeSeleccion(seleccionados, i)" size="small"><ion-icon name="close-circle-outline"></ion-icon> </ion-button>| </span></a></ion-text>
+
   
   
   <ion-button [disabled]="!selected_user" style="position:fixed; right:0; bottom:0;" (click)="agregarcompra()">

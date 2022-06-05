@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgxDocViewerModule } from 'ngx-doc-viewer'
 
 import { IonicModule } from '@ionic/angular';
-
+// visualziador de archivos:
 import { VisualizadorimagenesPageRoutingModule } from './visualizadorimagenes-routing.module';
 
 import { VisualizadorimagenesPage } from './visualizadorimagenes.page';
@@ -13,6 +14,7 @@ import { VisualizadorimagenesPage } from './visualizadorimagenes.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxDocViewerModule,
     VisualizadorimagenesPageRoutingModule
   ],
   declarations: [VisualizadorimagenesPage]

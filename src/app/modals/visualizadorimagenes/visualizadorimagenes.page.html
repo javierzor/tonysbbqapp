@@ -17,6 +17,21 @@
   </ion-grid>
 
 
-  <img [src]="this.dataparaelmodal">
+  <!-- <img [src]="this.dataparaelmodal"> -->
+  <!-- https://tonys.ml/wordejemplo.docx -->
+  
+  <ngx-doc-viewer [url]="dataparaelmodal" viewer="google"
+  style="width:100%;height:93vh;">
+</ngx-doc-viewer>
 
+  <!-- <iframe width="98%" height="500px"
+   [src]="enlace"  frameborder="0"
+   ></iframe> -->
+
+   <!-- <button ion-button (click)="openWithSystemBrowser('https://www.techiediaries.com')">Open with System browser</button>
+   <button ion-button (click)="openWithInAppBrowser('https://www.techiediaries.com')">Open with In App browser</button>
+   <button ion-button (click)="openWithCordovaBrowser('https://www.techiediaries.com')">Open with Cordova browser</button> -->
+
+  
+  
 </ion-content>

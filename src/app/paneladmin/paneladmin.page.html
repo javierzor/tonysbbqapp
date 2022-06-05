@@ -105,53 +105,44 @@ mode="ios"
 <ion-text color="primary" *ngIf="!segmentModel"><h2>Bienvenido Admin</h2></ion-text>
 </section>
 
+
+
 <section *ngIf="segmentModel=='solicitudesdecompras'">
   <ion-text style="text-align:center;" color="success"><ion-button color="success" (click)="agregarcompra()">
     <ion-icon name="add-circle-outline"></ion-icon>
     Agregar</ion-button><br></ion-text>
     
-<ion-text style="font-size: small;">Usr=Usuario | BC=BeoCode | PTS=Puntos | Nom=Nombre | Tr=Traking | PE=Peso | Or=Origen | Est=Estado | Obs=Observación</ion-text>
+<ion-text style="font-size: small;">Nom=Nombre | OB=Observación | PE=Peso | FEC=Fecha | TI=Tipo | RE=Recomendaciones</ion-text>
 <ion-grid class="ion-no-padding" no-padding>
   <ion-card *ngFor="let movimiento of respuestadetonysadminobtenermovimientos">
   <ion-row class="ion-no-padding" no-padding>
     <ion-col size="3.5"  class="ion-no-padding" no-padding>
 
-      <a color="primary">Usr</a>:{{movimiento.userdetalles.username}}
-      
-      <br>
-        <a color="primary">BC</a>:{{movimiento.userdetalles.id_publico}}
-      <br>
-
-        <a color="primary">PTS</a>:{{movimiento.monto}}
-      <br>
-        <a color="primary">Nom</a>:{{movimiento.userdetalles.name}}&nbsp;{{movimiento.userdetalles.lastname}}
-
+      <a color="primary">NOM</a>:{{movimiento.userdetalles.username}}
+        <br>
+      <a color="primary">OB</a>:{{movimiento.observacion}}
+        <br>
+      <a color="primary">PE</a>:{{movimiento.peso}} <strong>gr</strong>
+    
     </ion-col>
     <ion-col  size="4.5"   class="ion-no-padding" no-padding>
-
-        <a color="primary">tr</a>:{{movimiento.traking}}
-
-      <br>
-
-      <a color="primary">Pe</a>:{{movimiento.peso}} <strong>gr</strong>
-      <br>
-        <a color="primary">Or</a>:{{movimiento.origen}}
+  
+      <a color="primary">TI:</a>:{{movimiento.traking}}
         <br>
-        <a color="primary">Est</a>:<strong>{{movimiento.status}}</strong>
+      <a color="primary">FEC</a>:{{movimiento.fecha | date:'shortTime':'GMT-3'}}
         <br>
-        <a color="primary">Obs</a>:<strong>{{movimiento.observacion}}</strong>
+      <a color="primary">REC:</a>{{movimiento.origen}} <strong>gr</strong>
 
     </ion-col>
     <ion-col  size="4"   class="ion-no-padding" no-padding>
       <ion-button size="small" color="primary" text-capitalize >
-        Detalles
+        Usuarios
       </ion-button>
-      <ion-button (click)="presentAlertRadio(movimiento)" text-capitalize >
-        <strong>Estado</strong>
-      </ion-button>
+      <br>
+
       
       <ion-button size="small" (click)="VerImagen(movimiento.reciboImgUrl)">
-        Ver Imagen
+        Ver Archivo
       </ion-button>
       
     </ion-col>

@@ -42,7 +42,7 @@ export class PaneladminPage implements OnInit {
   reportederegistros: any;
   cambioelselector: boolean=false;
   listasdechat: any;
-
+  verarchivo: boolean=false;
 
   constructor(
     private datepipe : DatePipe,
@@ -237,8 +237,8 @@ async VerImagen(ImgUrl) {
     componentProps: {
       'dataparaelmodal': ImgUrl
     },
-    initialBreakpoint: 1.2,
-    breakpoints: [1, 1.5, 1]
+    // initialBreakpoint: 1.2,
+    // breakpoints: [1, 1.5, 1]
   });
   modal.onDidDismiss().then((data) => {
       console.log('data',data);
