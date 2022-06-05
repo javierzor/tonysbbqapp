@@ -82,11 +82,12 @@
 
   <ion-card class="ion-no-padding" no-padding>
     <div class="content-img">
-      <label  style="cursor:pointer;"  for="input">Adjunta Archivo.
-      <img style="border-radius: 50em; display: block; object-fit: cover;" [src]="!new_url_image ? 'assets/adjuntar.gif' : new_url_image"/>
+      <label  style="cursor:pointer;"  for="input">Adjunta Archivo. <a>Tipos:(Word,Pdf,Excel,PowerPoint,Texto) "doc, pdf, docx, ppt, xls, xlsx, ppt,pptx, txt" </a>
+      <img style="border-radius: 50em; display: block; object-fit: cover;" [src]="!new_url_image ? 'assets/adjuntar.gif' : 'assets/adjuntar.gif'"/>
       <ion-icon name="folder-outline"></ion-icon>
       </label>
-      <input (change)=takePicture($event) class="input" type="file" id="input">
+      <input accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+      text/plain, application/pdf" (change)=takePicture($event) class="input" type="file" id="input">
   </div>
   <ion-icon *ngIf="new_url_image" color="success" style="font-size:xx-large;" name="checkmark-circle"></ion-icon>
   </ion-card>
