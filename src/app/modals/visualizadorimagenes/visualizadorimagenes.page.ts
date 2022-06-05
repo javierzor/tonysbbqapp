@@ -38,7 +38,7 @@ export class VisualizadorimagenesPage implements OnInit {
   async loading(){
 
     const actualizando = await this.loadingController.create({
-      message: 'Cargando visualización de archivo, porfavor espere...',spinner: 'bubbles',duration: 3500,
+      message: 'Cargando visualización de archivo, porfavor espere...',spinner: 'bubbles',duration: 6500,
       });
       actualizando.present();
     }

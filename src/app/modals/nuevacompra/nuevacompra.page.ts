@@ -37,6 +37,8 @@ export class NuevacompraPage implements OnInit {
   puntos:any;
   observacion:any;
   seleccion = [];
+  archivoaceptado:  boolean = false;
+  archivosubido:  boolean = false;
 
   constructor(
     private imageService: ImageService,
@@ -134,19 +136,51 @@ export class NuevacompraPage implements OnInit {
     var reader = new FileReader();
     reader.onload = (event: any) => {
       this.imageProfile = event.target.result;
-      this.sendPhotos(input);
+      // this.sendPhotos(input);
+      console.log('Base64',this.imageProfile);
     }
-    reader.readAsDataURL(event.target.files[0]); 
+    reader.readAsDataURL(event.target.files[0]);
+    console.log('file data:',event.target.files[0]);
+    console.log('file name:',event.target.files[0].name);
+    console.log('file extencion:',event.target.files[0].name.split('.').pop());
+    if(event.target.files[0].name.split('.').pop()=='txt'||
+    event.target.files[0].name.split('.').pop()=='text'||
+    event.target.files[0].name.split('.').pop()=='pptx'||
+    event.target.files[0].name.split('.').pop()=='ppt'||
+    event.target.files[0].name.split('.').pop()=='pdf'||
+    event.target.files[0].name.split('.').pop()=='doc'||
+    event.target.files[0].name.split('.').pop()=='docx'||
+    event.target.files[0].name.split('.').pop()=='xls'||
+    event.target.files[0].name.split('.').pop()=='xlsx'
+    )
+    {
+      this.variosservicios.presentToast("..::Aceptado::..");
+
+      // URGENTE PORFAVOR! archivo aceptado true luego de la respuesta del server
+      // extension del archivo compatible, se procedera a subir al servidor
+
+      
+      this.archivoaceptado=true;
+
+      // this.variosservicios.presentToast("..::Subido::..");
+      this.archivosubido=true;
+
+    }
+    else {
+      this.variosservicios.presentToast("..::Archivo No Admitido::..");
+      this.archivoaceptado=false;
+    }
+
   }
   
-  sendPhotos(file){
-    this.imageService.generateUrl(file).subscribe(x => {
-      let imagentemporal = new Image();
-      imagentemporal.urlImage = x.data.url;
-      this.new_url_image=imagentemporal.urlImage;
-      console.log('this.new_url_image',this.new_url_image);
-    }); 
-  }
+  // sendPhotos(file){
+  //   this.imageService.generateUrl(file).subscribe(x => {
+  //     let imagentemporal = new Image();
+  //     imagentemporal.urlImage = x.data.url;
+  //     this.new_url_image=imagentemporal.urlImage;
+  //     console.log('this.new_url_image',this.new_url_image);
+  //   }); 
+  //}
 
   decrypt(textToDecrypt : string){
     return CryptoJS.AES.decrypt(textToDecrypt, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
