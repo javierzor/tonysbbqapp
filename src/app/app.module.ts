@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 // visualizador de archivos:
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 

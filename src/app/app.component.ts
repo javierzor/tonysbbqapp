@@ -34,6 +34,8 @@ export class AppComponent {
     { title: 'Entregas', url: 'entregas', icon: 'laptop' },
     { title: 'Novedades Supervisor', url: 'novedades-supervisor', icon: 'newspaper' },
   ];
+  informacion_perfil: any;
+  isloggedin: any;
 
 
   constructor(
@@ -45,16 +47,58 @@ export class AppComponent {
   
   {
 
-    this.funcionverificartipocuenta();
+    // this.funcionverificartipocuenta();
+    // this.funcionverificartipocuenta();
+    this.ConsultarLogin();
+    this.tipo_cuenta_botones_admin();
   }
   
   ngOnInit() {
-    this.funcionverificartipocuenta();
+    // this.funcionverificartipocuenta();
+    this.tipo_cuenta_botones_admin();
   }
 
   iralpaneladmin(){
 
   }
+
+  async ConsultarLogin(){
+    this.isloggedin=localStorage.getItem('isloggedin');
+    if (this.isloggedin !== 'si') {
+      this.router.navigate(['login']);
+    }
+    else{
+      this.informacion_perfil=localStorage.getItem('profileInfo');
+      this.informacion_perfil=this.decrypt(this.informacion_perfil);
+      this.varios.informacion_perfil=JSON.parse(this.informacion_perfil);
+    }
+    this.tipo_cuenta_botones_admin();
+  }
+
+  tipo_cuenta_botones_admin(){
+    this.tipo_cuenta=this.varios.informacion_perfil.tipo_cuenta;
+  }
+
+  // async ConsultarLogin(){
+  //   this.isloggedin=localStorage.getItem('isloggedin');
+  //   console.log('this.isloggedin',this.isloggedin);
+
+  //   if(this.isloggedin=='si'){
+  //     this.informacion_perfil=localStorage.getItem('profileInfo');
+  //     if(this.informacion_perfil!=null){
+  //       this.informacion_perfil=this.decrypt(this.informacion_perfil);
+  //     }
+  //     this.informacion_perfil=JSON.parse(this.informacion_perfil);
+  //     console.log('informacion de perfil en Perfil', this.informacion_perfil);
+  //     this.tipo_cuenta=this.informacion_perfil.tipo_cuenta;
+  //   }
+
+  //   else{
+  //     this.router.navigate(['login']);
+  //   }
+    
+  // }
+
   
   ocultarhamburgesa(){
     this.iconohambuergesa=true;
@@ -87,25 +131,16 @@ export class AppComponent {
     this.menu.close();
   }
 
-  funcionverificarlogin(){
-    this.verificarloginemail=localStorage.getItem('email');
-    this.verificarloginemail= this.decrypt(this.verificarloginemail);
-    console.log('this.verificarlogin', this.verificarloginemail);
-    if(this.verificarloginemail!=null||this.verificarloginemail!='false')
-     {
-      console.log('Bienvenido:',this.verificarloginemail);
-    }
-  }
+  // funcionverificarlogin(){
+  //   this.verificarloginemail=localStorage.getItem('email');
+  //   this.verificarloginemail= this.decrypt(this.verificarloginemail);
+  //   console.log('this.verificarlogin', this.verificarloginemail);
+  //   if(this.verificarloginemail!=null||this.verificarloginemail!='false')
+  //    {
+  //     console.log('Bienvenido:',this.verificarloginemail);
+  //   }
+  // }
 
-  async funcionverificartipocuenta(){
-    this.tipo_cuenta=localStorage.getItem('tipo_cuenta');
-    this.tipo_cuenta= this.decrypt(this.tipo_cuenta);
-    console.log('this.tipo_cuenta', this.tipo_cuenta);
-    if(this.tipo_cuenta)
-     {
-      console.log('Bienvenido: tipo_cuenta',this.tipo_cuenta);
-    }
-  }
 
   openFirst() {
     this.menu.enable(true, 'first');

@@ -14,7 +14,7 @@ export class VariosService {
   activar_realtime_user_conversaciones: boolean = false;
   activar_realtime_admin_conversaciones: boolean = false;
   activar_real_time_modal_ver_conversacion_chat: boolean = false;
-
+  informacion_perfil:any;
   ir_a_registro: string='registro';
   constructor(
     public toastController: ToastController,

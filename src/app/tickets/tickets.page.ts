@@ -34,6 +34,7 @@ export class TicketsPage implements OnInit {
     private modalController: ModalController,
     private routerOutlet: IonRouterOutlet,
     private variosservicios: VariosService,
+    public  varios: VariosService,
     private router: Router,
     private menu: MenuController,
     private imageService: ImageService,
@@ -42,7 +43,6 @@ export class TicketsPage implements OnInit {
   )
   {
     this.countryData=this.paises.countryData;    
-    this.funcionverificarlogin();
     this.ObtenerProfileInfo();
     this.step='1';
   }
@@ -54,28 +54,18 @@ export class TicketsPage implements OnInit {
   }
   
   async ngOnInit() {
-    this.funcionverificarlogin();
     this.ObtenerProfileInfo();
     this.step='1';
     this.obtenertickets(); 
   }
 
-  funcionverificarlogin(){
-    this.verificarloginemail=localStorage.getItem('email');
-    this.verificarloginemail= this.decrypt(this.verificarloginemail);
-    console.log('this.verificarlogin', this.verificarloginemail);
-    if(this.verificarloginemail!=null||this.verificarloginemail!='false')
-     {
-      console.log('Bienvenido:',this.verificarloginemail);
+  async ObtenerProfileInfo(){
+    if(this.varios.informacion_perfil){
+      this.informacion_perfil=this.varios.informacion_perfil;
+      console.log('informacion de perfil en Perfil', this.informacion_perfil);
     }
   }
 
-async ObtenerProfileInfo(){
-    this.informacion_perfil=localStorage.getItem('profileInfo');
-    this.informacion_perfil=this.decrypt(this.informacion_perfil);
-    this.informacion_perfil=JSON.parse(this.informacion_perfil);
-    console.log('informacion de perfil en Perfil', this.informacion_perfil);
-  }
   ONCHANGEmenuderechosuperior(){
     if(this.menuderechosuperior==false)   {this.menuderechosuperior=true;}
     else{this.menuderechosuperior=false;}

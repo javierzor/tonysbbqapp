@@ -151,6 +151,7 @@ export class LoginPage implements OnInit {
                       localStorage.setItem('username', this.encrypt(res.username));
                       localStorage.setItem('profileInfo', this.encrypt(JSON.stringify(res)));
 
+                      this.variosservicios.informacion_perfil=res;
 
                       //inician los nuevos cache
                       localStorage.setItem('email', this.encrypt(res.email));
@@ -227,7 +228,7 @@ export class LoginPage implements OnInit {
         localStorage.setItem('username', this.encrypt(res.username));
         localStorage.setItem('profileInfo', this.encrypt(JSON.stringify(res)));
         // this.router.navigate(['home']);
-        
+        this.variosservicios.informacion_perfil=res;
         //inician los nuevos cache
         localStorage.setItem('email', this.encrypt(res.email));
         localStorage.setItem('tipo_cuenta', res.tipo_cuenta);

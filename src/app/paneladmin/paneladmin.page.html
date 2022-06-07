@@ -15,13 +15,13 @@
 </ion-header>
 
 <!-- Contenido si no se tiene informacion del tipo de cuenta -->
-<ion-content *ngIf="!this.varios.tipo_cuenta">
+<ion-content *ngIf="!this.informacion_perfil.tipo_cuenta">
   <ion-item routerLink="/login"><ion-button>Reingresar</ion-button>
   </ion-item>
 </ion-content>
 
 
-<ion-content *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+<ion-content *ngIf="this.informacion_perfil.tipo_cuenta=='999'||this.informacion_perfil.tipo_cuenta=='888'" color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
 <!-- <ion-content  color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true"> -->
 
   <ion-card *ngIf="menuderechosuperior==true" style="position:sticky; float: right; width: fit-content; top:0%; z-index: 9999;">
@@ -53,17 +53,17 @@ mode="ios"
 (ionChange)="segmentChanged()"
 >
 
-    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='solicitudesdecompras'" value="solicitudesdecompras">
+    <ion-segment-button *ngIf="this.informacion_perfil.tipo_cuenta=='999'||this.informacion_perfil.tipo_cuenta=='888'" [disabled]="segmentModel=='solicitudesdecompras'" value="solicitudesdecompras">
       <ion-button [disabled]="segmentModel=='solicitudesdecompras'" > 
          <ion-label>Archivos</ion-label>
       </ion-button>
     </ion-segment-button>
-    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='activardesacusuario'" value="activardesacusuario">
+    <ion-segment-button *ngIf="this.informacion_perfil.tipo_cuenta=='999'" [disabled]="segmentModel=='activardesacusuario'" value="activardesacusuario">
       <ion-button [disabled]="segmentModel=='activardesacusuario'"> 
       <ion-label>Activar/ <br>Desac. usuario</ion-label>
       </ion-button>
     </ion-segment-button>
-    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'||this.varios.tipo_cuenta=='888'" [disabled]="segmentModel=='chatdesoporte'" value="chatdesoporte">
+    <ion-segment-button *ngIf="this.informacion_perfil.tipo_cuenta=='999'||this.informacion_perfil.tipo_cuenta=='888'" [disabled]="segmentModel=='chatdesoporte'" value="chatdesoporte">
       <ion-button [disabled]="segmentModel=='chatdesoporte'"> 
       <ion-label>tickets Soporte</ion-label>
       </ion-button>
@@ -81,17 +81,17 @@ mode="ios"
 (ionChange)="segmentChanged()"
 >
 
-    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='direcciones'" value="direcciones">
+    <ion-segment-button *ngIf="this.informacion_perfil.tipo_cuenta=='999'" [disabled]="segmentModel=='direcciones'" value="direcciones">
       <ion-button [disabled]="segmentModel=='direcciones'" > 
          <ion-label>Direcciones (TODAS)</ion-label>
       </ion-button>
     </ion-segment-button>
-    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='veraumentarfase'" value="veraumentarfase">
+    <ion-segment-button *ngIf="this.informacion_perfil.tipo_cuenta=='999'" [disabled]="segmentModel=='veraumentarfase'" value="veraumentarfase">
      <ion-button [disabled]="segmentModel=='veraumentarfase'"> 
         <ion-label>Ver o editar<br>anuncios</ion-label> 
      </ion-button>
     </ion-segment-button>
-    <ion-segment-button *ngIf="this.varios.tipo_cuenta=='999'" [disabled]="segmentModel=='reportes'" value="reportes">
+    <ion-segment-button *ngIf="this.informacion_perfil.tipo_cuenta=='999'" [disabled]="segmentModel=='reportes'" value="reportes">
       <ion-button [disabled]="segmentModel=='reportes'"> 
       <ion-label>Reportes</ion-label>
       </ion-button>
@@ -152,7 +152,7 @@ mode="ios"
 
 </section>
 
-<section *ngIf="segmentModel=='activardesacusuario'&&this.varios.tipo_cuenta=='999'">
+<section *ngIf="segmentModel=='activardesacusuario'&&this.informacion_perfil.tipo_cuenta=='999'">
 
 <ion-grid>
   <ion-card *ngFor="let cadausuario of respuestadetonysadminobtenerlistadeuduarios">
@@ -186,7 +186,7 @@ mode="ios"
 </section>
 
 
-<section *ngIf="segmentModel=='veraumentarfase'&&this.varios.tipo_cuenta=='999'">
+<section *ngIf="segmentModel=='veraumentarfase'&&this.informacion_perfil.tipo_cuenta=='999'">
 
   <ion-grid class="ion-no-padding" no-padding>
     <ion-row style="margin-bottom:15px">
@@ -255,7 +255,7 @@ mode="ios"
   
 </section>
 
-    <section *ngIf="segmentModel=='direcciones'&&this.varios.tipo_cuenta=='999'">
+    <section *ngIf="segmentModel=='direcciones'&&this.informacion_perfil.tipo_cuenta=='999'">
       <ion-grid>
 
       <ion-row>
@@ -292,7 +292,7 @@ mode="ios"
       </ion-grid>
     </section>
 
-    <section *ngIf="segmentModel=='reportes'&&this.varios.tipo_cuenta=='999'">
+    <section *ngIf="segmentModel=='reportes'&&this.informacion_perfil.tipo_cuenta=='999'">
       <ion-grid>
       <ion-card>
         <ion-row>
