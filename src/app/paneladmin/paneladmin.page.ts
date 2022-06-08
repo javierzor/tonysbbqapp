@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common'
 import { ActualizarretirooficinaPage } from '../modals/actualizarretirooficina/actualizarretirooficina.page';
 import { VerconversacionPage } from '../modals/verconversacion/verconversacion.page';
 import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
+import { UsuariosdearchivoPage } from '../modals/usuariosdearchivo/usuariosdearchivo.page';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class PaneladminPage implements OnInit {
   listasdechat: any;
   verarchivo: boolean=false;
   desactivar_agregar: boolean=false;
+  desactivar_verusuariosdearchivo: boolean=false;
   constructor(
     private datepipe : DatePipe,
     private alertController: AlertController,
@@ -369,6 +371,34 @@ async VerImagen(ImgUrl) {
       return await modal.present();
     }
 
+    async Verusuariosdearchivo(id, nombre){
+      this.desactivar_verusuariosdearchivo=true;
+      const modal = await this.modalController.create({
+        component: UsuariosdearchivoPage,
+        componentProps: { 
+          id:id,
+          nombre:nombre
+        },
+      });
+      modal.onDidDismiss().then((data) => {
+          console.log('data',data);
+          this.desactivar_verusuariosdearchivo=false;
+          if(data.data.dismissed==true){
+            this.segmentModel='solicitudesdecompras';
+            
+            // NO ES NECESARIO ACTUALIZAR PORQUE NOMAS SE LE ASIGNO USUARIOS
+            // POR ESO HE DESACTIVADO this.segmentChanged();
+            // this.segmentChanged();
+          }
+        });
+    
+    
+      return await modal.present();
+
+    }
+
+
+
     async actualizarAdminDireccion(cadadireccion) {
       const modal = await this.modalController.create({
         component: ActualizardireccionPage,
@@ -433,13 +463,7 @@ async VerImagen(ImgUrl) {
                    this.segmentChanged();
                 }
                 });
-           
 
-
-
-
-              
-              
             }
           }
         ]

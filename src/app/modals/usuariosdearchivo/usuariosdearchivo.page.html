@@ -1,0 +1,52 @@
+
+<ion-content color="light">
+<ion-grid>
+
+  <ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+
+ 
+  
+<section *ngIf="this.step=='2'">
+  <ion-row>
+    <ion-col>
+      <ion-button  (click)="step1()"><ion-icon name="arrow-undo"></ion-icon>Volver</ion-button>
+    </ion-col>
+  </ion-row>
+</section>
+
+  <section *ngIf="this.step=='1'">
+    <ion-row>
+        <ion-col>
+          <ion-button color="success" (click)="step2()"><ion-icon color="primary" name="person-add-outline"></ion-icon>Agregar</ion-button>
+          <br>
+          <ion-text style="text-align: center;">Lista de usuarios para 
+            <ion-icon color="primary" name="folder-outline"></ion-icon> 
+            <a>{{this.nombre}}</a></ion-text>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let cadausuario of respuestadetonysverusuariosdearchivo">
+            <ion-label *ngIf="cadausuario.detalles">
+              <ion-icon size="large" name="close-circle"></ion-icon>
+              {{cadausuario.detalles.name}}|&nbsp;
+              {{cadausuario.detalles.lastname}}|&nbsp;
+              {{cadausuario.detalles.id_publico}}|&nbsp;
+              {{cadausuario.detalles.email}}
+            </ion-label>
+            <!-- <ion-label *ngIf="!cadausuario.detalles">
+              <ion-icon size="large" name="close-circle"></ion-icon>
+              &nbsp;Usuario Borrado
+            </ion-label> -->
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+  </section>
+
+
+</ion-grid>
+</ion-content>

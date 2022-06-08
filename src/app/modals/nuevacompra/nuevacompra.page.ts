@@ -198,7 +198,7 @@ export class NuevacompraPage implements OnInit {
 
   async agregarcompra(){
     const actualizando = await this.loadingController.create({
-      message: 'Subiendo archivo, porfavor espere...',spinner: 'bubbles',duration: 15000,
+      message: 'Subiendo archivo, porfavor espere...',spinner: 'bubbles',duration: 35000,
       });
     actualizando.present();
     console.log('base64 en JSON',this.filebase64data);

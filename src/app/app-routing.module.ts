@@ -83,6 +83,14 @@ const routes: Routes = [
     path: 'adminverconversacion',
     loadChildren: () => import('./modals/adminverconversacion/adminverconversacion.module').then( m => m.AdminverconversacionPageModule)
   },
+  {
+    path: 'usuariosdearchivo',
+    loadChildren: () => import('./modals/usuariosdearchivo/usuariosdearchivo.module').then( m => m.UsuariosdearchivoPageModule)
+  },
+  {
+    path: 'archivosdeusuario',
+    loadChildren: () => import('./modals/archivosdeusuario/archivosdeusuario.module').then( m => m.ArchivosdeusuarioPageModule)
+  },
 ];
 
 @NgModule({
