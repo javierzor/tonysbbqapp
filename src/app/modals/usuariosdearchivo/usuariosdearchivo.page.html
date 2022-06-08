@@ -21,7 +21,7 @@
         <ion-list>
           <ion-item *ngFor="let cadausuario of respuestadetonysverusuariosdearchivo">
             <ion-label *ngIf="cadausuario.detalles">
-              <ion-icon size="large" name="close-circle"></ion-icon>
+              <ion-icon (click)="borrarusuariostep1(cadausuario)" style="cursor:pointer;" size="large" name="close-circle"></ion-icon>
               {{cadausuario.detalles.name}}|&nbsp;
               {{cadausuario.detalles.lastname}}|&nbsp;
               {{cadausuario.detalles.id_publico}}|&nbsp;
@@ -33,25 +33,6 @@
             </ion-label> -->
           </ion-item>
         </ion-list>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-text *ngIf="seleccion.length<1||!seleccion">aún no ha seleccionado usuarios para este archivo.</ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-text *ngIf="seleccion.length>0">
-          <a style="color:black;" *ngFor=" let seleccionados of seleccion; let i = index;">
-            {{seleccionados.name}} {{seleccionados.last_name}}, {{seleccionados.id_publico}}, {{seleccionados.email}}
-            <span style="color:#c81f26;"> 
-              <ion-button (click)="borrarSelectedUserDeSeleccion(seleccionados, i)" size="small">
-                <ion-icon name="close-circle-outline"></ion-icon> </ion-button>| 
-            </span></a>
-        </ion-text>
       </ion-col>
     </ion-row>
 
@@ -88,6 +69,41 @@
     
         </ion-card-content>
       </ion-card>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-row>
+          <ion-col>
+            <ion-text *ngIf="seleccion.length>0">
+              <a style="color:black;" *ngFor=" let seleccionados of seleccion; let i = index;">
+                {{seleccionados.name}} {{seleccionados.last_name}}, {{seleccionados.id_publico}}, {{seleccionados.email}}
+                <span style="color:#c81f26;"> 
+                  <ion-button (click)="borrarSelectedUserDeSeleccion(seleccionados, i)" size="small">
+                    <ion-icon name="close-circle-outline"></ion-icon> </ion-button>| 
+                </span></a>
+            </ion-text>
+            <br>
+            <hr>
+            <br>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="2">
+
+          </ion-col>
+          <ion-col  size="8">
+            <ion-button shape="round" fill="outline" *ngIf="seleccion.length>0" expand="full" (click)="AgregarusuariosAArchivo()"><ion-icon color="success" name="checkmark-done-outline"></ion-icon>Agregar Usuarios</ion-button>
+          </ion-col>
+          <ion-col size="2">
+            
+          </ion-col>
+        </ion-row>
+    
+        <ion-text *ngIf="seleccion.length<1||!seleccion">aún no ha seleccionado usuarios para este archivo.</ion-text>
+      </ion-col>
     </ion-row>
   
   </section>

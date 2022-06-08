@@ -32,6 +32,7 @@ export class UsuariosdearchivoPage implements OnInit {
   }
 
   ngOnInit() {
+    this.ObtenerUsariosNormales();
   }
 
   dismissyactualiza() {
@@ -77,11 +78,14 @@ export class UsuariosdearchivoPage implements OnInit {
   }
   
   step1(){
+    this.VerUsuariosDeArchivoFuction();
     this.step='1';
+    this.seleccion=[];
         console.log('this.step', this.step);
   }
 
   step2(){
+    this.ObtenerUsariosNormales();
     this.step='2';
         console.log('this.step', this.step);
   }
@@ -130,19 +134,44 @@ async AgregarusuariosAArchivo(){
     });
   actualizando.present();
 
-  var dataagregarusuarioaarchivo = {
-    nombre_solicitud: 'agregarusuarioaarchivo',
+  var datatonysagregarusuarioaarchivo = {
+    nombre_solicitud: 'tonysagregarusuarioaarchivo',
     usuarios: this.seleccion,
     id_archivo: this.id
   }
 
-  this.variosservicios.variasfunciones(dataagregarusuarioaarchivo).subscribe(async( res: any ) =>{
-    console.log('respuesta de agregarusuarioaarchivo', res);
+
+  this.variosservicios.variasfunciones(datatonysagregarusuarioaarchivo).subscribe(async( res: any ) =>{
+    console.log('respuesta de tonysagregarusuarioaarchivo', res);
     actualizando.dismiss();
-    this.dismissyactualiza();
-    this.variosservicios.presentToast("..::Subido::..");
+    this.step1();
+    // this.dismissyactualiza();
+    this.variosservicios.presentToast("..::Usuarios agregados exitosamente!::..");
     });
 
+
+}
+
+  async borrarusuariostep1(cadausuario){
+  const actualizando = await this.loadingController.create({
+    message: 'Desautorizando (Borrando) acceso de usuario a este archivo, espere...',spinner: 'bubbles',duration: 20000,
+    });
+  actualizando.present();
+
+  var datatonysborrarusuariodeunarchivo = {
+    nombre_solicitud: 'tonysborrarusuariodeunarchivo',
+    usuario: cadausuario.usuario,
+    id_archivo: this.id
+  }
+
+  console.log('data a enviar', datatonysborrarusuariodeunarchivo);
+
+  this.variosservicios.variasfunciones(datatonysborrarusuariodeunarchivo).subscribe(async( res: any ) =>{
+    console.log('respuesta de tonysborrarusuariodeunarchivo', res);
+    actualizando.dismiss();
+    this.step1();
+    this.variosservicios.presentToast("..::Usuario Borrado exitosamente!::..");
+    });
 
 }
 
