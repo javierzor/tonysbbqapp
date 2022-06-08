@@ -21,7 +21,7 @@ export class NuevacompraPage implements OnInit {
   montoendolares:any;
   infovariable:any;
   mostrarinformaciondepago: boolean = false;
-  imageProfile: any = null;
+  filebase64data: any = null;
   new_url_image: any = null;
   montopasadoaweras: any = null;
   precio_wera_usd: any;
@@ -36,10 +36,11 @@ export class NuevacompraPage implements OnInit {
   mostrarcampopuntos:  boolean = false;
   puntos:any;
   observacion:any;
+  extension: any;
   seleccion = [];
   archivoaceptado:  boolean = false;
-  archivosubido:  boolean = false;
-
+  typefile: any;
+  arrayarchivoinfo= [];
   constructor(
     private imageService: ImageService,
     private varios: VariosService,
@@ -130,19 +131,30 @@ export class NuevacompraPage implements OnInit {
   }
 
 
+ 
+
 
   async takePicture(event: any){
+    console.log('event',event);
     const input = <File>event.target.files[0];
     var reader = new FileReader();
     reader.onload = (event: any) => {
-      this.imageProfile = event.target.result;
+      // this.filebase64data = event.target.result;
+      this.filebase64data = reader.result;
+      this.arrayarchivoinfo = this.filebase64data.split(',');
+      console.log("this.arrayarchivoinfo",this.arrayarchivoinfo);
       // this.sendPhotos(input);
-      console.log('Base64',this.imageProfile);
+      console.log('Base64====',this.filebase64data);
+      
     }
+
     reader.readAsDataURL(event.target.files[0]);
     console.log('file data:',event.target.files[0]);
+    console.log('file type:',event.target.files[0].type);
+    this.typefile = event.target.files[0].type;
     console.log('file name:',event.target.files[0].name);
     console.log('file extencion:',event.target.files[0].name.split('.').pop());
+    this.extension = event.target.files[0].name.split('.').pop();
     if(event.target.files[0].name.split('.').pop()=='txt'||
     event.target.files[0].name.split('.').pop()=='text'||
     event.target.files[0].name.split('.').pop()=='pptx'||
@@ -163,7 +175,6 @@ export class NuevacompraPage implements OnInit {
       this.archivoaceptado=true;
 
       // this.variosservicios.presentToast("..::Subido::..");
-      this.archivosubido=true;
 
     }
     else {
@@ -172,6 +183,7 @@ export class NuevacompraPage implements OnInit {
     }
 
   }
+  
   
   // sendPhotos(file){
   //   this.imageService.generateUrl(file).subscribe(x => {
@@ -188,36 +200,23 @@ export class NuevacompraPage implements OnInit {
 
 
   agregarcompra(){
-    this.informacion_perfil=localStorage.getItem('profileInfo');
-    this.informacion_perfil=this.decrypt(this.informacion_perfil);
-    this.informacion_perfil=JSON.parse(this.informacion_perfil);
-    
+    // this.filebase64data=JSON.stringify(this.filebase64data);
+    console.log('base64 en JSON',this.filebase64data);
+    var datatonysagregararchivonuevo = {
+      nombre_solicitud: 'tonysagregararchivonuevo',
+      usuarios: this.seleccion,
+      filebase64data: this.filebase64data,
+      extension: this.extension,
+      type:this.typefile,
+      antesdelacoma: this.arrayarchivoinfo[0],
+      despuesdelacoma: this.arrayarchivoinfo[1]
+    }
+    console.log('informacion de usuarios/archivo',datatonysagregararchivonuevo);
 
 
-
-
-      if(this.mostrarcampopuntos){  }
-      else { this.puntos=0;  }
-
-      var dataagregarmovimiento = {
-        id_tipo_movimiento: '1',
-        nombre_solicitud: 'tonyscrearmovimiento',
-        id_user: this.selected_user.id,
-        traking: this.traking,
-        peso:this.peso,
-        origen:this.origen,
-        mas_o_menos:'mas',
-        monto:this.puntos,
-        reciboImgUrl: this.new_url_image,
-        observacion: this.observacion
-      }
-    
-
-    console.log('data a guardar', dataagregarmovimiento);
-
-    this.variosservicios.variasfunciones(dataagregarmovimiento).subscribe(async( res: any ) =>{
-      console.log('respuesta de tonyscrearmovimiento', res);
-      this.dismissyactualiza();
+    this.variosservicios.variasfunciones(datatonysagregararchivonuevo).subscribe(async( res: any ) =>{
+      console.log('respuesta de tonysagregararchivonuevo', res);
+      // this.dismissyactualiza();
       });
 
 
