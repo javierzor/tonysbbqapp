@@ -43,7 +43,7 @@ export class PaneladminPage implements OnInit {
   cambioelselector: boolean=false;
   listasdechat: any;
   verarchivo: boolean=false;
-
+  desactivar_agregar: boolean=false;
   constructor(
     private datepipe : DatePipe,
     private alertController: AlertController,
@@ -350,6 +350,7 @@ async VerImagen(ImgUrl) {
     }
 
     async agregarcompra() {
+      this.desactivar_agregar=true;
       const modal = await this.modalController.create({
         component: NuevacompraPage,
         initialBreakpoint: 1.2,
@@ -357,6 +358,7 @@ async VerImagen(ImgUrl) {
       });
       modal.onDidDismiss().then((data) => {
           console.log('data',data);
+          this.desactivar_agregar=false;
           if(data.data.dismissed==true){
             this.segmentModel='solicitudesdecompras';
             this.segmentChanged();

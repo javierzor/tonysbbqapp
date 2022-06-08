@@ -108,7 +108,8 @@ mode="ios"
 
 
 <section *ngIf="segmentModel=='solicitudesdecompras'">
-  <ion-text style="text-align:center;" color="success"><ion-button color="success" (click)="agregarcompra()">
+  <ion-text style="text-align:center;" color="success">
+    <ion-button [disabled]="desactivar_agregar" color="success" (click)="agregarcompra()">
     <ion-icon name="add-circle-outline"></ion-icon>
     Agregar</ion-button><br></ion-text>
     
@@ -118,20 +119,20 @@ mode="ios"
   <ion-row class="ion-no-padding" no-padding>
     <ion-col size="3.5"  class="ion-no-padding" no-padding>
 
-      <a color="primary">NOM</a>:{{movimiento.userdetalles.username}}
+      <a color="primary">NOM</a>:{{movimiento.traking}}
         <br>
       <a color="primary">OB</a>:{{movimiento.observacion}}
         <br>
-      <a color="primary">PE</a>:{{movimiento.peso}} <strong>gr</strong>
+      <a color="primary">PE</a>:{{movimiento.peso/1000| number : '1.2-2'}}<strong>KB</strong>
     
     </ion-col>
     <ion-col  size="4.5"   class="ion-no-padding" no-padding>
   
-      <a color="primary">TI:</a>:{{movimiento.traking}}
+      <a color="primary">TI:</a>:{{movimiento.mas_o_menos}}
         <br>
-      <a color="primary">FEC</a>:{{movimiento.fecha | date:'shortTime':'GMT-3'}}
+      <a color="primary">FEC</a>:{{movimiento.fecha | date:'shortDate':'GMT-3'}},{{movimiento.fecha | date:'shortTime':'GMT-3'}}
         <br>
-      <a color="primary">REC:</a>{{movimiento.origen}} <strong>gr</strong>
+      <a color="primary">REC:</a>{{movimiento.origen}}
 
     </ion-col>
     <ion-col  size="4"   class="ion-no-padding" no-padding>

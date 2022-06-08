@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { VariosService } from 'src/app/service/varios.service';
 import * as CryptoJS from 'crypto-js';
 import { ImageService } from '../../service/image.service';
@@ -41,7 +41,11 @@ export class NuevacompraPage implements OnInit {
   archivoaceptado:  boolean = false;
   typefile: any;
   arrayarchivoinfo= [];
+  pesoarchivo:any;
+  nombrearchivo:any;
+  pesoaceptado:  boolean = true;
   constructor(
+    private loadingController: LoadingController,
     private imageService: ImageService,
     private varios: VariosService,
     private modalController: ModalController,
@@ -151,11 +155,13 @@ export class NuevacompraPage implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
     console.log('file data:',event.target.files[0]);
     console.log('file type:',event.target.files[0].type);
+    this.nombrearchivo = event.target.files[0].name;
+    this.pesoarchivo = event.target.files[0].size;
     this.typefile = event.target.files[0].type;
     console.log('file name:',event.target.files[0].name);
     console.log('file extencion:',event.target.files[0].name.split('.').pop());
     this.extension = event.target.files[0].name.split('.').pop();
-    if(event.target.files[0].name.split('.').pop()=='txt'||
+    if(
     event.target.files[0].name.split('.').pop()=='text'||
     event.target.files[0].name.split('.').pop()=='pptx'||
     event.target.files[0].name.split('.').pop()=='ppt'||
@@ -166,16 +172,16 @@ export class NuevacompraPage implements OnInit {
     event.target.files[0].name.split('.').pop()=='xlsx'
     )
     {
-      this.variosservicios.presentToast("..::Aceptado::..");
-
-      // URGENTE PORFAVOR! archivo aceptado true luego de la respuesta del server
-      // extension del archivo compatible, se procedera a subir al servidor
-
-      
+      if(this.pesoarchivo>800000){
+        this.pesoaceptado=false;
+        this.variosservicios.presentToast("El archivo supera el peso permitido 8MB");
+      }
+      else{
+        this.pesoaceptado=true;
+        this.variosservicios.presentToast("..::Aceptado::..");
+        }
+    
       this.archivoaceptado=true;
-
-      // this.variosservicios.presentToast("..::Subido::..");
-
     }
     else {
       this.variosservicios.presentToast("..::Archivo No Admitido::..");
@@ -184,23 +190,17 @@ export class NuevacompraPage implements OnInit {
 
   }
   
-  
-  // sendPhotos(file){
-  //   this.imageService.generateUrl(file).subscribe(x => {
-  //     let imagentemporal = new Image();
-  //     imagentemporal.urlImage = x.data.url;
-  //     this.new_url_image=imagentemporal.urlImage;
-  //     console.log('this.new_url_image',this.new_url_image);
-  //   }); 
-  //}
 
   decrypt(textToDecrypt : string){
     return CryptoJS.AES.decrypt(textToDecrypt, this.secretKey.trim()).toString(CryptoJS.enc.Utf8);
   }
 
 
-  agregarcompra(){
-    // this.filebase64data=JSON.stringify(this.filebase64data);
+  async agregarcompra(){
+    const actualizando = await this.loadingController.create({
+      message: 'Subiendo archivo, porfavor espere...',spinner: 'bubbles',duration: 15000,
+      });
+    actualizando.present();
     console.log('base64 en JSON',this.filebase64data);
     var datatonysagregararchivonuevo = {
       nombre_solicitud: 'tonysagregararchivonuevo',
@@ -208,6 +208,10 @@ export class NuevacompraPage implements OnInit {
       filebase64data: this.filebase64data,
       extension: this.extension,
       type:this.typefile,
+      pesoarchivo: this.pesoarchivo,
+      nombrearchivo:this.nombrearchivo,
+      observacion:this.observacion,
+      recomendacion:this.origen,
       antesdelacoma: this.arrayarchivoinfo[0],
       despuesdelacoma: this.arrayarchivoinfo[1]
     }
@@ -216,7 +220,9 @@ export class NuevacompraPage implements OnInit {
 
     this.variosservicios.variasfunciones(datatonysagregararchivonuevo).subscribe(async( res: any ) =>{
       console.log('respuesta de tonysagregararchivonuevo', res);
-      // this.dismissyactualiza();
+      actualizando.dismiss();
+      this.dismissyactualiza();
+      this.variosservicios.presentToast("..::Subido::..");
       });
 
 
