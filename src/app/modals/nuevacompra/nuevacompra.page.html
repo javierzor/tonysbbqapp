@@ -1,8 +1,8 @@
 
 <ion-content color="light">
 
-  <!-- <ion-button color="danger" click="dismissystep2()"><ion-icon cname="close"></ion-icon></ion-button> -->
-  <ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+
+<ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
   
 <ion-grid class="ion-no-padding" no-padding>
 <ion-row class="ion-no-padding" no-padding>
@@ -11,25 +11,7 @@
     <ion-card-content class="ion-no-padding" no-padding>
 
       <ion-searchbar [(ngModel)]="filterTerm" (ionFocus)="mostrarleusuariosverdadero()" (ionBlur)="mostrarleusuariosfalso()" placeholder="Buscar Usuario..."></ion-searchbar>
-
-      <!-- <ion-row *ngIf="selected_user" class="ion-no-padding" no-padding>
-        <ion-col size="10" class="ion-no-padding" no-padding>
-          <a style="color:white; margin-left: 15px;">{{selected_user.id_publico}}</a>
-            <a style="color:white;">&nbsp;|</a>
-          <ion-text>{{selected_user.name}}</ion-text>
-          {{selected_user.lastname}}
-          <a style="color:white;">|</a>
-          {{selected_user.email}}
-          <a style="color:white;">|</a>
-          {{selected_user.paisnombre}}
-        </ion-col>
-        <ion-col size="2">
-          <ion-button color="danger" (click)="borrarSelectedUser()" >
-            <ion-icon color="light" name="close-circle"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row> -->
-      
+     
       <ion-list *ngIf="mostrarleusuarios==true">
         <ion-item (click)="esteusuario(usuario, i)" *ngFor="let usuario of respuestaobtenerusuariosbusqueda | filter:filterTerm ; let i = index;">
           <ion-label>{{usuario.name}}

@@ -13,6 +13,11 @@ export class UsuariosdearchivoPage implements OnInit {
   nombre;
   step: string = '1';
   respuestadetonysverusuariosdearchivo: any;
+  mostrarleusuarios:  boolean = false;
+  filterTerm: string;
+  selected_user: any;
+  respuestaobtenerusuariosbusqueda: any;
+  seleccion = [];
 
   constructor(
     private loadingController: LoadingController,
@@ -80,5 +85,67 @@ export class UsuariosdearchivoPage implements OnInit {
     this.step='2';
         console.log('this.step', this.step);
   }
+
+  mostrarleusuariosverdadero(){
+    this.mostrarleusuarios=true;
+  }
+
+  mostrarleusuariosfalso(){
+    setTimeout(() => 
+    {
+      this.mostrarleusuarios=false;
+    },
+    150);
+}
+
+esteusuario(usuario, index){
+  console.log('Usuario',usuario);
+  this.selected_user=usuario;
+
+  this.respuestaobtenerusuariosbusqueda.splice(index, 1);
+  this.seleccion[this.seleccion.length]=usuario;
+  console.log('seleccion',this.seleccion);
+}
+
+borrarSelectedUserDeSeleccion(usuario, index){
+  this.seleccion.splice(index, 1);
+  this.respuestaobtenerusuariosbusqueda[this.respuestaobtenerusuariosbusqueda.length]=usuario;
+
+}
+
+ObtenerUsariosNormales(){
+  var dataobtenerusuariosbusqueda = {
+    nombre_solicitud: 'tonysobtenerusuariosbusqueda'
+  }
+  this.variosservicios.variasfunciones(dataobtenerusuariosbusqueda).subscribe(async( res: any ) =>{
+    console.log('respuesta de obtenerusuariosbusqueda', res);
+    this.respuestaobtenerusuariosbusqueda=res;
+});
+}
+
+
+async AgregarusuariosAArchivo(){
+  const actualizando = await this.loadingController.create({
+    message: 'Autorizando usuarios a este archivo, Porfavor espere...',spinner: 'bubbles',duration: 35000,
+    });
+  actualizando.present();
+
+  var dataagregarusuarioaarchivo = {
+    nombre_solicitud: 'agregarusuarioaarchivo',
+    usuarios: this.seleccion,
+    id_archivo: this.id
+  }
+
+  this.variosservicios.variasfunciones(dataagregarusuarioaarchivo).subscribe(async( res: any ) =>{
+    console.log('respuesta de agregarusuarioaarchivo', res);
+    actualizando.dismiss();
+    this.dismissyactualiza();
+    this.variosservicios.presentToast("..::Subido::..");
+    });
+
+
+}
+
+
 
 }

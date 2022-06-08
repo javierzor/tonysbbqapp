@@ -76,7 +76,9 @@ export class AppComponent {
   }
 
   tipo_cuenta_botones_admin(){
-    this.tipo_cuenta=this.varios.informacion_perfil.tipo_cuenta;
+    if(this.varios.informacion_perfil!=null&&this.varios.informacion_perfil!=undefined){
+      this.tipo_cuenta=this.varios.informacion_perfil.tipo_cuenta;
+    }
   }
 
   // async ConsultarLogin(){

@@ -20,14 +20,14 @@
         </ion-buttons>
       </ion-item>
 
-      <ion-item (click)="toggleMenu()" *ngIf="tipo_cuenta==999" routerLink="/paneladmin">
+      <ion-item (click)="toggleMenu()" *ngIf="tipo_cuenta&&tipo_cuenta==999" routerLink="/paneladmin">
         <ion-icon slot="start" name="log-in-outline"></ion-icon>
         <ion-button (click)="iralpaneladmin()">
           Admin Panel
         </ion-button>
       </ion-item>
 
-      <ion-item (click)="toggleMenu()" *ngIf="tipo_cuenta==888" routerLink="/paneladmin">
+      <ion-item (click)="toggleMenu()" *ngIf="tipo_cuenta&&tipo_cuenta==888" routerLink="/paneladmin">
         <ion-icon slot="start" name="log-in-outline"></ion-icon>
         <ion-button (click)="iralpaneladmin()">
           Moderador Panel

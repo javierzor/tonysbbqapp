@@ -5,16 +5,7 @@
   <ion-fab-button  size="small" (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
 
  
-  
-<section *ngIf="this.step=='2'">
-  <ion-row>
-    <ion-col>
-      <ion-button  (click)="step1()"><ion-icon name="arrow-undo"></ion-icon>Volver</ion-button>
-    </ion-col>
-  </ion-row>
-</section>
-
-  <section *ngIf="this.step=='1'">
+    <section *ngIf="this.step=='1'">
     <ion-row>
         <ion-col>
           <ion-button color="success" (click)="step2()"><ion-icon color="primary" name="person-add-outline"></ion-icon>Agregar</ion-button>
@@ -45,7 +36,62 @@
       </ion-col>
     </ion-row>
 
+    <ion-row>
+      <ion-col>
+        <ion-text *ngIf="seleccion.length<1||!seleccion">aún no ha seleccionado usuarios para este archivo.</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text *ngIf="seleccion.length>0">
+          <a style="color:black;" *ngFor=" let seleccionados of seleccion; let i = index;">
+            {{seleccionados.name}} {{seleccionados.last_name}}, {{seleccionados.id_publico}}, {{seleccionados.email}}
+            <span style="color:#c81f26;"> 
+              <ion-button (click)="borrarSelectedUserDeSeleccion(seleccionados, i)" size="small">
+                <ion-icon name="close-circle-outline"></ion-icon> </ion-button>| 
+            </span></a>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+
   </section>
+
+  <section *ngIf="this.step=='2'">
+    <ion-row>
+      <ion-col>
+        <ion-button  (click)="step1()"><ion-icon name="arrow-undo"></ion-icon>Volver</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card color="primary" [class]="mostrarleusuarios==false ? 'ningunaclase' : 'cartaconscrolly300dealto'" class="ion-no-padding" no-padding>
+        <ion-card-content class="ion-no-padding" no-padding>
+    
+          <ion-searchbar [(ngModel)]="filterTerm" (ionFocus)="mostrarleusuariosverdadero()" (ionBlur)="mostrarleusuariosfalso()" placeholder="Buscar Usuario..."></ion-searchbar>
+         
+          <ion-list *ngIf="mostrarleusuarios==true">
+            <ion-item (click)="esteusuario(usuario, i)" *ngFor="let usuario of respuestaobtenerusuariosbusqueda | filter:filterTerm ; let i = index;">
+              <ion-label>{{usuario.name}}
+                <a color="primary">|</a>
+                {{usuario.lastname}}
+                <a color="primary">|</a>
+                {{usuario.email}}<br>
+                <a color="primary">{{usuario.id_publico}}</a>
+                <a color="primary">|</a>
+                <span style="font-size: small;">{{usuario.create_date| date: 'yyyy-MM-dd hh:mm a'}}</span>
+                <a color="primary">|</a>
+                <ion-icon style="cursor:pointer;" color="primary" name="chevron-forward-circle"></ion-icon>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+    
+    
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  
+  </section>
+
 
 
 </ion-grid>
