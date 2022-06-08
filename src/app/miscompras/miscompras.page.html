@@ -40,103 +40,107 @@
 <!-- empiea direcciones de retiro -->
 <section>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title color="primary">&nbsp;&nbsp;Monitoreo de Paqueteria.&nbsp;&nbsp;</ion-card-title>
-    </ion-card-header>
+
+  <ion-segment (ionChange)="segmentChanged($event)" value="javascript">
+    <ion-segment-button value="archivos">
+      <ion-label>Archivos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="videos">
+      <ion-label>Videos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <section *ngIf="this.ValorSegmento=='archivos'">
+
+
+
+
+    <ion-card >
+
+      <ion-card-content>
+  
+        <section>
+  
+          <ion-row class="ion-align-items-center">
+            <ion-col style="text-align: center;" size="12" class="ion-text-center">
+              <ion-text>Lista de archivos de mi cuenta.</ion-text>
+            </ion-col>
+          </ion-row>
+        
+          <ion-row class="ion-align-items-center">
+            <ion-col size="4" class="ion-text-center">
+              <ion-text color="primary" >Detalles</ion-text>
+          
+            </ion-col>
+            <ion-col size="3" class="ion-text-center">
+              <ion-text color="primary" >fecha</ion-text>
+            </ion-col>
+            <ion-col size="2.5" class="ion-text-center">
+              <ion-text color="primary" >Origen</ion-text>
+            </ion-col>
+            <ion-col size="2.5" class="ion-text-center">
+              <ion-text color="primary" >Estado</ion-text>
+            </ion-col>
+            </ion-row>
+        
+        <section >
+        
+        
+        
+        
+  
+  
+        
+        </section>
+        
+        </section>
+        
+      </ion-card-content>
+  </ion-card>
+  
+  <ion-card *ngFor="let cadamovimiento of movimientos">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4" class="ion-text-center">
+        <ion-text *ngIf="cadamovimiento.detalles" color="primary"><strong></strong>{{cadamovimiento.traking}}<br><strong style="font-size: small;">&nbsp;</strong><a style="font-size: small;">{{cadamovimiento.peso}}<strong>Gr</strong></a></ion-text>
+      </ion-col>
+      <ion-col size="3" class="ion-text-center">
+        <ion-text style="font-size: small;" color="primary" >{{cadamovimiento.fecha | date: 'dd/MM/yyyy':'GMT-3' }}<br>{{cadamovimiento.fecha | date: 'hh:mm:ss':'GMT-3' }}</ion-text>
+      </ion-col>
+      <ion-col size="2.5" class="ion-text-center">
+        <ion-text color="primary" >
+          <ion-icon name="location"></ion-icon>
+          {{cadamovimiento.origen}}&nbsp;</ion-text>
+      </ion-col>
+      <ion-col size="2.5" class="ion-text-center">
+                  <span style="text-transform:capitalize; margin-left: -20px;" class="v2-badge v2-badge-pendiente"><a style="vertical-align: inherit; color:orange;">{{cadamovimiento.status}}</a></span>
+      </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+            
+              <ion-buttons transparent color="light" class="v2-badge v2-badge-fondoimagen"> <strong>Su Paquete:&nbsp;</strong> 
+                <ion-button class="v2-badge v2-badge-imagen" (click)="VerImagen(cadamovimiento.reciboImgUrl)">Ver Imagen de paquete
+                  &nbsp; <ion-icon color="success" name="eye-outline"></ion-icon> 
+                </ion-button>
+              </ion-buttons> 
+          </ion-col>
+      </ion-row>
   </ion-card>
 
-      <ion-row>
-        <ion-col>
 
-        </ion-col>
-        <ion-col>
-
-        </ion-col>
-        <ion-col>
-
-        </ion-col>
-        <!-- <ion-col offset="3">
-          <ion-button (click)="agregarcompra()" fill="outline"><ion-icon name="add"></ion-icon>Agregar</ion-button>
-        </ion-col> -->
-      </ion-row>
-
-
+  </section>
       
 
 
 
-  <ion-card >
-
-    <ion-card-content>
-
-      <section>
-
-        <ion-row class="ion-align-items-center">
-          <ion-col style="text-align: center;" size="12" class="ion-text-center">
-            <ion-text>Lista de paquetes de mi cuenta.</ion-text>
-          </ion-col>
-        </ion-row>
-      
-        <ion-row class="ion-align-items-center">
-          <ion-col size="4" class="ion-text-center">
-            <ion-text color="primary" >Detalles</ion-text>
-        
-          </ion-col>
-          <ion-col size="3" class="ion-text-center">
-            <ion-text color="primary" >fecha</ion-text>
-          </ion-col>
-          <ion-col size="2.5" class="ion-text-center">
-            <ion-text color="primary" >Origen</ion-text>
-          </ion-col>
-          <ion-col size="2.5" class="ion-text-center">
-            <ion-text color="primary" >Estado</ion-text>
-          </ion-col>
-          </ion-row>
-      
-      <section >
-      
-      
-      
-      
+  <section *ngIf="this.ValorSegmento=='videos'">
+    <img src="assets/en-desarrollo.gif">
+  </section>
 
 
-      
-      </section>
-      
-      </section>
-      
-    </ion-card-content>
-</ion-card>
 
-<ion-card *ngFor="let cadamovimiento of movimientos">
-  <ion-row class="ion-align-items-center">
-    <ion-col size="4" class="ion-text-center">
-      <ion-text *ngIf="cadamovimiento.detalles" color="primary"><strong></strong>{{cadamovimiento.traking}}<br><strong style="font-size: small;">&nbsp;</strong><a style="font-size: small;">{{cadamovimiento.peso}}<strong>Gr</strong></a></ion-text>
-    </ion-col>
-    <ion-col size="3" class="ion-text-center">
-      <ion-text style="font-size: small;" color="primary" >{{cadamovimiento.fecha | date: 'dd/MM/yyyy':'GMT-3' }}<br>{{cadamovimiento.fecha | date: 'hh:mm:ss':'GMT-3' }}</ion-text>
-    </ion-col>
-    <ion-col size="2.5" class="ion-text-center">
-      <ion-text color="primary" >
-        <ion-icon name="location"></ion-icon>
-        {{cadamovimiento.origen}}&nbsp;</ion-text>
-    </ion-col>
-    <ion-col size="2.5" class="ion-text-center">
-                <span style="text-transform:capitalize; margin-left: -20px;" class="v2-badge v2-badge-pendiente"><a style="vertical-align: inherit; color:orange;">{{cadamovimiento.status}}</a></span>
-    </ion-col>
-    </ion-row>
-    <ion-row>
-        <ion-col>
-          
-            <ion-buttons transparent color="light" class="v2-badge v2-badge-fondoimagen"> <strong>Su Paquete:&nbsp;</strong> 
-              <ion-button class="v2-badge v2-badge-imagen" (click)="VerImagen(cadamovimiento.reciboImgUrl)">Ver Imagen de paquete
-                &nbsp; <ion-icon color="success" name="eye-outline"></ion-icon> 
-              </ion-button>
-            </ion-buttons> 
-        </ion-col>
-    </ion-row>
-</ion-card>
+
 
 
 </section>

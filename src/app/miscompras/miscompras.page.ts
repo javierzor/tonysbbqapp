@@ -28,6 +28,7 @@ export class MiscomprasPage {
   step:any;
   languages_active: any;
   movimientos: any;
+  ValorSegmento: any;
 
   constructor(
     private modalController: ModalController,
@@ -149,6 +150,12 @@ async VerImagen(ImgUrl) {
 
 ionViewWillLeave(){
   this.variosservicios.activar_realtime_paqueteria=false;
+}
+
+//empieza nuevo codigo de mis compras:
+segmentChanged(event: any) {
+  console.log('Segment changed', event);
+  this.ValorSegmento=event.target.value;
 }
 
 
