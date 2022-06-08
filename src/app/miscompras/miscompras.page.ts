@@ -28,7 +28,7 @@ export class MiscomprasPage {
   step:any;
   languages_active: any;
   movimientos: any;
-  ValorSegmento: any;
+  ValorSegmento: any ='archivos';
 
   constructor(
     private modalController: ModalController,
