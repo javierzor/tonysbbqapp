@@ -14,6 +14,7 @@ import { ActualizarretirooficinaPage } from '../modals/actualizarretirooficina/a
 import { VerconversacionPage } from '../modals/verconversacion/verconversacion.page';
 import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
 import { UsuariosdearchivoPage } from '../modals/usuariosdearchivo/usuariosdearchivo.page';
+import { DireccionnuevaPage } from '../modals/direccionnueva/direccionnueva.page';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class PaneladminPage implements OnInit {
   respuestadetonysadminobtenerlistadeuduarios: any;
   ModalAggFaseAbierto: boolean=false;
   respuestatonysanuncios: any;
-  respuestatonysobteneradmindirecciones: any;
+  tonysobteneadminrformularios: any;
   cambiarestado_a: any;
   fecha_inicio: string;
   fecha_fin: string;
@@ -46,6 +47,8 @@ export class PaneladminPage implements OnInit {
   verarchivo: boolean=false;
   desactivar_agregar: boolean=false;
   desactivar_verusuariosdearchivo: boolean=false;
+  nombreformulario: any;
+  editorformulario: any;
   constructor(
     private datepipe : DatePipe,
     private alertController: AlertController,
@@ -149,13 +152,13 @@ if(this.segmentModel=='veraumentarfase'){
 }
 
 if(this.segmentModel=='direcciones'){
-  var datatonysobteneradmindirecciones = {
-    nombre_solicitud: 'tonysobteneradmindirecciones',
+  var datatonysobteneadminrformularios = {
+    nombre_solicitud: 'tonysobteneadminrformularios',
     id_user: this.informacion_perfil.id
   }
-   this.variosservicios.variasfunciones(datatonysobteneradmindirecciones).subscribe(async( res: any ) =>{
-     console.log('respuesta de tonysobteneradmindirecciones', res);
-     this.respuestatonysobteneradmindirecciones=res;
+   this.variosservicios.variasfunciones(datatonysobteneadminrformularios).subscribe(async( res: any ) =>{
+     console.log('respuesta de tonysobteneadminrformularios', res);
+     this.tonysobteneadminrformularios=res;
      actualizando.dismiss();
    });
 }
@@ -399,78 +402,93 @@ async VerImagen(ImgUrl) {
 
 
 
-    async actualizarAdminDireccion(cadadireccion) {
-      const modal = await this.modalController.create({
-        component: ActualizardireccionPage,
-        initialBreakpoint: 1.2,
-        componentProps: { 
-          cadadireccion:cadadireccion
-        },
-        breakpoints: [1, 1.5, 1]
-      });
-      modal.onDidDismiss().then((data) => {
-          console.log('data',data);
-          if(data.data.dismissed==true){
-            this.segmentModel='direcciones';
-            this.segmentChanged();
-          }
-        });
-    
-    
-      return await modal.present();
-    }
+    async agregarformulario(tipo, cadaformulario) {
 
-    async presentAlertRadio(movimiento) {
-      const alert = await this.alertController.create({
-        cssClass: 'my-custom-class', header: 'Cambiar estado', inputs: [
-          {name: 'recibido',type: 'radio',label: 'Recibido',value: 'recibido',
-            handler: () => {
-              console.log('Radio 1 selected'); this.cambiarestado_a='recibido';
-            },
-            checked: true
-          },
-          {name: 'en camino',type: 'radio',label: 'En camino',value: 'en camino',
-            handler: () => {
-              console.log('Radio 2 selected'); this.cambiarestado_a='en camino';
-            }
-          },
-          {name: 'listo',type: 'radio',label: 'Listo',value: 'listo',
-            handler: () => {
-              console.log('Radio 3 selected');  this.cambiarestado_a='listo';
-            }
-          },
-          {name: 'entregado',type: 'radio',label: 'Entregado',value: 'entregado',
-            handler: () => {
-              console.log('Radio 4 selected'); this.cambiarestado_a='entregado';
-            }
-          }
-        ],
-        buttons: [
-          {
-            text: 'Cancelar', role: 'cancel', cssClass: 'secondary',
-            handler: () => {
-              console.log('Confirm Cancel');
-            }
-          }, {
-            text: 'Ok',
-            handler: () => {
-              console.log('Confirm Ok, this.cambiarestado_a=',this.cambiarestado_a);
-              var datatonysupdatemovimientostatus={nombre_solicitud:'tonysupdatemovimientostatus', id: movimiento.id,status: this.cambiarestado_a};
-              this.variosservicios.variasfunciones(datatonysupdatemovimientostatus).subscribe(async( res: any ) =>{
-                console.log('respuesta de tonysupdatemovimientostatus', res);
-                if(res){
-                   this.segmentModel='solicitudesdecompras';
-                   this.segmentChanged();
+      if(tipo=='agregar'){
+
+          const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Agregar Formulario:',
+            inputs: [
+              {
+                name: 'nombreformulario',
+                type: 'text',
+                placeholder: 'Nombre del formulario',
+                value: this.nombreformulario
+              }
+
+            ],
+            buttons: [
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {
+                  console.log('Confirm Cancel');
                 }
-                });
+              }, {
+                text: 'Ok',
+                handler: async (alertData) => {
+                  console.log('Confirm Ok');
+                  console.log(alertData.nombreformulario);
 
+                  var datatonyscrearformulario = {
+                    nombre_solicitud: 'tonyscrearformulario',
+                    nombre:alertData.nombreformulario
+                  }
+                   this.variosservicios.variasfunciones(datatonyscrearformulario).subscribe(async( res: any ) =>{
+                     console.log('respuesta de tonyscrearformulario', res);
+                     if(res.nombre==alertData.nombreformulario){
+                         this.variosservicios.presentToast("..::Formulario creado exitosamente::..");
+                          const modal = await this.modalController.create({
+                            component: DireccionnuevaPage,
+                            componentProps: { 
+                              cadaformulario:cadaformulario
+                            },
+                          });
+                          modal.onDidDismiss().then((data) => {
+                              console.log('data',data);
+                              if(data.data.dismissed==true){
+                                this.segmentModel='direcciones';
+                                this.segmentChanged();
+                              }
+                            });
+                            return await modal.present();
+                          }
+                     });
+
+                }
+              }
+            ]
+          });
+      
+          await alert.present();
+      }
+
+      if(tipo=='actualizar'){
+
+        const modal = await this.modalController.create({
+          component: DireccionnuevaPage,
+          componentProps: { 
+            cadaformulario:cadaformulario
+          },
+        });
+        modal.onDidDismiss().then((data) => {
+            console.log('data',data);
+            if(data.data.dismissed==true){
+              this.segmentModel='direcciones';
+              this.segmentChanged();
             }
-          }
-        ]
-      });
-  
-      await alert.present();
+          });
+          return await modal.present();
+      }
+
+
+    
+    
     }
+
+
 
     consultarReporte(){
       var datatonysconsultarreporte = {

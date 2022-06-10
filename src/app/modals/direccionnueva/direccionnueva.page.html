@@ -5,34 +5,103 @@
 <ion-fab-button (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
 
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Tipo:</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-select [(ngModel)]="tipo_direccion" placeholder="Seleccione Tipo">
-      <ion-select-option value="BTC">BTC</ion-select-option>
-      <ion-select-option value="TRX">TRX</ion-select-option>
-      <ion-select-option value="DOT">DOT</ion-select-option>
-      <ion-select-option value="ADA">ADA</ion-select-option>
-      <ion-select-option value="ETH">ETH</ion-select-option>
-    </ion-select>
-  </ion-card-content>
-</ion-card>
+<section *ngIf="this.step=='1'">
 
-<br>
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Dirección:</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-item>
-      <ion-label position="floating">Direccion:</ion-label>
-      <ion-input [(ngModel)]="direccion"></ion-input>
-    </ion-item>
-  </ion-card-content>
-</ion-card>
+  <ion-button (click)="step2()">Agregar</ion-button>
+  <br>
+  <ion-text>Lista de preguntas del formulario: <strong><a>{{cadaformulario.nombre}}:</a></strong> </ion-text>
+    
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Pregunta abierta</ion-card-subtitle>
+      <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button>
+      <ion-button size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text><strong>¿Texto de pregunta abierta?</strong></ion-text>
+    </ion-card-content>
+  </ion-card>
 
-<ion-button (click)="agregardireccion()"><ion-icon name="checkmark"></ion-icon>Agregar</ion-button>
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle>Pregunta Opciones multiples<strong>?La Pregunta para las opciones?</strong></ion-card-subtitle>
+      <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button>
+      <ion-button size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>A: OPCION</ion-text><br>
+      <ion-text>B: OPCION</ion-text><br>
+      <ion-text>C: OPCION</ion-text><br>
+      <ion-text>D: OPCION</ion-text>
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+</section>
+
+<section  *ngIf="this.step=='2'">
+  <ion-button (click)="step1()">Volver</ion-button>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Tipo:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-select [(ngModel)]="tipo_direccion" placeholder="Seleccione Tipo">
+        <ion-select-option value="abierta">Abierta</ion-select-option>
+        <ion-select-option value="multiple">Opciones multiples</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
+  
+  <br>
+  <ion-card *ngIf="tipo_direccion=='abierta'" >
+    <ion-card-header>
+      <ion-card-title>Pregunta:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Pregunta abierta:</ion-label>
+        <ion-input [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card *ngIf="tipo_direccion=='multiple'" >
+
+    <ion-card-content>
+      <ion-card-title>Opciones:</ion-card-title>
+      <ion-item>
+        <ion-label position="floating">Pregunta:</ion-label>
+        <ion-input [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Opción A:</ion-label>
+        <ion-input [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Opción B:</ion-label>
+        <ion-input [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Opción C:</ion-label>
+        <ion-input [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Opción D:</ion-label>
+        <ion-input [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-button style="position:absolute; top:0%;right:0%;" (click)="agregarpregunta()"><ion-icon name="checkmark"></ion-icon>Agregar</ion-button>
+
+
+</section>
+
+
+
 
 </ion-content>

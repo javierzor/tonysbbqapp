@@ -261,30 +261,22 @@ mode="ios"
 
       <ion-row>
         <ion-col>
-          <ion-button (click)="abrireditardireccionderetiro()">Agregar Formulario</ion-button>
+          <ion-button (click)="agregarformulario('agregar', 'nuevo')">Agregar Formulario</ion-button>
         </ion-col>
       </ion-row>
 
-      <ion-card *ngFor="let cadadireccion of respuestatonysobteneradmindirecciones">
+      <ion-card *ngFor="let cadaformulario of tonysobteneadminrformularios">
         <ion-row>
           <ion-col>
-            <ion-fab-button (click)="actualizarAdminDireccion(cadadireccion)" style="position:absolute; right:1%; bottom:5%;" color="primary">
+            <ion-fab-button (click)="agregarformulario('actualizar', cadaformulario)" style="position:absolute; right:1%; bottom:5%;" color="primary">
               <ion-icon style="color:white;" name="create"></ion-icon>
             </ion-fab-button>
-            <ion-text><strong>Pais:</strong> {{cadadireccion.pais}}</ion-text>
+            <ion-text><strong>Nombre:</strong> {{cadaformulario.nombre}}</ion-text>
             <br>
-            <ion-text><strong>Nombre:</strong> {{cadadireccion.nombre}}</ion-text>
+            <ion-text><strong>ID:</strong> {{cadaformulario.id}}</ion-text>
             <br>
-            <ion-text><strong>Dirección 1:</strong> {{cadadireccion.direccion_1}}</ion-text>
-            <br>
-            <ion-text><strong>Ciudad:</strong> {{cadadireccion.ciudad}}</ion-text>
-            <br>
-            <ion-text><strong>State:</strong> {{cadadireccion.estado}}</ion-text>
-            <br>
-            <ion-text><strong>Cod. Postal:</strong> {{cadadireccion.codigo_postal}}</ion-text>
-            <br>
-            <ion-text><strong>Numero Tlf:</strong> {{cadadireccion.telefono}}</ion-text>
-  
+            <ion-text><strong>F. Creado:</strong> {{cadaformulario.fecha_creacion | date:'shortDate':'GMT-5'}} A las: {{cadaformulario.fecha_creacion | date:'shortTime':'GMT-5'}}</ion-text>
+
             <ion-text></ion-text>
           </ion-col>
         </ion-row>
