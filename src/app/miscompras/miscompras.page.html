@@ -54,80 +54,47 @@
   <section *ngIf="this.ValorSegmento=='archivos'">
 
 
-
-
-    <ion-card >
-
-      <ion-card-content>
-  
-        <section>
   
           <ion-row class="ion-align-items-center">
             <ion-col style="text-align: center;" size="12" class="ion-text-center">
-              <ion-text>Lista de archivos de mi cuenta.</ion-text>
+              <ion-text>Lista de archivos de mi cuenta:</ion-text>
             </ion-col>
           </ion-row>
         
-          <ion-row class="ion-align-items-center">
-            <ion-col size="4" class="ion-text-center">
-              <ion-text color="primary" >Detalles</ion-text>
-          
-            </ion-col>
-            <ion-col size="3" class="ion-text-center">
-              <ion-text color="primary" >fecha</ion-text>
-            </ion-col>
-            <ion-col size="2.5" class="ion-text-center">
-              <ion-text color="primary" >Origen</ion-text>
-            </ion-col>
-            <ion-col size="2.5" class="ion-text-center">
-              <ion-text color="primary" >Estado</ion-text>
-            </ion-col>
-            </ion-row>
-        
-        <section >
-        
-        
-        
-        
-  
-  
-        
-        </section>
-        
-        </section>
-        
-      </ion-card-content>
-  </ion-card>
-  
-  <ion-card *ngFor="let cadamovimiento of movimientos">
-    <ion-row class="ion-align-items-center">
-      <ion-col size="4" class="ion-text-center">
-        <ion-text *ngIf="cadamovimiento.detalles" color="primary"><strong></strong>{{cadamovimiento.traking}}<br><strong style="font-size: small;">&nbsp;</strong><a style="font-size: small;">{{cadamovimiento.peso}}<strong>Gr</strong></a></ion-text>
-      </ion-col>
-      <ion-col size="3" class="ion-text-center">
-        <ion-text style="font-size: small;" color="primary" >{{cadamovimiento.fecha | date: 'dd/MM/yyyy':'GMT-3' }}<br>{{cadamovimiento.fecha | date: 'hh:mm:ss':'GMT-3' }}</ion-text>
-      </ion-col>
-      <ion-col size="2.5" class="ion-text-center">
-        <ion-text color="primary" >
-          <ion-icon name="location"></ion-icon>
-          {{cadamovimiento.origen}}&nbsp;</ion-text>
-      </ion-col>
-      <ion-col size="2.5" class="ion-text-center">
-                  <span style="text-transform:capitalize; margin-left: -20px;" class="v2-badge v2-badge-pendiente"><a style="vertical-align: inherit; color:orange;">{{cadamovimiento.status}}</a></span>
-      </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-            
-              <ion-buttons transparent color="light" class="v2-badge v2-badge-fondoimagen"> <strong>Su Paquete:&nbsp;</strong> 
-                <ion-button class="v2-badge v2-badge-imagen" (click)="VerImagen(cadamovimiento.reciboImgUrl)">Ver Imagen de paquete
-                  &nbsp; <ion-icon color="success" name="eye-outline"></ion-icon> 
-                </ion-button>
-              </ion-buttons> 
-          </ion-col>
-      </ion-row>
-  </ion-card>
 
+          <ion-row no-padding class="ion-no-padding" >
+            <ion-col no-padding class="ion-no-padding" >
+              <ion-card *ngFor="let cadaarchivo of tonystraerarchivosdeusuario"  style="margin:4px;">
+                <!-- se carga la sig. seccion si el archivo "Tiene detalles" (si no ha sido borrado) -->
+                <section *ngIf="cadaarchivo.detalles">
+                  <ion-card-header color="primary">
+                    <ion-card-subtitle>{{cadaarchivo.detalles.traking}}</ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content style="margin-left:0px;">
+                    <ion-row>
+                      <ion-col size="10">
+                        <ion-text ><span class="v2-badge-aceptado v2-badge">Observación:</span> {{cadaarchivo.detalles.observacion}}.</ion-text>
+                        <br><a style="line-height: 2.5em;"></a>
+                        <ion-text><span class="v2-badge-aceptado v2-badge">Recomendación:</span> {{cadaarchivo.detalles.origen}}.</ion-text>
+                        <br><a style="line-height: 1.5em;"></a>                 
+                        <ion-text><span class="v2-badge-aceptado v2-badge">Tipo:</span> {{cadaarchivo.detalles.mas_o_menos}}.</ion-text>
+                        <br><a style="line-height: 2.5em;"></a> 
+                        <ion-text><span class="v2-badge-aceptado v2-badge">Fecha:</span> {{cadaarchivo.detalles.fecha | date:'shortDate':'GMT-5'}}.</ion-text>
+                      </ion-col>
+                      <ion-col size="2">
+                        <ion-fab>
+                          <br><br>
+                          <ion-fab-button (click)="VerImagen(cadaarchivo.detalles.reciboImgUrl)">Ver</ion-fab-button>
+                        </ion-fab>
+                      </ion-col>
+                    </ion-row>
+
+                  </ion-card-content>
+                </section>
+                </ion-card>
+            </ion-col>
+          </ion-row>
+        
 
   </section>
       
@@ -135,6 +102,9 @@
 
 
   <section *ngIf="this.ValorSegmento=='videos'">
+    <center>
+      <img  width="50%" height="50%" src="assets/seccion-en-construccion.png">
+    </center>
     <img src="assets/en-desarrollo.gif">
   </section>
 

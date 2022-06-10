@@ -12,6 +12,7 @@ import { DireccionnuevaPage } from '../modals/direccionnueva/direccionnueva.page
 import { ModalController } from '@ionic/angular';
 import { NuevacompraPage } from '../modals/nuevacompra/nuevacompra.page';
 import { VisualizadorimagenesPage } from '../modals/visualizadorimagenes/visualizadorimagenes.page';
+import { ToastController, LoadingController } from "@ionic/angular";
 
 @Component({
   selector: 'app-miscompras',
@@ -27,10 +28,10 @@ export class MiscomprasPage {
   informacion_perfil: any;
   step:any;
   languages_active: any;
-  movimientos: any;
   ValorSegmento: any ='archivos';
-
+  tonystraerarchivosdeusuario: any;
   constructor(
+    private loadingController: LoadingController,
     private modalController: ModalController,
     private routerOutlet: IonRouterOutlet,
     private variosservicios: VariosService,
@@ -90,14 +91,33 @@ obtenermovimientos(){
   this.informacion_perfil=localStorage.getItem('profileInfo');
   this.informacion_perfil=this.decrypt(this.informacion_perfil);
   this.informacion_perfil=JSON.parse(this.informacion_perfil);
-  var datatonysobtenermovimientos = {
-    nombre_solicitud: 'tonysobtenermovimientos',
-    id_user: this.informacion_perfil.id
+  var datatonystraerarchivosdeusuario = {
+    nombre_solicitud: 'tonystraerarchivosdeusuario',
+    id: this.informacion_perfil.id
   }
-   this.variosservicios.variasfunciones(datatonysobtenermovimientos).subscribe(async( res: any ) =>{
-     console.log('respuesta de tonysobtenermovimientos', res);
-     this.movimientos=res;
+   this.variosservicios.variasfunciones(datatonystraerarchivosdeusuario).subscribe(async( res: any ) =>{
+     console.log('respuesta de tonystraerarchivosdeusuario', res);
+     this.tonystraerarchivosdeusuario=res;
    });
+}
+
+  async obtenermovimientosconloading(){
+  const actualizando = await this.loadingController.create({
+    message: 'Actualizando...',spinner: 'bubbles',duration: 15000,
+    });
+    actualizando.present();
+    this.informacion_perfil=localStorage.getItem('profileInfo');
+    this.informacion_perfil=this.decrypt(this.informacion_perfil);
+    this.informacion_perfil=JSON.parse(this.informacion_perfil);
+    var datatonystraerarchivosdeusuario = {
+      nombre_solicitud: 'tonystraerarchivosdeusuario',
+      id: this.informacion_perfil.id
+    }
+     this.variosservicios.variasfunciones(datatonystraerarchivosdeusuario).subscribe(async( res: any ) =>{
+       console.log('respuesta de tonystraerarchivosdeusuario', res);
+       this.tonystraerarchivosdeusuario=res;
+       actualizando.dismiss();
+     });
 }
 
 ConRealTime(){
@@ -109,7 +129,7 @@ ConRealTime(){
       this.ConRealTime();  //se repite
     } 
     },
-      15000);
+      20000);
 }
 
 
@@ -137,8 +157,8 @@ async VerImagen(ImgUrl) {
     componentProps: {
       'dataparaelmodal': ImgUrl
     },
-    initialBreakpoint: 1.2,
-    breakpoints: [1, 1.5, 1]
+    // initialBreakpoint: 1.2,
+    // breakpoints: [1, 1.5, 1]
   });
   modal.onDidDismiss().then((data) => {
       console.log('data',data);
@@ -156,6 +176,9 @@ ionViewWillLeave(){
 segmentChanged(event: any) {
   console.log('Segment changed', event);
   this.ValorSegmento=event.target.value;
+  if(this.ValorSegmento=="archivos"){
+    this.obtenermovimientosconloading();
+  }
 }
 
 
