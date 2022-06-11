@@ -2,7 +2,7 @@
 <ion-content color="light">
 
 <!-- <ion-button color="danger" click="dismissystep2()"><ion-icon cname="close"></ion-icon></ion-button> -->
-<ion-fab-button (click)="dismiss()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
+<ion-fab-button (click)="dismissyactualiza()" color="danger"><ion-icon name="close"></ion-icon></ion-fab-button>
 
 
 <section *ngIf="this.step=='1'">
@@ -11,31 +11,53 @@
   <br>
   <ion-text>Lista de preguntas del formulario: <strong><a>{{cadaformulario.nombre}}:</a></strong> </ion-text>
     
-  <ion-card>
+<section *ngFor="let cadapregunta of respuestadetonysobtenerpreguntasdeformulario">
+  <ion-card *ngIf="cadapregunta.tipo=='abierta'">
     <ion-card-header color="primary">
       <ion-card-subtitle>Pregunta abierta</ion-card-subtitle>
       <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button>
       <ion-button size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
     </ion-card-header>
     <ion-card-content>
-      <ion-text><strong>¿Texto de pregunta abierta?</strong></ion-text>
+      <ion-text><strong>{{cadapregunta.pregunta}}</strong></ion-text>
     </ion-card-content>
   </ion-card>
-
-  <ion-card>
+  <ion-card *ngIf="cadapregunta.tipo=='cerrada'">
     <ion-card-header color="primary">
-      <ion-card-subtitle>Pregunta Opciones multiples<strong>?La Pregunta para las opciones?</strong></ion-card-subtitle>
+      <ion-card-subtitle>Pregunta Opciones multiples, <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
       <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button>
       <ion-button size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
     </ion-card-header>
-    <ion-card-content>
-      <ion-text>A: OPCION</ion-text><br>
-      <ion-text>B: OPCION</ion-text><br>
-      <ion-text>C: OPCION</ion-text><br>
-      <ion-text>D: OPCION</ion-text>
-
+    <ion-card-content style="margin:0;" no-padding class="ion-no-padding">
+      <ion-row style="margin:0;" no-padding class="ion-no-padding">
+        <ion-col *ngIf="cadapregunta.a" size="6" style="background-color:#FDF000; border-right: 1px solid #000000;" no-padding class="ion-no-padding">
+          <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">A</span> {{cadapregunta.a}}</ion-text>
+        </ion-col>
+        <ion-col *ngIf="cadapregunta.b" size="6" style="background-color:#FDF000;" no-padding class="ion-no-padding">
+          <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">B</span> {{cadapregunta.b}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin:0;" ion-no-padding class="no-padding">
+        <ion-col *ngIf="cadapregunta.c" size="6"  style="background-color:#c81f26; border-right: 1px solid #000000;" no-padding class="ion-no-padding">
+          <ion-text style="color:white;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaamarilla">C</span> {{cadapregunta.c}}</ion-text>
+        </ion-col>
+        <ion-col *ngIf="cadapregunta.d" size="6"  style="background-color:#c81f26;" no-padding class="ion-no-padding">
+          <ion-text style="color:white;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaamarilla">D</span> {{cadapregunta.d}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row  style="margin:0;" no-padding class="ion-no-padding">
+        <ion-col *ngIf="cadapregunta.e" size="6" style="background-color:#FDF000; border-right: 1px solid #000000;" no-padding class="ion-no-padding">
+          <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">E</span> {{cadapregunta.e}}</ion-text>
+        </ion-col>
+        <ion-col *ngIf="cadapregunta.f" size="6" style="background-color:#FDF000;" no-padding class="ion-no-padding">
+          <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">F</span> {{cadapregunta.f}}</ion-text>
+        </ion-col>
+      </ion-row>
+  
     </ion-card-content>
   </ion-card>
+</section>
+
 
 
 
@@ -49,15 +71,15 @@
       <ion-card-title>Tipo:</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-select [(ngModel)]="tipo_direccion" placeholder="Seleccione Tipo">
+      <ion-select [(ngModel)]="tipo_pregunta" placeholder="Seleccione Tipo">
         <ion-select-option value="abierta">Abierta</ion-select-option>
-        <ion-select-option value="multiple">Opciones multiples</ion-select-option>
+        <ion-select-option value="cerrada">Opciones multiples</ion-select-option>
       </ion-select>
     </ion-card-content>
   </ion-card>
   
   <br>
-  <ion-card *ngIf="tipo_direccion=='abierta'" >
+  <ion-card *ngIf="tipo_pregunta=='abierta'" >
     <ion-card-header>
       <ion-card-title>Pregunta:</ion-card-title>
     </ion-card-header>
@@ -69,29 +91,50 @@
     </ion-card-content>
   </ion-card>
   
-  <ion-card *ngIf="tipo_direccion=='multiple'" >
+  <ion-card *ngIf="tipo_pregunta=='cerrada'" >
 
     <ion-card-content>
       <ion-card-title>Opciones:</ion-card-title>
       <ion-item>
-        <ion-label position="floating">Pregunta:</ion-label>
-        <ion-input [(ngModel)]="direccion"></ion-input>
+        <ion-label style="color:#00000059" position="floating">Pregunta:</ion-label>
+        <ion-input placeholder="¿Que desea preguntar?" [(ngModel)]="direccion"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <span class="v2-badge v2-badge-letrapreguntaroja">A</span> &nbsp;
+        <ion-input [(ngModel)]="a" [disabled]="anular_pregunta_a" type="text" placeholder="Pregunta A"></ion-input>
+        <ion-button (click)="activaranular_pregunta_a()" [disabled]="anular_pregunta_a" color="primary" ion-button large item-end><ion-icon  name="close-circle"></ion-icon></ion-button>
+        <ion-button (click)="desactivaranular_pregunta_a()" [disabled]="!anular_pregunta_a"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Opción A:</ion-label>
-        <ion-input [(ngModel)]="direccion"></ion-input>
+        <span class="v2-badge v2-badge-letrapreguntaroja">B</span> &nbsp;
+        <ion-input [(ngModel)]="b" [disabled]="anular_pregunta_b" type="text" placeholder="Pregunta B"></ion-input>
+        <ion-button (click)="activaranular_pregunta_b()" [disabled]="anular_pregunta_b" color="primary" ion-button large item-end><ion-icon  name="close-circle"></ion-icon></ion-button>
+        <ion-button (click)="desactivaranular_pregunta_b()" [disabled]="!anular_pregunta_b"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Opción B:</ion-label>
-        <ion-input [(ngModel)]="direccion"></ion-input>
+        <span class="v2-badge v2-badge-letrapreguntaroja">C</span> &nbsp;
+        <ion-input [(ngModel)]="c" [disabled]="anular_pregunta_c" type="text" placeholder="Pregunta C"></ion-input>
+        <ion-button (click)="activaranular_pregunta_c()" [disabled]="anular_pregunta_c" color="primary" ion-button large item-end><ion-icon  name="close-circle"></ion-icon></ion-button>
+        <ion-button (click)="desactivaranular_pregunta_c()" [disabled]="!anular_pregunta_c"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Opción C:</ion-label>
-        <ion-input [(ngModel)]="direccion"></ion-input>
+        <span class="v2-badge v2-badge-letrapreguntaroja">D</span> &nbsp;
+        <ion-input [(ngModel)]="d" [disabled]="anular_pregunta_d" type="text" placeholder="Pregunta D"></ion-input>
+        <ion-button (click)="activaranular_pregunta_d()" [disabled]="anular_pregunta_d" color="primary" ion-button large item-end><ion-icon  name="close-circle"></ion-icon></ion-button>
+        <ion-button (click)="desactivaranular_pregunta_d()" [disabled]="!anular_pregunta_d"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Opción D:</ion-label>
-        <ion-input [(ngModel)]="direccion"></ion-input>
+        <span class="v2-badge v2-badge-letrapreguntaroja">E</span> &nbsp;
+        <ion-input [(ngModel)]="e" [disabled]="anular_pregunta_e" type="text" placeholder="Pregunta E"></ion-input>
+        <ion-button (click)="activaranular_pregunta_e()" [disabled]="anular_pregunta_e" color="primary" ion-button large item-end><ion-icon  name="close-circle"></ion-icon></ion-button>
+        <ion-button (click)="desactivaranular_pregunta_e()" [disabled]="!anular_pregunta_e"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+          <span class="v2-badge v2-badge-letrapreguntaroja">F</span> &nbsp;
+          <ion-input [(ngModel)]="f" [disabled]="anular_pregunta_f" type="text" placeholder="Pregunta F"></ion-input>
+          <ion-button (click)="activaranular_pregunta_f()" [disabled]="anular_pregunta_f" color="primary" ion-button large item-end><ion-icon  name="close-circle"></ion-icon></ion-button>
+          <ion-button (click)="desactivaranular_pregunta_f()" [disabled]="!anular_pregunta_f"><ion-icon name="checkmark-done-outline"></ion-icon></ion-button>
       </ion-item>
     </ion-card-content>
   </ion-card>
