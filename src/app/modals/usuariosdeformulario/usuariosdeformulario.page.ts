@@ -13,7 +13,7 @@ export class UsuariosdeformularioPage implements OnInit {
   id;
   nombre;
   step: string = '1';
-  respuestadetonysverusuariosdearchivo: any;
+  respuestadetonysverusuariosdeformulario: any;
   mostrarleusuarios:  boolean = false;
   filterTerm: string;
   selected_user: any;
@@ -28,7 +28,7 @@ export class UsuariosdeformularioPage implements OnInit {
   ) 
   
   {
-    this.VerUsuariosDeArchivoFuction();
+    this.VerUsuariosDeformularioFuction();
     this.traidopormodalparamsFuction();
   }
 
@@ -62,24 +62,24 @@ export class UsuariosdeformularioPage implements OnInit {
     
   }
 
-  async VerUsuariosDeArchivoFuction(){
+  async VerUsuariosDeformularioFuction(){
     const actualizando = await this.loadingController.create({
       message: 'Consultando usuarios...',spinner: 'bubbles',duration: 15000,
       });
       actualizando.present();
-    var datatonysverusuariosdearchivo = {
-      nombre_solicitud: 'tonysverusuariosdearchivo',
+    var datatonysverusuariosdeformulario = {
+      nombre_solicitud: 'tonysverusuariosdeformulario',
       id: this.id
     }
-     this.variosservicios.variasfunciones(datatonysverusuariosdearchivo).subscribe(async( res: any ) =>{
-       console.log('respuesta de tonysverusuariosdearchivo', res);
-       this.respuestadetonysverusuariosdearchivo=res;
+     this.variosservicios.variasfunciones(datatonysverusuariosdeformulario).subscribe(async( res: any ) =>{
+       console.log('respuesta de tonysverusuariosdeformulario', res);
+       this.respuestadetonysverusuariosdeformulario=res;
        actualizando.dismiss();
      });
   }
   
   step1(){
-    this.VerUsuariosDeArchivoFuction();
+    this.VerUsuariosDeformularioFuction();
     this.step='1';
     this.seleccion=[];
         console.log('this.step', this.step);
@@ -129,21 +129,21 @@ ObtenerUsariosNormales(){
 }
 
 
-async AgregarusuariosAArchivo(){
+async AgregarusuariosAformulario(){
   const actualizando = await this.loadingController.create({
-    message: 'Autorizando usuarios a este archivo, Porfavor espere...',spinner: 'bubbles',duration: 35000,
+    message: 'Autorizando usuarios a este formulario, Porfavor espere...',spinner: 'bubbles',duration: 35000,
     });
   actualizando.present();
 
-  var datatonysagregarusuarioaarchivo = {
-    nombre_solicitud: 'tonysagregarusuarioaarchivo',
+  var datatonysagregarusuarioaformulario = {
+    nombre_solicitud: 'tonysagregarusuarioaformulario',
     usuarios: this.seleccion,
-    id_archivo: this.id
+    id_formulario: this.id
   }
 
 
-  this.variosservicios.variasfunciones(datatonysagregarusuarioaarchivo).subscribe(async( res: any ) =>{
-    console.log('respuesta de tonysagregarusuarioaarchivo', res);
+  this.variosservicios.variasfunciones(datatonysagregarusuarioaformulario).subscribe(async( res: any ) =>{
+    console.log('respuesta de tonysagregarusuarioaformulario', res);
     actualizando.dismiss();
     this.step1();
     // this.dismissyactualiza();
@@ -155,20 +155,20 @@ async AgregarusuariosAArchivo(){
 
   async borrarusuariostep1(cadausuario){
   const actualizando = await this.loadingController.create({
-    message: 'Desautorizando (Borrando) acceso de usuario a este archivo, espere...',spinner: 'bubbles',duration: 20000,
+    message: 'Desautorizando (Borrando) acceso de usuario a este formulario, espere...',spinner: 'bubbles',duration: 20000,
     });
   actualizando.present();
 
-  var datatonysborrarusuariodeunarchivo = {
-    nombre_solicitud: 'tonysborrarusuariodeunarchivo',
+  var datatonysborrarusuariodeunformulario = {
+    nombre_solicitud: 'tonysborrarusuariodeunformulario',
     usuario: cadausuario.usuario,
-    id_archivo: this.id
+    id_formulario: this.id
   }
 
-  console.log('data a enviar', datatonysborrarusuariodeunarchivo);
+  console.log('data a enviar', datatonysborrarusuariodeunformulario);
 
-  this.variosservicios.variasfunciones(datatonysborrarusuariodeunarchivo).subscribe(async( res: any ) =>{
-    console.log('respuesta de tonysborrarusuariodeunarchivo', res);
+  this.variosservicios.variasfunciones(datatonysborrarusuariodeunformulario).subscribe(async( res: any ) =>{
+    console.log('respuesta de tonysborrarusuariodeunformulario', res);
     actualizando.dismiss();
     this.step1();
     this.variosservicios.presentToast("..::Usuario Borrado exitosamente!::..");

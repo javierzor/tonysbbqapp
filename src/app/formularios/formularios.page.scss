@@ -1,0 +1,28 @@
+
+
+.v2-badge-aceptado {
+    color: #c81f26;
+    background-color: #FDF000;
+  }
+  
+  
+  .v2-badge {
+    padding: 3px 8px;
+    font-weight: 600;
+    font-size: 12px;
+    border: 2px solid #c81f26;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  ion-segment-button {
+  --indicator-box-shadow: transparent !important;
+  --background: #c4c4c4;
+  --color:#c81f26;
+  --background-checked: linear-gradient(to right, #bb1d22, #ff0051)!important;
+  --color-checked: white;
+  border-radius: .5rem !important;
+  padding: 2px;
+  margin: 0;
+}
+

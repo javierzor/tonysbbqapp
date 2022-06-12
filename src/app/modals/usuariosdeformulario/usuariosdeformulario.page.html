@@ -11,7 +11,7 @@
             <ion-button color="success" (click)="step2()"><ion-icon color="primary" name="person-add-outline"></ion-icon>Agregar</ion-button>
             <br>
             <ion-text style="text-align: center;">Lista de usuarios para 
-              <ion-icon color="primary" name="folder-outline"></ion-icon> 
+              <ion-icon color="primary" name="clipboard"></ion-icon> 
               <a>{{this.nombre}}</a></ion-text>
           </ion-col>
       </ion-row>
@@ -19,7 +19,7 @@
       <ion-row>
         <ion-col>
           <ion-list>
-            <ion-item *ngFor="let cadausuario of respuestadetonysverusuariosdearchivo">
+            <ion-item *ngFor="let cadausuario of respuestadetonysverusuariosdeformulario">
               <ion-label *ngIf="cadausuario.detalles">
                 <ion-icon (click)="borrarusuariostep1(cadausuario)" style="cursor:pointer;" size="large" name="close-circle"></ion-icon>
                 {{cadausuario.detalles.name}}|&nbsp;
@@ -95,14 +95,14 @@
   
             </ion-col>
             <ion-col  size="8">
-              <ion-button shape="round" fill="outline" *ngIf="seleccion.length>0" expand="full" (click)="AgregarusuariosAArchivo()"><ion-icon color="success" name="checkmark-done-outline"></ion-icon>Agregar Usuarios</ion-button>
+              <ion-button shape="round" fill="outline" *ngIf="seleccion.length>0" expand="full" (click)="AgregarusuariosAformulario()"><ion-icon color="success" name="checkmark-done-outline"></ion-icon>Agregar Usuarios</ion-button>
             </ion-col>
             <ion-col size="2">
               
             </ion-col>
           </ion-row>
       
-          <ion-text *ngIf="seleccion.length<1||!seleccion">aún no ha seleccionado usuarios para este archivo.</ion-text>
+          <ion-text *ngIf="seleccion.length<1||!seleccion">aún no ha seleccionado usuarios para este formulario.</ion-text>
         </ion-col>
       </ion-row>
     
