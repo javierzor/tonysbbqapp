@@ -15,6 +15,7 @@ import { VerconversacionPage } from '../modals/verconversacion/verconversacion.p
 import { AdminverconversacionPage } from '../modals/adminverconversacion/adminverconversacion.page';
 import { UsuariosdearchivoPage } from '../modals/usuariosdearchivo/usuariosdearchivo.page';
 import { DireccionnuevaPage } from '../modals/direccionnueva/direccionnueva.page';
+import { UsuariosdeformularioPage } from '../modals/usuariosdeformulario/usuariosdeformulario.page';
 
 
 @Component({
@@ -399,6 +400,33 @@ async VerImagen(ImgUrl) {
       return await modal.present();
 
     }
+
+    async Verusuariosdeformulario(id, nombre){
+      this.desactivar_verusuariosdearchivo=true;
+      const modal = await this.modalController.create({
+        component: UsuariosdeformularioPage,
+        componentProps: { 
+          id:id,
+          nombre:nombre
+        },
+      });
+      modal.onDidDismiss().then((data) => {
+          console.log('data',data);
+          this.desactivar_verusuariosdearchivo=false;
+          if(data.data.dismissed==true){
+            this.segmentModel='solicitudesdecompras';
+            
+            // NO ES NECESARIO ACTUALIZAR PORQUE NOMAS SE LE ASIGNO USUARIOS
+            // POR ESO HE DESACTIVADO this.segmentChanged();
+            // this.segmentChanged();
+          }
+        });
+    
+    
+      return await modal.present();
+
+    }
+
 
 
 

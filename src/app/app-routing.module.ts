@@ -91,6 +91,10 @@ const routes: Routes = [
     path: 'archivosdeusuario',
     loadChildren: () => import('./modals/archivosdeusuario/archivosdeusuario.module').then( m => m.ArchivosdeusuarioPageModule)
   },
+  {
+    path: 'usuariosdeformulario',
+    loadChildren: () => import('./modals/usuariosdeformulario/usuariosdeformulario.module').then( m => m.UsuariosdeformularioPageModule)
+  },
 ];
 
 @NgModule({

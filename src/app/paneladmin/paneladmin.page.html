@@ -273,7 +273,7 @@ mode="ios"
             </ion-fab-button>
             <ion-text><strong>Nombre:</strong> {{cadaformulario.nombre}}</ion-text>
             <br>
-            <ion-button size="small">Ver/Editar Usuarios</ion-button>
+            <ion-button (click)="Verusuariosdeformulario(cadaformulario.id, cadaformulario.nombre)" size="small">Ver/Editar Usuarios</ion-button>
             <br>
             <ion-text><strong>ID:</strong> {{cadaformulario.id}}</ion-text>
             <br>
