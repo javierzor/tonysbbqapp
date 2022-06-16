@@ -28,10 +28,12 @@ export class FormulariosPage {
   menuderechosuperior:boolean=false;
   countryData: { id: number; name: string; }[];
   informacion_perfil: any;
-  step:any;
+  step:any='1';
   languages_active: any;
   ValorSegmento: any ='formularios';
   tonystraerformulariosdeusuario: any;
+  formularioseleccionado:any;
+  respuestadetonysobtenerpreguntasdeformulario: any;
   constructor(
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -179,6 +181,7 @@ segmentChanged(event: any) {
   console.log('Segment changed', event);
   this.ValorSegmento=event.target.value;
   if(this.ValorSegmento=="formularios"){
+    this.step='1';
     this.obtenermovimientosconloading();
   }
 }
@@ -190,6 +193,34 @@ segmentChanged(event: any) {
     actualizando.present();
     this.variosservicios.presentToast("..::LLenar formularios en Desarrollo...::..");
 
+}
+
+async step2(cadaformulario){
+  console.log('formulario seleccionado=',cadaformulario);
+  this.formularioseleccionado=cadaformulario;
+  const actualizando = await this.loadingController.create({
+    message: 'Cargando información del formulario, porfavor espere...',spinner: 'bubbles',duration: 16000,
+    });
+    actualizando.present();
+  var datatonysobtenerpreguntasdeformulario = {
+  nombre_solicitud:'tonysobtenerpreguntasdeformulariousuarios',
+  id:cadaformulario.detalles.id
+  }
+  this.variosservicios.variasfunciones(datatonysobtenerpreguntasdeformulario).subscribe(async( res: any ) =>{
+  console.log('respuesta de tonysobtenerpreguntasdeformulario', res);
+  if(res!=null){
+    actualizando.dismiss();
+    this.step='2';
+    this.respuestadetonysobtenerpreguntasdeformulario=res
+  }
+  });
+
+
+}
+
+async step1(){
+  this.step='1';
+  this.formularioseleccionado=undefined;
 }
 
 

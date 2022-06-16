@@ -15,6 +15,8 @@
 </ion-header>
 
 <ion-content color="light" (click)="ONCHANGEclickenelcontent()" [fullscreen]="true">
+<ion-grid>
+
 
   <ion-card *ngIf="menuderechosuperior==true" style="position:sticky; float: right; width: fit-content; top:0%; z-index: 9999;">
     <ion-card-header>
@@ -37,15 +39,12 @@
   </ion-card>
 <!-- termina el menu superior izquierdo -->
 
-<!-- empiea direcciones de retiro -->
-<section>
-
 
 <ion-segment (ionChange)="segmentChanged($event)" value="formularios">
   <ion-segment-button value="formularios">
     <ion-label>formularios</ion-label>
   </ion-segment-button>
-  <ion-segment-button value="videos">
+  <ion-segment-button value="historial">
     <ion-label>Historial</ion-label>
   </ion-segment-button>
 </ion-segment>
@@ -53,6 +52,7 @@
 
 <section *ngIf="this.ValorSegmento=='formularios'">
 
+  <section *ngIf="this.step=='1'">
 
 
         <ion-row class="ion-align-items-center">
@@ -82,7 +82,7 @@
                     <ion-col size="2">
                       <ion-fab>
                         <br><br>
-                        <ion-fab-button (click)="VerFormulariousuario()">Ver</ion-fab-button>
+                        <ion-fab-button (click)="step2(cadaformulario)">Ver</ion-fab-button>
                       </ion-fab>
                     </ion-col>
                   </ion-row>
@@ -93,13 +93,70 @@
           </ion-col>
         </ion-row>
       
+  </section>
+
+  <section *ngIf="this.step=='2'">
+  <section  *ngIf="formularioseleccionado.detalles">
+    <ion-button (click)="step1()" size="small">
+      <ion-icon color="medium" name="arrow-back-outline"></ion-icon>
+    </ion-button> &nbsp;&nbsp;
+    <ion-text>Respondiendo: <strong color="primary">{{this.formularioseleccionado.detalles.nombre}}</strong></ion-text>
+
+
+    
+    <section *ngFor="let cadapregunta of respuestadetonysobtenerpreguntasdeformulario">
+      <ion-card *ngIf="cadapregunta.tipo=='abierta'">
+        <ion-card-header color="medium">
+          <ion-card-subtitle>Pregunta abierta: <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-textarea placeholder="Escriba aqui su respuesta"></ion-textarea>
+        </ion-card-content>
+      </ion-card>
+      <ion-card *ngIf="cadapregunta.tipo=='cerrada'">
+        <ion-card-header color="medium">
+          <ion-card-subtitle>Pregunta Opciones multiples: <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content style="margin:0;" no-padding class="ion-no-padding">
+          <ion-row style="margin:0;" no-padding class="ion-no-padding">
+            <ion-col *ngIf="cadapregunta.a" size="6" style="background-color:#FDF000; border-right: 1px solid #000000;" no-padding class="ion-no-padding">
+              <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">A</span> {{cadapregunta.a}}</ion-text>
+            </ion-col>
+            <ion-col *ngIf="cadapregunta.b" size="6" style="background-color:#FDF000;" no-padding class="ion-no-padding">
+              <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">B</span> {{cadapregunta.b}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row style="margin:0;" ion-no-padding class="no-padding">
+            <ion-col *ngIf="cadapregunta.c" size="6"  style="background-color:#c81f26; border-right: 1px solid #000000;" no-padding class="ion-no-padding">
+              <ion-text style="color:white;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaamarilla">C</span> {{cadapregunta.c}}</ion-text>
+            </ion-col>
+            <ion-col *ngIf="cadapregunta.d" size="6"  style="background-color:#c81f26;" no-padding class="ion-no-padding">
+              <ion-text style="color:white;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaamarilla">D</span> {{cadapregunta.d}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row  style="margin:0;" no-padding class="ion-no-padding">
+            <ion-col *ngIf="cadapregunta.e" size="6" style="background-color:#FDF000; border-right: 1px solid #000000;" no-padding class="ion-no-padding">
+              <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">E</span> {{cadapregunta.e}}</ion-text>
+            </ion-col>
+            <ion-col *ngIf="cadapregunta.f" size="6" style="background-color:#FDF000;" no-padding class="ion-no-padding">
+              <ion-text style="color:black;">&nbsp;<span class="v2-badge v2-badge-letrapreguntaroja">F</span> {{cadapregunta.f}}</ion-text>
+            </ion-col>
+          </ion-row>
+      
+        </ion-card-content>
+      </ion-card>
+    </section>
+    
+  </section>
+  </section>
+
 
 </section>
     
 
 
 
-<section *ngIf="this.ValorSegmento=='videos'">
+<section *ngIf="this.ValorSegmento=='historial'">
   <center>
     <img  width="50%" height="50%" src="assets/seccion-en-construccion.png">
   </center>
@@ -109,12 +166,5 @@
 
 
 
-
-
-</section>
-
-
-
-
-
+</ion-grid>
 </ion-content>

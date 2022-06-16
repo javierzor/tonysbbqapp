@@ -172,9 +172,9 @@ export class NuevacompraPage implements OnInit {
     event.target.files[0].name.split('.').pop()=='xlsx'
     )
     {
-      if(this.pesoarchivo>800000){
+      if(this.pesoarchivo>8000000){
         this.pesoaceptado=false;
-        this.variosservicios.presentToast("El archivo supera el peso permitido 8MB");
+        this.variosservicios.presentToast("El archivo supera el peso permitido 80MB");
       }
       else{
         this.pesoaceptado=true;
