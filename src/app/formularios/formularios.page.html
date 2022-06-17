@@ -173,7 +173,7 @@
       </section>
       
     </section>
-    <ion-button [disabled]="desbloquear_boton_enviar_formulario_cerrada==false||desbloquear_boton_enviar_formulario_abierta==false" style="position:fixed; right:2%; bottom:2%; z-index:2000;">Enviar</ion-button>
+    <ion-button [disabled]="desbloquear_boton_enviar_formulario_cerrada==false||desbloquear_boton_enviar_formulario_abierta==false" (click)="enviarformulario()" style="position:fixed; right:2%; bottom:2%; z-index:2000;">Enviar</ion-button>
 
   </section>
 

@@ -35,7 +35,6 @@ export class FormulariosPage {
   formularioseleccionado:any;
   respuestadetonysobtenerpreguntasdeformulario: any;
   desbloquear_boton_enviar_formulario_cerrada:boolean=false;
-  la_respuesta_abierta_es_valida:boolean=false;
   desbloquear_boton_enviar_formulario_abierta:boolean=false;
   constructor(
     private loadingController: LoadingController,
@@ -224,27 +223,23 @@ async step2(cadaformulario){
 async step1(){
   this.step='1';
   this.formularioseleccionado=undefined;
+  this.desbloquear_boton_enviar_formulario_cerrada=false;
+  this.desbloquear_boton_enviar_formulario_abierta=false
 }
 
 
 async seleccionarpreguntacerrada(opcion, i){
   this.respuestadetonysobtenerpreguntasdeformulario[i].respuestacerrada=opcion;
   this.respuestadetonysobtenerpreguntasdeformulario[i].respondida='si';
-  console.log('respuestadetonysobtenerpreguntasdeformulario=',this.respuestadetonysobtenerpreguntasdeformulario);
-  console.log('indice',i);
-  console.log('opcion',opcion);
+  // console.log('respuestadetonysobtenerpreguntasdeformulario=',this.respuestadetonysobtenerpreguntasdeformulario);
+  // console.log('indice',i);
+  // console.log('opcion',opcion);
 }
 
 async responderpreguntaabierta (event, i){
   this.respuestadetonysobtenerpreguntasdeformulario[i].respuestaabierta=event.target.value;
   this.respuestadetonysobtenerpreguntasdeformulario[i].respondida='si';
 }
-//   if(event.target.value){
-//     this.la_respuesta_abierta_es_valida=true;
-//   }
-//   else { this.la_respuesta_abierta_es_valida=false;}
-//   this.respuestadetonysobtenerpreguntasdeformulario[i].respondida='si';
-// }
 
 async ONCHANGECONTENTactivadordebotonenviar(){
   for (var i=0; i<this.respuestadetonysobtenerpreguntasdeformulario.length; i++) { 
@@ -286,8 +281,18 @@ for (var j=0; j<this.respuestadetonysobtenerpreguntasdeformulario.length; j++) {
 }
 
 
-console.log('formulario completo', this.respuestadetonysobtenerpreguntasdeformulario);
+// console.log('formulario completo', this.respuestadetonysobtenerpreguntasdeformulario);
 
+
+}
+
+async enviarformulario(){
+  var data = {
+    nombre_solicitud: 'tonysguardarrespuestadeformulario',
+    respuestas: this.respuestadetonysobtenerpreguntasdeformulario
+  } 
+  console.log('data a enviar',data);
+  
 
 }
 
