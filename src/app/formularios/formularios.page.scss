@@ -1,6 +1,6 @@
 
 
-.v2-badge-aceptado {
+.v2-badge-letrapreguntaroja {
     color: #c81f26;
     background-color: #FDF000;
   }
@@ -15,6 +15,13 @@
     white-space: nowrap;
   }
 
+  .letraopcion {
+   color:#505050; 
+  //  margin-top: 1px; 
+   border: 2px solid #878787; 
+   border-radius: 25px;
+  }
+
   ion-segment-button {
   --indicator-box-shadow: transparent !important;
   --background: #c4c4c4;
@@ -26,3 +33,129 @@
   margin: 0;
 }
 
+.mostrartodalapregunta {
+  text-overflow: clip; 
+  white-space: initial;
+}
+
+.item-radio-checked ion-label {
+  --color: red;
+}
+
+// inicia selectores abcd
+
+// body{
+// 	margin: 0;
+// 	padding: 0;
+// 	font-family: sans-serif;
+// 	color: #333;
+// 	background-color: #eee;
+// }
+
+// h1, h2, h3, h4, h5, h6{
+// 	font-weight: 200;
+//   	font-family: sans-serif;
+
+// }
+
+// h1{
+// 	text-align: center;
+// 	padding-bottom: 10px;
+// 	border-bottom: 2px solid #2fcc71;
+
+// 	margin: 20px auto;
+// }
+
+// /* CONTAINERS */
+
+// .container {max-width: 100%; width: 100%; margin: 0 auto;}
+// .four { width: 100%; max-width: 100%;}
+
+
+// /* COLUMNS */
+
+// .col {
+//   display: block;
+//   float:left;
+// }
+
+// .col:first-of-type { margin-left: 0; }
+
+// /* CLEARFIX */
+
+// .cf:before,
+// .cf:after {
+//     content: " ";
+//     display: table;
+// }
+
+// .cf:after {
+//     clear: both;
+// }
+
+// .cf {
+//     *zoom: 1;
+// }
+
+// /* FORM */
+
+// .form .plan input, .form .payment-plan input, .form .payment-type input{
+// 	display: none;
+// }
+
+// .form label{
+// 	position: relative;
+// 	color: #fff;
+// 	background-color: #aaa;
+// 	font-size: 26px;
+// 	text-align: center;
+// 	// height: 130%;
+// 	// line-height: 130%;
+// 	display: block;
+// 	cursor: pointer;
+// 	-webkit-box-sizing: border-box;
+// 	-moz-box-sizing: border-box;
+// 	box-sizing: border-box;
+// }
+
+// .form .plan input:checked + label, .form .payment-plan input:checked + label, .form .payment-type input:checked + label{
+// 	border: 3px solid #333;
+// 	background-color: #2fcc71;
+// }
+
+// .form .plan input:checked + label:after, form .payment-plan input:checked + label:after, .form .payment-type input:checked + label:after{
+// 	content: "\2713";
+// 	width: 40px;
+// 	height: 40px;
+// 	line-height: 40px;
+// 	border-radius: 100%;
+// 	border: 2px solid #333;
+// 	background-color: #2fcc71;
+// 	z-index: 999;
+// 	position: absolute;
+// 	top: -10px;
+// 	right: -10px;
+// }
+
+// .submit{
+// 	padding: 15px 60px;
+// 	display: inline-block;
+// 	border: none;
+// 	margin: 20px 0;
+// 	background-color: #2fcc71;
+// 	color: #fff;
+// 	border: 2px solid #333;
+// 	font-size: 18px;
+// 	-webkit-transition: transform 0.3s ease-in-out;
+// 	-o-transition: transform 0.3s ease-in-out;
+// 	transition: transform 0.3s ease-in-out;
+// }
+
+// .submit:hover{
+// 	cursor: pointer;
+// 	transform: rotateX(360deg);
+//   	font-family: sans-serif;
+
+// }
+
+//termina selectores abcd
