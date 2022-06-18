@@ -245,6 +245,7 @@ async ONCHANGECONTENTactivadordebotonenviar(){
   for (var i=0; i<this.respuestadetonysobtenerpreguntasdeformulario.length; i++) { 
 
       if(this.respuestadetonysobtenerpreguntasdeformulario[i].tipo=='cerrada'){
+              this.respuestadetonysobtenerpreguntasdeformulario[i].respuestaabierta=null;
               if(
                   this.respuestadetonysobtenerpreguntasdeformulario[i].respuestacerrada=='a'||
                   this.respuestadetonysobtenerpreguntasdeformulario[i].respuestacerrada=='b'||
@@ -267,6 +268,7 @@ async ONCHANGECONTENTactivadordebotonenviar(){
 for (var j=0; j<this.respuestadetonysobtenerpreguntasdeformulario.length; j++) { 
 
   if(this.respuestadetonysobtenerpreguntasdeformulario[j].tipo=='abierta'){
+      this.respuestadetonysobtenerpreguntasdeformulario[j].respuestacerrada=null;
       if(this.respuestadetonysobtenerpreguntasdeformulario[j].respuestaabierta==''||
       this.respuestadetonysobtenerpreguntasdeformulario[j].respuestaabierta==undefined||
       this.respuestadetonysobtenerpreguntasdeformulario[j].respuestaabierta==null
@@ -287,13 +289,29 @@ for (var j=0; j<this.respuestadetonysobtenerpreguntasdeformulario.length; j++) {
 }
 
 async enviarformulario(){
-  var data = {
-    nombre_solicitud: 'tonysguardarrespuestadeformulario',
-    respuestas: this.respuestadetonysobtenerpreguntasdeformulario
-  } 
-  console.log('data a enviar',data);
-  
 
+  
+  const actualizando = await this.loadingController.create({
+    message: 'Actualizando...',spinner: 'bubbles',duration: 15000,
+    });
+    actualizando.present();
+    this.informacion_perfil=localStorage.getItem('profileInfo');
+    this.informacion_perfil=this.decrypt(this.informacion_perfil);
+    this.informacion_perfil=JSON.parse(this.informacion_perfil);
+    var datatonysguardarrespuestadeformulario = {
+      nombre_solicitud: 'tonysguardarrespuestadeformulario',
+      id_usuario_que_respondio: this.informacion_perfil.id,
+      respuestas: this.respuestadetonysobtenerpreguntasdeformulario
+    }
+     console.log('data a enviar',datatonysguardarrespuestadeformulario);
+     this.variosservicios.variasfunciones(datatonysguardarrespuestadeformulario).subscribe(async( res: any ) =>{
+       console.log('respuesta de tonysguardarrespuestadeformulario', res);
+       actualizando.dismiss();
+     });
+
+
+
+  
 }
 
 
