@@ -361,6 +361,8 @@ async enviarformulario(){
                          console.log('data a enviar',datatonysenviaremail2);
                          this.variosservicios.variasfunciones(datatonysenviaremail2).subscribe(async( res3: any ) =>{
                            console.log('respuesta de tonysenviaremail2', res3);
+                               this.variosservicios.presentToast("..::Formulario Enviado a (2)Direcciones de correo::..");
+                               this.step1();
                           //  actualizando.dismiss();
                          });
               //  actualizando.dismiss();

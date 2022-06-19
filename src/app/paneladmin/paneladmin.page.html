@@ -288,65 +288,10 @@ mode="ios"
     </section>
 
     <section *ngIf="segmentModel=='reportes'&&this.informacion_perfil.tipo_cuenta=='999'">
-      <ion-grid>
-      <ion-card>
-        <ion-row>
-              <ion-col>
-                <ion-item>
-                  <ion-select (ionChange)="IONCHANGEselector()" [(ngModel)]="estado" placeholder="Estado" interface="popover">
-                    <ion-select-option value="recibido">recibido</ion-select-option>
-                    <ion-select-option value="en camino">en camino</ion-select-option>
-                    <ion-select-option value="listo">listo</ion-select-option>
-                    <ion-select-option value="entregado">entregado</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Inicio:</ion-label>
-                 <ion-input (ionChange)="IONCHANGEselector()" format="yyyy:mm:dd" [(ngModel)]="fecha_inicio" type="date"></ion-input>
-              </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-label>Fin:</ion-label>
-                 <ion-input (ionChange)="IONCHANGEselector()" [(ngModel)]="fecha_fin" type="date"></ion-input>
-             </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-button [disabled]="
-        !fecha_inicio||!fecha_fin||!estado
-        " (click)="consultarReporte()">Consultar</ion-button>
-      </ion-card>
-
-      <section *ngIf="cambioelselector==false&&reportederegistros&&reportederegistros.length>0">
-        <ion-card  *ngFor="let reporte of reportederegistros">
-          <ion-row>
-            <ion-col>
-              <ion-text><strong>Traking:</strong>{{reporte.traking}}</ion-text>
-              <br>
-              <ion-text><strong>Peso:</strong>{{reporte.peso}}</ion-text>
-              <br>
-              <ion-text><strong>Origen:</strong>{{reporte.origen}}</ion-text>
-            </ion-col>
-            <ion-col>
-              <ion-text><strong>BeoPoint:</strong>{{reporte.monto}}</ion-text>
-              <br>
-              <ion-text><strong>Fecha:</strong>{{reporte.fecha}}</ion-text>
-              <br>
-              <ion-text><strong>Estado:</strong>{{reporte.status}}</ion-text>
-            </ion-col>
-            <ion-col>
-              <ion-text><strong>BeoCode:</strong>{{reporte.userdetalles.id_publico}}</ion-text>
-              <br>
-              <ion-text><strong>Usuario:</strong>{{reporte.userdetalles.username}}</ion-text>
-              <br>
-              <ion-text><strong>nombre:</strong>{{reporte.userdetalles.name}} {{reporte.userdetalles.lastname}}</ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </section>
-      </ion-grid>
+      
+        <img  width="50%" height="50%" src="assets/seccion-en-construccion.png">
+      
+      <img center src="assets/en-desarrollo.gif">
     </section>
 
     <section *ngIf="cambioelselector==false&&reportederegistros&&reportederegistros.length<1">
