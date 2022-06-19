@@ -36,6 +36,7 @@ export class FormulariosPage {
   respuestadetonysobtenerpreguntasdeformulario: any;
   desbloquear_boton_enviar_formulario_cerrada:boolean=false;
   desbloquear_boton_enviar_formulario_abierta:boolean=false;
+  today: any;
   constructor(
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -289,8 +290,10 @@ for (var j=0; j<this.respuestadetonysobtenerpreguntasdeformulario.length; j++) {
 }
 
 async enviarformulario(){
+  var strdedia = new Date();
+  // this.today = Date.now();
+  var datestring = strdedia.toString();
 
-  
   const actualizando = await this.loadingController.create({
     message: 'Actualizando...',spinner: 'bubbles',duration: 15000,
     });
@@ -307,7 +310,84 @@ async enviarformulario(){
      this.variosservicios.variasfunciones(datatonysguardarrespuestadeformulario).subscribe(async( res: any ) =>{
        console.log('respuesta de tonysguardarrespuestadeformulario', res);
        actualizando.dismiss();
+
+     const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Agregar Formulario:',
+      inputs: [
+        {
+          name: 'email1',
+          type: 'email',
+          placeholder: 'Email 1',
+        },
+        {
+          name: 'email2',
+          type: 'email',
+          placeholder: 'Email 2',
+
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: async (alertData) => {
+            console.log('Confirm Ok');
+            console.log(alertData.email1);
+            var datatonysenviaremail = {
+              nombre_solicitud: 'tonysenviaremail',
+              to: alertData.email1,
+              id_publico:res[0].id_publico,
+              datestring:datestring,
+              nombre_usuario_que_respondio: this.informacion_perfil.name+' '+this.informacion_perfil.lastname,
+            }
+             console.log('data a enviar',datatonysenviaremail);
+             this.variosservicios.variasfunciones(datatonysenviaremail).subscribe(async( res2: any ) =>{
+               console.log('res2puesta de tonysenviaremail', res2);
+                        //segundo email:
+                        var datatonysenviaremail2 = {
+                          nombre_solicitud: 'tonysenviaremail',
+                          to: alertData.email2,
+                          id_publico:res[0].id_publico,
+                          datestring:datestring,
+                          nombre_usuario_que_respondio: this.informacion_perfil.name+' '+this.informacion_perfil.lastname,
+                        }
+                         console.log('data a enviar',datatonysenviaremail2);
+                         this.variosservicios.variasfunciones(datatonysenviaremail2).subscribe(async( res3: any ) =>{
+                           console.log('respuesta de tonysenviaremail2', res3);
+                          //  actualizando.dismiss();
+                         });
+              //  actualizando.dismiss();
+             });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
+
      });
+
+    //  var datatonysenviaremail = {
+    //   nombre_solicitud: 'tonysenviaremail',
+    //   to: 'javier20450@gmail.com'
+    // }
+    //  console.log('data a enviar',datatonysenviaremail);
+    //  this.variosservicios.variasfunciones(datatonysenviaremail).subscribe(async( res: any ) =>{
+    //    console.log('respuesta de tonysenviaremail', res);
+    //    actualizando.dismiss();
+    //  });
+    
+
+
 
 
 
