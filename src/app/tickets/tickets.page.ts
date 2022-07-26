@@ -48,13 +48,13 @@ export class TicketsPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.ObtenerProfileInfo();
     this.menu.enable(true);
     this.variosservicios.activar_realtime_user_conversaciones=true;
     this.ConRealTime();
   }
   
   async ngOnInit() {
-    this.ObtenerProfileInfo();
     this.step='1';
     this.obtenertickets(); 
   }
@@ -83,6 +83,7 @@ export class TicketsPage implements OnInit {
   logout(){
     localStorage.clear();
     this.router.navigate(['login']);
+    window.location.reload();
   }
 //Termina menu superior y sus ONCHANGE
 

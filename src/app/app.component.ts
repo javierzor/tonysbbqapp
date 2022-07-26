@@ -58,6 +58,10 @@ export class AppComponent {
     this.tipo_cuenta_botones_admin();
   }
 
+  ionViewWillEnter(){
+    this.ConsultarLogin();
+  }
+
   iralpaneladmin(){
 
   }
@@ -166,6 +170,7 @@ export class AppComponent {
   logout(){
     localStorage.clear();
     this.router.navigate(['login']);
+    window.location.reload();
   }
 
 

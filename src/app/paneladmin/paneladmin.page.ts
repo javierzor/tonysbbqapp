@@ -98,6 +98,7 @@ export class PaneladminPage implements OnInit {
   logout(){
     localStorage.clear();
     this.router.navigate(['login']);
+    window.location.reload();
   }
 
   decrypt(textToDecrypt : string){
@@ -334,6 +335,59 @@ async VerImagen(ImgUrl) {
          }
          });
     }
+
+
+    async borrarformulario(cadaanuncio){
+      this.variosservicios.presentToast("Porfavor espere...");
+      var datatonysborraranuncio = {
+        nombre_solicitud: 'tonysborrarformularios',
+        id:cadaanuncio.id
+      }
+       this.variosservicios.variasfunciones(datatonysborraranuncio).subscribe(async( res: any ) =>{
+         console.log('respuesta de tonysborraranuncio', res);
+         if(res){
+            this.segmentModel='direcciones';
+            this.segmentChanged();
+         }
+         });
+    }
+
+
+    async borrararhivos(movimiento){
+      this.variosservicios.presentToast("Porfavor espere...");
+      var datatonysborraranuncio = {
+        nombre_solicitud: 'tonysborrararchivos',
+        id:movimiento.id
+      }
+       this.variosservicios.variasfunciones(datatonysborraranuncio).subscribe(async( res: any ) =>{
+         console.log('respuesta de tonysborraranuncio', res);
+         if(res){
+            this.segmentModel='solicitudesdecompras';
+            this.segmentChanged();
+         }
+         });
+    }
+
+    async borrarusuarios(cadausuario){
+      this.variosservicios.presentToast("Porfavor espere...");
+      var datatonysborraranuncio = {
+        nombre_solicitud: 'tonysborrarusuario',
+        id:cadausuario.id
+      }
+       this.variosservicios.variasfunciones(datatonysborraranuncio).subscribe(async( res: any ) =>{
+         console.log('respuesta de tonysborraranuncio', res);
+         if(res){
+            this.segmentModel='activardesacusuario';
+            this.segmentChanged();
+         }
+         });
+    }
+
+
+    
+
+    
+
 
     async AdminagregarFase(){
 

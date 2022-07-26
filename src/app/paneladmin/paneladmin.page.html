@@ -145,6 +145,10 @@ mode="ios"
       <ion-button size="small" (click)="VerImagen(movimiento.reciboImgUrl)">
         Ver Archivo
       </ion-button>
+
+      <ion-fab-button size="small" (click)="borrararhivos(movimiento)" style="position:absolute; right:1%; top:-5%;" color="danger">
+        <ion-icon style="color:white;" name="trash-outline"></ion-icon>
+      </ion-fab-button>
       
     </ion-col>
   </ion-row>
@@ -175,6 +179,12 @@ mode="ios"
       <ion-col>
         <ion-button color="danger" (click)="suspenderusuario(cadausuario)" *ngIf="cadausuario.status=='activo'">Desactivar</ion-button>
         <ion-button color="success" (click)="activarusuario(cadausuario)" *ngIf="cadausuario.status=='desactivado'">Activar</ion-button>
+
+        <ion-fab-button size="small" (click)="borrarusuarios(cadausuario)" style="position:absolute; right:1%; top:-5%;" color="danger">
+          <ion-icon style="color:white;" name="trash-outline"></ion-icon>
+        </ion-fab-button>
+
+
 
         <!-- <ion-button>Desactivar</ion-button> -->
                
@@ -268,9 +278,14 @@ mode="ios"
       <ion-card *ngFor="let cadaformulario of tonysobteneadminrformularios">
         <ion-row>
           <ion-col>
-            <ion-fab-button (click)="agregarformulario('actualizar', cadaformulario)" style="position:absolute; right:1%; bottom:5%;" color="primary">
+            <ion-fab-button size="small" (click)="agregarformulario('actualizar', cadaformulario)" style="position:absolute; right:1%; bottom:-5%;" color="primary">
               <ion-icon style="color:white;" name="create"></ion-icon>
             </ion-fab-button>
+
+            <ion-fab-button size="small" (click)="borrarformulario(cadaformulario)" style="position:absolute; right:1%; top:-5%;" color="danger">
+              <ion-icon style="color:white;" name="trash-outline"></ion-icon>
+            </ion-fab-button>
+
             <ion-text><strong>Nombre:</strong> {{cadaformulario.nombre}}</ion-text>
             <br>
             <ion-button (click)="Verusuariosdeformulario(cadaformulario.id, cadaformulario.nombre)" size="small">Ver/Editar Usuarios</ion-button>

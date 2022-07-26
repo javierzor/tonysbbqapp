@@ -91,6 +91,7 @@ export class FormulariosPage {
   logout(){
     localStorage.clear();
     this.router.navigate(['login']);
+    window.location.reload();
   }
 //Termina menu superior y sus ONCHANGE
 

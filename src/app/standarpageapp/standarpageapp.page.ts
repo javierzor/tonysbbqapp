@@ -36,10 +36,10 @@ export class StandarpageappPage{
     this.ObtenerProfileInfo();
   }
   ionViewWillEnter(){
+    this.ObtenerProfileInfo();
     this.menu.enable(true);
   }
   async ngOnInit() {
-    this.ObtenerProfileInfo();
   }
 
   async ObtenerProfileInfo(){
@@ -66,6 +66,7 @@ export class StandarpageappPage{
   logout(){
     localStorage.clear();
     this.router.navigate(['login']);
+    window.location.reload();
   }
 //Termina menu superior y sus ONCHANGE
 

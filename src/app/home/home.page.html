@@ -60,11 +60,42 @@
   </ion-card>
 
 
-  
+  <ion-grid class="ion-no-padding" no-padding>
+    <ion-row style="border-bottom: 1px solid #d1d9e5"> 
+  <ion-col>
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-title>Mi cuenta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list class="ion-no-padding" no-padding>
+        <ion-item  class="ion-no-padding" no-padding>
+          <ion-text>Usted tiene actualmente <a color="Primary">
+            <a *ngIf="respuestadetonysdetallesdelhome&&respuestadetonysdetallesdelhome[0]">{{this.respuestadetonysdetallesdelhome[0].length-1}}</a>
+          </a> archivos asignados.</ion-text><br>
+        </ion-item>
+        <ion-item  class="ion-no-padding" no-padding>
+          <ion-text>Usted tiene actualmente <a color="Primary">
+            <a *ngIf="respuestadetonysdetallesdelhome&&respuestadetonysdetallesdelhome[1]">{{this.respuestadetonysdetallesdelhome[1].length-1}}</a>
+          </a> formularios asignados.</ion-text><br>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+    <ion-card-header class="ion-no-padding" no-padding>
+
+    </ion-card-header>
+    <br>
+  </ion-card>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+<!--   
     <ion-grid class="ion-no-padding" no-padding>
       <ion-row style="border-bottom: 1px solid #d1d9e5"> 
         <ion-col>
-          <!-- direciones -->
           <ion-card>
             <ion-card-header color="primary">
               <ion-card-title>Favoritos</ion-card-title>
@@ -96,26 +127,6 @@
 
                       </ion-col>
                   </ion-row>
-<!-- 
-                  <ion-row>
-                    <ion-col size="6">
-                      <ion-buttons>
-                        <ion-button style="border-radius:15px; background:#f1f1f1;color:black;" (click)="variabledelsegmentmodel=='2'">
-                          <ion-segment-button value="2">{{respuestatonysobteneradmindirecciones[2].pais}}
-                          </ion-segment-button>
-                       </ion-button>
-                     </ion-buttons>
-                    </ion-col>
-                    <ion-col size="6">
-                        <ion-buttons>
-                        <ion-button style="border-radius:15px; background:#f1f1f1;color:black;" (click)="variabledelsegmentmodel=='3'">
-                            <ion-segment-button value="3">{{respuestatonysobteneradmindirecciones[3].pais}}
-                            </ion-segment-button>
-                        </ion-button>
-                       </ion-buttons>
-                    </ion-col>
-                   </ion-row> -->
-
               </ion-grid>
               </ion-segment>
 
@@ -144,34 +155,11 @@
           
           <ion-row>
             <ion-col>
-              <!-- mi account -->
-              <ion-card>
-                <ion-card-header color="primary">
-                  <ion-card-title>Mi cuenta</ion-card-title>
-                </ion-card-header>
-                <ion-card-content>
-                  <ion-list class="ion-no-padding" no-padding>
-                    <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> archivos asignados.</ion-text><br>
-                    </ion-item>
-                    <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> formularios asignados.</ion-text><br>
-                    </ion-item>
-                    <ion-item  class="ion-no-padding" no-padding>
-                      <ion-text>Usted tiene actualmente <a color="Primary">0</a> formularios enviados.</ion-text><br>
-                    </ion-item>
-                  </ion-list>
-                </ion-card-content>
-                <ion-card-header class="ion-no-padding" no-padding>
 
-                </ion-card-header>
-                <br>
-              </ion-card>
             </ion-col>
           </ion-row>
 
           <ion-row>
-            <!-- subastas -->
             <ion-col>
               <ion-card>
                 <ion-card-header color="primary">
@@ -184,7 +172,7 @@
 
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
 
 
   

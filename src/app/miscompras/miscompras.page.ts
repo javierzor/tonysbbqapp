@@ -46,16 +46,16 @@ export class MiscomprasPage {
   {
 
     this.countryData=this.paises.countryData;    
-    this.ObtenerProfileInfo();
     this.step='1';
   }
   ionViewWillEnter(){
     this.menu.enable(true);
     this.variosservicios.activar_realtime_paqueteria=true;
     this.ConRealTime();
+    this.ObtenerProfileInfo();
   }
   async ngOnInit() {
-    this.ObtenerProfileInfo();
+    this.informacion_perfil=null;
     this.step='1';
     this.obtenermovimientos();
   }
@@ -84,6 +84,7 @@ export class MiscomprasPage {
   logout(){
     localStorage.clear();
     this.router.navigate(['login']);
+    window.location.reload();
   }
 //Termina menu superior y sus ONCHANGE
 

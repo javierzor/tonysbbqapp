@@ -40,155 +40,170 @@
 <!-- termina el menu superior izquierdo -->
 
 
-<ion-segment (ionChange)="segmentChanged($event)" value="formularios">
+<!-- <ion-segment (ionChange)="segmentChanged($event)" value="formularios">
   <ion-segment-button value="formularios">
     <ion-label>formularios</ion-label>
   </ion-segment-button>
   <ion-segment-button value="historial">
     <ion-label>Historial</ion-label>
   </ion-segment-button>
-</ion-segment>
+</ion-segment> -->
+
+<ion-card>
+  <ion-card-header color="primary"  style="text-align:center;">
+    <ion-label><strong>Formularios</strong></ion-label>
+  </ion-card-header>
+  <ion-card-content>
 
 
-<section *ngIf="this.ValorSegmento=='formularios'">
+    <section *ngIf="this.ValorSegmento=='formularios'">
 
-  <section *ngIf="this.step=='1'">
-
-
-        <ion-row class="ion-align-items-center">
-          <ion-col style="text-align: center;" size="12" class="ion-text-center">
-            <ion-text>Lista de formularios de mi cuenta:</ion-text>
-          </ion-col>
-        </ion-row>
-      
-
-        <ion-row no-padding class="ion-no-padding" >
-          <ion-col no-padding class="ion-no-padding" >
-            <ion-card *ngFor="let cadaformulario of tonystraerformulariosdeusuario"  style="margin:4px;">
-              <!-- se carga la sig. seccion si el formulario "Tiene detalles" (si no ha sido borrado) -->
-              <section *ngIf="cadaformulario.detalles">
-                <ion-card-header color="primary">
-                  <ion-card-subtitle>{{cadaformulario.detalles.nombre}}</ion-card-subtitle>
-                </ion-card-header>
-                <ion-card-content style="margin-left:0px;">
-                  <ion-row>
-                    <ion-col size="10">
-                      <ion-text ><span class="v2-badge-aceptado v2-badge">Nombre:</span> {{cadaformulario.detalles.nombre}}.</ion-text>
-                      <br><a style="line-height: 2.5em;"></a>
-                      <ion-text><span class="v2-badge-aceptado v2-badge">ID:</span> {{cadaformulario.detalles.id}}.</ion-text>
-                      <br><a style="line-height: 1.5em;"></a>                 
-                      <ion-text><span class="v2-badge-aceptado v2-badge">Fecha:</span> {{cadaformulario.detalles.fecha_creacion | date:'shortDate':'GMT-5'}}.</ion-text>
+      <section *ngIf="this.step=='1'">
+    
+    
+            <ion-row class="ion-align-items-center">
+              <ion-col style="text-align: center;" size="12" class="ion-text-center">
+                <ion-text>Lista de formularios de mi cuenta:</ion-text>
+              </ion-col>
+            </ion-row>
+          
+    
+            <ion-row no-padding class="ion-no-padding" >
+              <ion-col no-padding class="ion-no-padding" >
+                <ion-card *ngFor="let cadaformulario of tonystraerformulariosdeusuario"  style="margin:4px;">
+                  <!-- se carga la sig. seccion si el formulario "Tiene detalles" (si no ha sido borrado) -->
+                  <section *ngIf="cadaformulario.detalles">
+                    <ion-card-header color="primary">
+                      <ion-card-subtitle>{{cadaformulario.detalles.nombre}}</ion-card-subtitle>
+                    </ion-card-header>
+                    <ion-card-content style="margin-left:0px;">
+                      <ion-row>
+                        <ion-col size="10">
+                          <ion-text ><span class="v2-badge-aceptado v2-badge">Nombre:</span> {{cadaformulario.detalles.nombre}}.</ion-text>
+                          <br><a style="line-height: 2.5em;"></a>
+                          <ion-text><span class="v2-badge-aceptado v2-badge">ID:</span> {{cadaformulario.detalles.id}}.</ion-text>
+                          <br><a style="line-height: 1.5em;"></a>                 
+                          <ion-text><span class="v2-badge-aceptado v2-badge">Fecha:</span> {{cadaformulario.detalles.fecha_creacion | date:'shortDate':'GMT-5'}}.</ion-text>
+                        </ion-col>
+                        <ion-col size="2">
+                          <ion-fab>
+                            <br><br>
+                            <ion-fab-button (click)="step2(cadaformulario)">Ver</ion-fab-button>
+                          </ion-fab>
+                        </ion-col>
+                      </ion-row>
+    
+                    </ion-card-content>
+                  </section>
+                  </ion-card>
+              </ion-col>
+            </ion-row>
+          
+      </section>
+    
+      <section *ngIf="this.step=='2'">
+      <section  *ngIf="formularioseleccionado.detalles">
+        <ion-button (click)="step1()" size="small">
+          <ion-icon color="medium" name="arrow-back-outline"></ion-icon>
+        </ion-button> &nbsp;&nbsp;
+        <ion-text>Respondiendo: <strong color="primary">{{this.formularioseleccionado.detalles.nombre}}</strong></ion-text>
+    
+    
+        
+        <section *ngFor="let cadapregunta of respuestadetonysobtenerpreguntasdeformulario; let i=index;">
+          <ion-card *ngIf="cadapregunta.tipo=='abierta'">
+            <ion-card-header color="medium">
+              <ion-card-subtitle>Pregunta abierta: <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-textarea (ionChange)="responderpreguntaabierta($event, i)" placeholder="Escriba aqui su respuesta"></ion-textarea>
+            </ion-card-content>
+          </ion-card>
+          <ion-card *ngIf="cadapregunta.tipo=='cerrada'">
+            <ion-card-header color="medium">
+              <ion-card-subtitle>Pregunta Opciones multiples: <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content style="margin:0;" no-padding class="ion-no-padding">
+    
+    
+              <ion-radio-group no-padding class="ion-no-padding">
+                  <ion-row class="payment-type cf" no-padding class="ion-no-padding">
+    
+    
+                    <ion-col size="6" (click)="seleccionarpreguntacerrada('a',i)" no-padding class="ion-no-padding">
+                      <ion-item *ngIf="cadapregunta.a">
+                        <ion-radio></ion-radio>
+                        <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.a}}</ion-label>
+                      </ion-item>
                     </ion-col>
-                    <ion-col size="2">
-                      <ion-fab>
-                        <br><br>
-                        <ion-fab-button (click)="step2(cadaformulario)">Ver</ion-fab-button>
-                      </ion-fab>
+                    <ion-col size="6" (click)="seleccionarpreguntacerrada('b',i)" no-padding class="ion-no-padding">
+                      <ion-item *ngIf="cadapregunta.b">
+                        <ion-radio></ion-radio>
+                        <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.b}}</ion-label>
+                      </ion-item>
                     </ion-col>
                   </ion-row>
-
-                </ion-card-content>
-              </section>
-              </ion-card>
-          </ion-col>
-        </ion-row>
-      
-  </section>
-
-  <section *ngIf="this.step=='2'">
-  <section  *ngIf="formularioseleccionado.detalles">
-    <ion-button (click)="step1()" size="small">
-      <ion-icon color="medium" name="arrow-back-outline"></ion-icon>
-    </ion-button> &nbsp;&nbsp;
-    <ion-text>Respondiendo: <strong color="primary">{{this.formularioseleccionado.detalles.nombre}}</strong></ion-text>
-
-
+                  <ion-row class="payment-type cf" no-padding class="ion-no-padding">
+                    <ion-col size="6" (click)="seleccionarpreguntacerrada('c',i)" no-padding class="ion-no-padding">
+                      <ion-item *ngIf="cadapregunta.c">
+                        <ion-radio></ion-radio>
+                        <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.c}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6" (click)="seleccionarpreguntacerrada('d',i)" no-padding class="ion-no-padding">
+                      <ion-item *ngIf="cadapregunta.d">
+                        <ion-radio></ion-radio>
+                        <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.d}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="payment-type cf" no-padding class="ion-no-padding">
+                    <ion-col size="6" (click)="seleccionarpreguntacerrada('e',i)" no-padding class="ion-no-padding">
+                      <ion-item *ngIf="cadapregunta.e">
+                        <ion-radio></ion-radio>
+                        <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.e}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6" (click)="seleccionarpreguntacerrada('f',i)" no-padding class="ion-no-padding">
+                      <ion-item *ngIf="cadapregunta.f">
+                        <ion-radio></ion-radio>
+                        <ion-label class="mostrartodalapregunta">{{cadapregunta.f}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-radio-group>
+                
+                
+              </ion-card-content>
+            </ion-card>
+          </section>
+          
+        </section>
+        <ion-button [disabled]="desbloquear_boton_enviar_formulario_cerrada==false||desbloquear_boton_enviar_formulario_abierta==false" (click)="enviarformulario()" style="position:fixed; right:2%; bottom:2%; z-index:2000;">Enviar</ion-button>
     
-    <section *ngFor="let cadapregunta of respuestadetonysobtenerpreguntasdeformulario; let i=index;">
-      <ion-card *ngIf="cadapregunta.tipo=='abierta'">
-        <ion-card-header color="medium">
-          <ion-card-subtitle>Pregunta abierta: <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-textarea (ionChange)="responderpreguntaabierta($event, i)" placeholder="Escriba aqui su respuesta"></ion-textarea>
-        </ion-card-content>
-      </ion-card>
-      <ion-card *ngIf="cadapregunta.tipo=='cerrada'">
-        <ion-card-header color="medium">
-          <ion-card-subtitle>Pregunta Opciones multiples: <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content style="margin:0;" no-padding class="ion-no-padding">
-
-
-          <ion-radio-group no-padding class="ion-no-padding">
-              <ion-row class="payment-type cf" no-padding class="ion-no-padding">
-
-
-                <ion-col size="6" (click)="seleccionarpreguntacerrada('a',i)" no-padding class="ion-no-padding">
-                  <ion-item *ngIf="cadapregunta.a">
-                    <ion-radio></ion-radio>
-                    <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.a}}</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="6" (click)="seleccionarpreguntacerrada('b',i)" no-padding class="ion-no-padding">
-                  <ion-item *ngIf="cadapregunta.b">
-                    <ion-radio></ion-radio>
-                    <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.b}}</ion-label>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row class="payment-type cf" no-padding class="ion-no-padding">
-                <ion-col size="6" (click)="seleccionarpreguntacerrada('c',i)" no-padding class="ion-no-padding">
-                  <ion-item *ngIf="cadapregunta.c">
-                    <ion-radio></ion-radio>
-                    <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.c}}</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="6" (click)="seleccionarpreguntacerrada('d',i)" no-padding class="ion-no-padding">
-                  <ion-item *ngIf="cadapregunta.d">
-                    <ion-radio></ion-radio>
-                    <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.d}}</ion-label>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row class="payment-type cf" no-padding class="ion-no-padding">
-                <ion-col size="6" (click)="seleccionarpreguntacerrada('e',i)" no-padding class="ion-no-padding">
-                  <ion-item *ngIf="cadapregunta.e">
-                    <ion-radio></ion-radio>
-                    <ion-label class="mostrartodalapregunta">&nbsp;{{cadapregunta.e}}</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col size="6" (click)="seleccionarpreguntacerrada('f',i)" no-padding class="ion-no-padding">
-                  <ion-item *ngIf="cadapregunta.f">
-                    <ion-radio></ion-radio>
-                    <ion-label class="mostrartodalapregunta">{{cadapregunta.f}}</ion-label>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-            </ion-radio-group>
-            
-            
-          </ion-card-content>
-        </ion-card>
       </section>
-      
-    </section>
-    <ion-button [disabled]="desbloquear_boton_enviar_formulario_cerrada==false||desbloquear_boton_enviar_formulario_abierta==false" (click)="enviarformulario()" style="position:fixed; right:2%; bottom:2%; z-index:2000;">Enviar</ion-button>
-
-  </section>
-
-
-</section>
     
+    
+    </section>
+        
+    
+    
+    
+    <section *ngIf="this.ValorSegmento=='historial'">
+      
+        <img center width="50%" height="50%" src="assets/seccion-en-construccion.png">
+     
+      <img src="assets/en-desarrollo.gif">
+    </section>
 
 
 
-<section *ngIf="this.ValorSegmento=='historial'">
-  
-    <img center width="50%" height="50%" src="assets/seccion-en-construccion.png">
- 
-  <img src="assets/en-desarrollo.gif">
-</section>
+
+  </ion-card-content>
+</ion-card>
+
+
+
 
 
 
