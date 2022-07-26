@@ -71,12 +71,15 @@
       <ion-list class="ion-no-padding" no-padding>
         <ion-item  class="ion-no-padding" no-padding>
           <ion-text>Usted tiene actualmente <a color="Primary">
-            <a *ngIf="respuestadetonysdetallesdelhome&&respuestadetonysdetallesdelhome[0]">{{this.respuestadetonysdetallesdelhome[0].length-1}}</a>
+            <a *ngIf="respuestadetonysdetallesdelhome&&respuestadetonysdetallesdelhome[0]">{{this.respuestadetonysdetallesdelhome[0]}}</a>
+            <a *ngIf="respuestadetonysdetallesdelhome&&!respuestadetonysdetallesdelhome[0]">0</a>
+
           </a> archivos asignados.</ion-text><br>
         </ion-item>
         <ion-item  class="ion-no-padding" no-padding>
           <ion-text>Usted tiene actualmente <a color="Primary">
-            <a *ngIf="respuestadetonysdetallesdelhome&&respuestadetonysdetallesdelhome[1]">{{this.respuestadetonysdetallesdelhome[1].length-1}}</a>
+            <a *ngIf="respuestadetonysdetallesdelhome&&respuestadetonysdetallesdelhome[1]">{{this.respuestadetonysdetallesdelhome[1]}}</a>
+            <a *ngIf="respuestadetonysdetallesdelhome&&!respuestadetonysdetallesdelhome[1]">0</a>
           </a> formularios asignados.</ion-text><br>
         </ion-item>
 
