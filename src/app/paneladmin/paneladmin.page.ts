@@ -487,7 +487,6 @@ async VerImagen(ImgUrl) {
     async agregarformulario(tipo, cadaformulario) {
 
       if(tipo=='agregar'){
-
           const alert = await this.alertController.create({
             cssClass: 'my-custom-class',
             header: 'Agregar Formulario:',
@@ -525,7 +524,7 @@ async VerImagen(ImgUrl) {
                           const modal = await this.modalController.create({
                             component: DireccionnuevaPage,
                             componentProps: { 
-                              cadaformulario:cadaformulario
+                              cadaformulario:res
                             },
                           });
                           modal.onDidDismiss().then((data) => {

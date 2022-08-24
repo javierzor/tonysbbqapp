@@ -3,7 +3,6 @@ import * as CryptoJS from 'crypto-js';
 import {Router} from '@angular/router';
 import { MenuController,LoadingController } from '@ionic/angular';
 import { VariosService } from '../service/varios.service';
-import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +23,6 @@ export class HomePage {
     public varios: VariosService,
     private router: Router,
     private menu: MenuController,
-    private clipboard: Clipboard
   ) 
   {
     this.ObtenerProfileInfo();
@@ -122,13 +120,7 @@ ocultaranuncio(cadaanuncio, i){
   this.respuestatonysanuncios[i].hidden=true;
 }
 
-async copiar(texto) {
-  if (navigator.clipboard) {
-    try {
-      await navigator.clipboard.writeText(texto);
-    } catch (err) {}
-  }
-}
+
 
 async segmentChanged(event){
 

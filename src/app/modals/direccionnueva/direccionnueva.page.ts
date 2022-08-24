@@ -39,10 +39,13 @@ export class DireccionnuevaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.FuncionTonysobtenerpreguntasdeformulario();
+    // this.FuncionTonysobtenerpreguntasdeformulario();
   }
 
+  ionViewWillEnter(){
+    this.FuncionTonysobtenerpreguntasdeformulario();
 
+  }
 
   dismiss() {
     // using the injected ModalController this page
@@ -132,9 +135,28 @@ export class DireccionnuevaPage implements OnInit {
 
      this.variosservicios.variasfunciones(datatonysagregarpreguntadeformulario).subscribe(async( res: any ) =>{
        console.log('respuesta de tonysagregarpreguntadeformulario', res);
+       if(res.id&&res.id>0){
+         this.FuncionTonysobtenerpreguntasdeformulario();
+         this.step='1';
+       }
      });
 
 
+  }
+
+  borrarpregunta(cadapregunta){
+    console.log('id de la pregunta a borrar', cadapregunta.id);
+
+    var datatonysobtenerpreguntasdeformularioborrarla = {
+      nombre_solicitud:'tonysobtenerpreguntasdeformularioborrarla',
+      id:cadapregunta.id
+    }
+    this.variosservicios.variasfunciones(datatonysobtenerpreguntasdeformularioborrarla).subscribe(async( res: any ) =>{
+      console.log('respuesta de tonysobtenerpreguntasdeformularioborrarla', res);
+      this.FuncionTonysobtenerpreguntasdeformulario();
+      });
+
+    
   }
   
 

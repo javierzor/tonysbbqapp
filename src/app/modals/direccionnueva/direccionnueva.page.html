@@ -15,8 +15,8 @@
   <ion-card *ngIf="cadapregunta.tipo=='abierta'">
     <ion-card-header color="primary">
       <ion-card-subtitle>Pregunta abierta</ion-card-subtitle>
-      <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button>
-      <ion-button size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
+      <!-- <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button> -->
+      <ion-button (click)="borrarpregunta(cadapregunta)" size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
     </ion-card-header>
     <ion-card-content>
       <ion-text><strong>{{cadapregunta.pregunta}}</strong></ion-text>
@@ -25,8 +25,8 @@
   <ion-card *ngIf="cadapregunta.tipo=='cerrada'">
     <ion-card-header color="primary">
       <ion-card-subtitle>Pregunta Opciones multiples, <strong>{{cadapregunta.pregunta}}</strong></ion-card-subtitle>
-      <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button>
-      <ion-button size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
+      <!-- <ion-button size="small" ion-no-padding class="ion-no-padding" color="success">Editar</ion-button> -->
+      <ion-button (click)="borrarpregunta(cadapregunta)" size="small" ion-no-padding class="ion-no-padding" color="danger">Borrar</ion-button>
     </ion-card-header>
     <ion-card-content style="margin:0;" no-padding class="ion-no-padding">
       <ion-row style="margin:0;" no-padding class="ion-no-padding">
